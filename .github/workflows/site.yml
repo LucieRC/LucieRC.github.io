@@ -1,4 +1,4 @@
-# Site lucierc.github.io : CV + outils FiPu (Repères, Veille, Données) sous /bercy/.
+# Site lucierc.github.io : CV + outils FiPu (Repères, Veille, Données, Textes) sous /bercy/.
 # - chaque matin de semaine (et via Actions → Site → Run workflow) : collecte des trois outils,
 #   enregistrement de leurs bases dans le dépôt, puis publication ;
 # - à chaque push sur main : publication seule (CV, mises en page, mots-clés…), sans collecte.
@@ -69,6 +69,7 @@ jobs:
         run: |
           (cd veille-fipu && python build.py)
           (cd reperes-fipu && python build.py)
+          (cd Comptabilité_nationale && python page.py)
       - name: Site
         run: python site/build.py
       - uses: actions/upload-pages-artifact@v4

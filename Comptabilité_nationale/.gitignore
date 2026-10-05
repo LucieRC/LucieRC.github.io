@@ -1,0 +1,9 @@
+# Les PDF sont publics mais lourds (liens officiels dans config.json) ; l'index SQLite se reconstruit seul.
+*.pdf
+data/corpus.sqlite
+data/corpus.tmp
+__pycache__/
+.DS_Store
+# Journal des cas : PRIVÉ, jamais versionné (le dépôt Bercy est public).
+cas/
+dist/

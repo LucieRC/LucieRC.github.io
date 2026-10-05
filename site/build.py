@@ -1,10 +1,10 @@
 """Assemble le site publié sur GitHub Pages dans _site/ :
 
     /             CV (site/index.html, site/photo.jpg)
-    /bercy/       portail FiPu : Accueil, Repères, Veille, Données
+    /bercy/       portail FiPu : Accueil, Repères, Veille, Données, Textes
     /rss-flux/    ancienne adresse de la Veille, redirigée vers /bercy/veille/
 
-Les pages de Repères et Veille doivent avoir été générées (update.py ou build.py de chaque outil).
+Les pages de Repères, Veille et Textes doivent avoir été générées (update.py, build.py ou page.py de chaque outil).
 La page Données n'a pas de serveur en ligne : la base est exportée dans bercy/donnees/donnees.json
 et la page calcule ses réponses dans le navigateur.
 

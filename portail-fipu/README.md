@@ -1,6 +1,6 @@
 # Portail FiPu
 
-Une seule adresse locale pour les trois outils :
+Une seule adresse locale pour les quatre outils :
 
 | Onglet | Outil | Contenu |
 |---|---|---|
@@ -8,6 +8,7 @@ Une seule adresse locale pour les trois outils :
 | Repères | `../reperes-fipu` | Qui est en poste, gouvernement, Journal officiel, chiffres clés, cadre et calendrier |
 | Veille | `../veille-fipu` | Publications et presse classées par mots-clés |
 | Données | `../donnees-fipu` | Séries Eurostat et Insee : recherche, graphiques, tableaux, révisions, export Excel |
+| Textes | `../Comptabilité_nationale` | SEC 2010 et MGDD 2022 : recherche plein texte, paragraphes, plans et renvois (pas de collecte) |
 
 ## Lancer
 

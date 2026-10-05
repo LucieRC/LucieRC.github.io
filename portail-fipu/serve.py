@@ -1,4 +1,4 @@
-"""Portail FiPu : une seule adresse pour Repères, Veille et Données.
+"""Portail FiPu : une seule adresse pour Repères, Veille, Données et Textes.
 
     python3 serve.py            # ouvre http://127.0.0.1:8760 dans le navigateur
     python3 serve.py --no-open
@@ -32,6 +32,9 @@ TOOLS = {
                "desc": "Publications des institutions, organisations internationales, think tanks et presse, classées par mots-clés."},
     "donnees": {"label": "Données", "dir": BERCY / "donnees-fipu", "page": "page.html", "build": None,
                 "desc": "Séries Eurostat et Insee : recherche, graphiques, comparaisons, révisions, export Excel."},
+    # Pas de collecte : la page est régénérée depuis data/corpus.json (page.py), les PDF ne changent pas.
+    "textes": {"label": "Textes", "dir": BERCY / "Comptabilité_nationale", "page": "dist/textes-fipu.html", "build": "page.py",
+               "collect": False, "desc": "SEC 2010 et MGDD 2022 : recherche plein texte, paragraphes, plans et renvois."},
 }
 
 # La page Données est servie par ce processus : ses modules sont importés ici. Les autres outils
@@ -210,9 +213,11 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         _, parts = self._route()
         if parts == ["api", "refresh-all"]:
-            started = [k for k, t in TOOLS.items() if t["dir"].exists() and start(k)]
+            started = [k for k, t in TOOLS.items() if t["dir"].exists() and t.get("collect", True) and start(k)]
             return self._send(202, {"started": started})
         if len(parts) == 3 and parts[0] in TOOLS and parts[1:] == ["api", "refresh"]:
+            if not TOOLS[parts[0]].get("collect", True):
+                return self._send(400, {"error": "pas de collecte pour cet outil"})
             if not start(parts[0]):
                 return self._send(409, {"error": "actualisation déjà en cours"})
             return self._send(202, {"started": True})

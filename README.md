@@ -3,7 +3,7 @@
 | Adresse | Contenu | Source |
 |---|---|---|
 | `/` | CV | `site/index.html`, `site/photo.jpg` |
-| `/bercy/` | Portail FiPu : Accueil, Repères, Veille, Données | `portail-fipu/`, `reperes-fipu/`, `veille-fipu/`, `donnees-fipu/` |
+| `/bercy/` | Portail FiPu : Accueil, Repères, Veille, Données, Textes | `portail-fipu/`, `reperes-fipu/`, `veille-fipu/`, `donnees-fipu/`, `Comptabilité_nationale/` |
 | `/rss-flux/` | Ancienne adresse de la Veille, redirigée vers `/bercy/veille/` | `site/build.py` |
 
 `.github/workflows/site.yml` collecte les trois outils chaque matin de semaine (5 h 30 UTC),
@@ -17,4 +17,5 @@ http://127.0.0.1:8760. Pour voir la version publiée : `python3 site/build.py`, 
 **Les bases de référence sont celles du dépôt.** Avant une collecte locale, `git pull` ;
 après, `git push` (sinon la collecte du lendemain matin sur GitHub et la vôtre divergent).
 
-Le dossier `coloc/` n'est pas publié (`.gitignore`).
+Le dossier `coloc/` n'est pas publié (`.gitignore`), pas plus que le journal des cas
+`Comptabilité_nationale/cas/` ni les PDF du corpus (`Comptabilité_nationale/.gitignore`).

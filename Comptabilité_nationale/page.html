@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Textes FiPu</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f7f6f3; --surface: #fcfcfb; --surface-2: #f0efeb; --line: #e2e0da;
+  --ink: #16150f; --ink-2: #52514e; --ink-3: #7c7a74;
+  --accent: #2a78d6; --accent-soft: #e6effa; --mark: #fff0b3;
+  --radius: 10px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif: Charter, "Iowan Old Style", Georgia, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #121211; --surface: #1a1a19; --surface-2: #23231f; --line: #34332e;
+    --ink: #f4f3ee; --ink-2: #c3c2b7; --ink-3: #8f8d84;
+    --accent: #3987e5; --accent-soft: #1d2b3d; --mark: #4a3d12;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121211; --surface: #1a1a19; --surface-2: #23231f; --line: #34332e;
+  --ink: #f4f3ee; --ink-2: #c3c2b7; --ink-3: #8f8d84;
+  --accent: #3987e5; --accent-soft: #1d2b3d; --mark: #4a3d12;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 var(--font); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select { font: inherit; color: inherit; }
+mark { background: var(--mark); color: inherit; border-radius: 2px; padding: 0 1px; }
+.wrap { max-width: 1280px; margin: 0 auto; padding-inline: max(16px, 3vw); padding-block: 0 64px; }
+
+header.top { border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: center; gap: 16px; padding-block: 12px; flex-wrap: wrap; }
+.brand { font-weight: 650; font-size: 15px; letter-spacing: -0.01em; flex: 1; }
+.brand small { font-weight: 400; color: var(--ink-3); margin-left: 6px; }
+@media (max-width: 600px) { .brand small { display: none; } }
+.stamp { font-size: 12px; color: var(--ink-3); }
+
+.searchbar { display: flex; gap: 8px; padding-top: 20px; flex-wrap: wrap; }
+.searchbar input { flex: 1 1 320px; min-width: 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-size: 15px; }
+.searchbar input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.seg button { border: 0; background: none; padding: 8px 12px; cursor: pointer; color: var(--ink-2); }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--ink); font-weight: 600; }
+.hint { font-size: 12px; color: var(--ink-3); margin: 6px 2px 0; }
+.hint code { background: var(--surface-2); padding: 0 4px; border-radius: 4px; }
+
+.layout { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 20px; padding-top: 16px; align-items: start; }
+@media (max-width: 860px) { .layout { grid-template-columns: minmax(0, 1fr); } .side { order: 2; } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; min-width: 0; }
+.panel h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); margin: 0 0 10px; font-weight: 600; }
+.side { position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow: auto; }
+@media (max-width: 860px) { .side { position: static; max-height: 60vh; } }
+
+.toc { font-size: 13px; }
+.toc details { margin-left: 10px; }
+.toc > details { margin-left: 0; }
+.toc summary, .toc .leaf { cursor: pointer; padding: 2px 4px; border-radius: 5px; color: var(--ink-2); list-style-position: outside; }
+.toc .leaf { margin-left: 22px; display: block; }
+.toc summary:hover, .toc .leaf:hover { background: var(--surface-2); color: var(--ink); }
+.toc .pg { color: var(--ink-3); font-size: 11px; margin-left: 4px; }
+.toc .on { background: var(--accent-soft); color: var(--ink); }
+
+.status { color: var(--ink-3); font-size: 13px; margin: 0 0 10px; }
+.hit { padding: 12px 2px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.hit:last-child { border-bottom: 0; }
+.hit:hover .ref { text-decoration: underline; }
+.ref { font-weight: 600; color: var(--accent); }
+.pg-link { font-size: 12px; color: var(--ink-3); margin-left: 6px; }
+.crumb { font-size: 12px; color: var(--ink-3); margin: 2px 0 4px; overflow-wrap: anywhere; }
+.snip { color: var(--ink-2); font-size: 13.5px; }
+.tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 0 6px; border-radius: 4px; background: var(--surface-2); color: var(--ink-2); margin-right: 6px; vertical-align: 1px; }
+
+.reader-head { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; margin-bottom: 10px; }
+.reader-head h1 { font-size: 17px; margin: 0; flex: 1 1 300px; letter-spacing: -0.01em; }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 7px; padding: 4px 10px; cursor: pointer; color: var(--ink-2); font-size: 13px; }
+.btn:hover { background: var(--surface-2); color: var(--ink); }
+.para { padding: 10px 12px; border-radius: 8px; margin: 2px -12px; scroll-margin-top: 16px; }
+.para.target { background: var(--accent-soft); }
+.para .ref { font-size: 13px; }
+.para .body { font-family: var(--serif); font-size: 15.5px; line-height: 1.6; white-space: pre-line; margin-top: 2px; overflow-wrap: anywhere; }
+.para .body a.x { border-bottom: 1px dotted var(--accent); }
+.subhead { font-weight: 650; font-size: 13px; color: var(--ink-2); margin: 18px 0 2px; padding-top: 8px; border-top: 1px solid var(--line); }
+.citedby { font-size: 12.5px; color: var(--ink-3); margin-top: 4px; }
+.empty { color: var(--ink-3); padding: 24px 4px; }
+footer { font-size: 12px; color: var(--ink-3); margin-top: 28px; }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand">Textes de référence <small>SEC 2010 · MGDD 2022</small></div>
+  <div class="stamp" id="stamp"></div>
+</div></header>
+
+<main class="wrap">
+  <div class="searchbar">
+    <input id="q" type="search" placeholder="Rechercher (français pour le SEC, anglais pour le MGDD) ou aller à un paragraphe : 20.29, MGDD 1.2.3 ¶29" autocomplete="off" autofocus>
+    <div class="seg" id="docs" role="group" aria-label="Document"></div>
+  </div>
+  <p class="hint">Tous les mots sont requis ; <code>"expression exacte"</code>, <code>-mot</code> pour exclure, <code>préf*</code> pour un début de mot. Accents facultatifs.</p>
+
+  <div class="layout">
+    <aside class="panel side"><h2 id="toc-title">Plan</h2><div class="toc" id="toc"></div></aside>
+    <section class="panel" id="main"></section>
+  </div>
+  <footer id="foot"></footer>
+</main>
+
+<script>
+const DATA = /*__DATA__*/null;
+
+// ------------------------------------------------------------------ données
+const SRC = Object.fromEntries(DATA.sources.map(s => [s.id, s]));
+const SECS = DATA.sections.map(([doc, level, title, page, parent], i) => ({ i, doc, level, title, page, parent, kids: [], chunks: [] }));
+SECS.forEach(s => { if (s.parent !== null) SECS[s.parent].kids.push(s); });
+const CH = DATA.chunks.map(([sec, para, ref, page, page_end, text], i) => ({ i, sec, para, ref, page, page_end, text, doc: SECS[sec].doc }));
+CH.forEach(c => SECS[c.sec].chunks.push(c));
+// Fil d'Ariane ; le SEC répète le titre du chapitre en sous-niveau (« 20. Les comptes des APU › Les comptes des APU »).
+const bare = t => t.replace(/^\d+(\.\d+)*\.?\s+/, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const secPath = s => { const p = []; for (let x = s; x; x = x.parent === null ? null : SECS[x.parent]) if (!p.length || bare(p[0]) !== bare(x.title)) p.unshift(x.title); else p[0] = x.title; return p; };
+const SEC_PARA = new Map(CH.filter(c => c.doc === "SEC" && c.para).map(c => [c.para, c]));
+
+// ------------------------------------------------------------------ index (BM25)
+const fold = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const TOK = /[a-z0-9]+(?:[.,][0-9]+)*/g;
+const tokens = s => fold(s).match(TOK) || [];
+// Racinisation légère, identique pour l'index et la requête : pluriels et féminins (marchandes → marchand,
+// injections → injection, contrôle → control).
+const stem = w => { if (w.length > 4 && /[sx]$/.test(w)) w = w.slice(0, -1); if (w.length > 5 && w.endsWith("e")) w = w.slice(0, -1); return w; };
+const STOP = new Set("le la les de des du un une et ou a au aux en dans par pour sur que qui est sont ce ces se sa son ses il elle ils on pas ne d l s n the of and or to in is are be by for on as at an it that this with from which".split(" "));
+const POST = new Map(); const LEN = new Uint32Array(CH.length); let AVG = 0;
+CH.forEach(c => {
+  // Le titre de la section compte : « test marchand » n'apparaît que dans le titre du SEC.
+  const t = tokens(c.ref + " " + SECS[c.sec].title + " " + c.text).map(stem); LEN[c.i] = t.length; AVG += t.length;
+  const tf = new Map(); t.forEach(w => tf.set(w, (tf.get(w) || 0) + 1));
+  tf.forEach((n, w) => { let p = POST.get(w); if (!p) POST.set(w, p = []); p.push(c.i, n); });
+});
+AVG /= CH.length;
+const TERMS = [...POST.keys()].sort();
+
+function expand(term) {  // préfixe* → termes du vocabulaire
+  if (!term.endsWith("*")) return POST.has(term) ? [term] : [];
+  const pre = term.slice(0, -1); const out = [];
+  let lo = 0, hi = TERMS.length; while (lo < hi) { const m = (lo + hi) >> 1; TERMS[m] < pre ? lo = m + 1 : hi = m; }
+  for (let k = lo; k < TERMS.length && TERMS[k].startsWith(pre) && out.length < 200; k++) out.push(TERMS[k]);
+  return out;
+}
+
+function parseQuery(q) {
+  const must = [], not = [], phrases = [];
+  q.replace(/"([^"]+)"/g, (_, p) => { phrases.push(fold(p).replace(/\s+/g, " ").trim()); tokens(p).forEach(w => must.push(w)); return " "; })
+   .split(/\s+/).filter(Boolean).forEach(w => {
+     const neg = w.startsWith("-") && w.length > 1; const star = w.endsWith("*");
+     const t = tokens(neg ? w.slice(1) : w);
+     t.forEach((x, k) => (neg ? not : must).push(star && k === t.length - 1 ? x + "*" : stem(x)));
+   });
+  return { must: must.filter(w => !STOP.has(w) || must.length === 1), not, phrases };
+}
+
+function search(q, doc) {
+  const { must, not, phrases } = parseQuery(q);
+  if (!must.length) return [];
+  let score = null;
+  for (const term of must) {
+    const s = new Map();
+    for (const t of expand(term)) {
+      const p = POST.get(t); const idf = Math.log(1 + (CH.length - p.length / 2 + 0.5) / (p.length / 2 + 0.5));
+      for (let k = 0; k < p.length; k += 2) {
+        const i = p[k], tf = p[k + 1];
+        const v = idf * tf * 2.2 / (tf + 1.2 * (0.25 + 0.75 * LEN[i] / AVG));
+        s.set(i, Math.max(s.get(i) || 0, v));
+      }
+    }
+    if (score === null) score = s;
+    else { const n = new Map(); score.forEach((v, i) => { if (s.has(i)) n.set(i, v + s.get(i)); }); score = n; }
+    if (!score.size) return [];
+  }
+  const ban = new Set(); not.forEach(t => expand(t).forEach(x => { const p = POST.get(x); for (let k = 0; k < p.length; k += 2) ban.add(p[k]); }));
+  let hits = [...score].filter(([i]) => !ban.has(i) && (!doc || CH[i].doc === doc));
+  if (phrases.length) hits = hits.filter(([i]) => { const t = fold(CH[i].text).replace(/\s+/g, " "); return phrases.every(p => t.includes(p)); });
+  return hits.sort((a, b) => b[1] - a[1]).map(([i]) => CH[i]);
+}
+
+// ------------------------------------------------------------------ renvois directs : « 20.29 », « SEC 20.29 », « MGDD 1.2.3 ¶29 »
+function lookup(q) {
+  let m = q.trim().match(/^(?:(?:sec|esa)(?:\s*2010)?\s*§?\s*)?([a-z]?\d{1,2}\.\d{1,3}(?:\.\d)?)$/i);
+  if (m && SEC_PARA.has(m[1].toUpperCase())) return SEC_PARA.get(m[1].toUpperCase());
+  m = q.trim().match(/^mgdd(?:\s*2022)?\s+(\d+(?:\.\d+)*)\.?(?:\s*(?:¶|§|para(?:graph)?\.?)\s*|\s+)(\d+)$/i);
+  if (m) return CH.find(c => c.doc === "MGDD" && c.para === m[2] && (c.ref.includes(" " + m[1] + " ") || c.ref.includes(" " + m[1] + ".")));
+  m = q.trim().match(/^mgdd(?:\s*2022)?\s+(\d+(?:\.\d+)*)\.?$/i);
+  if (m) { const s = SECS.find(s => s.doc === "MGDD" && s.title.startsWith(m[1] + ". ")); if (s) return { section: s }; }
+  return null;
+}
+
+// ------------------------------------------------------------------ rendu
+const $ = s => document.querySelector(s);
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const pdf = (doc, page) => `${SRC[doc].url}#page=${page}`;
+const pages = c => c.page === c.page_end ? `p. ${c.page}` : `p. ${c.page}-${c.page_end}`;
+let state = { q: "", doc: "", view: null };
+
+function highlight(text, q) {
+  const words = parseQuery(q).must.map(w => w.replace(/\*$/, "")).filter(w => w.length > 1);
+  if (!words.length) return esc(text);
+  const f = fold(text); const marks = [];
+  words.forEach(w => { const re = new RegExp("(^|[^a-z0-9])(" + w.replace(/[.]/g, "\\.") + "[a-z0-9]*)", "g"); let m; while ((m = re.exec(f))) marks.push([m.index + m[1].length, m.index + m[0].length]); });
+  marks.sort((a, b) => a[0] - b[0]);
+  let out = "", at = 0;
+  for (const [a, b] of marks) { if (a < at) continue; out += esc(text.slice(at, a)) + "<mark>" + esc(text.slice(a, b)) + "</mark>"; at = b; }
+  return out + esc(text.slice(at));
+}
+
+function snippet(c, q) {
+  // Fenêtre de 360 caractères qui contient le plus de mots différents de la requête.
+  const words = parseQuery(q).must.map(w => w.replace(/\*$/, ""));
+  const f = fold(c.text); const hits = [];
+  words.forEach((w, k) => { const re = new RegExp("(^|[^a-z0-9])" + w.replace(/[.]/g, "\\."), "g"); let m; while ((m = re.exec(f))) hits.push([m.index, k]); });
+  let pos = 0, best = -1;
+  for (const [at] of hits) { const n = new Set(hits.filter(([b]) => b >= at && b < at + 240).map(([, k]) => k)).size; if (n > best) { best = n; pos = at; } }
+  const start = Math.max(0, pos - 80); const end = Math.min(c.text.length, start + 360);
+  return (start ? "… " : "") + highlight(c.text.slice(start, end).replace(/\n/g, " "), q) + (end < c.text.length ? " …" : "");
+}
+
+// Numéros de paragraphes du SEC cités dans un texte → liens (dans le SEC, ou après « ESA 2010 » dans le MGDD).
+function linkify(c, html) {
+  return html.replace(/(\b(?:ESA|SEC)\b[^.;]{0,60}?|\bpoints?\s|\bparagraphs?\s|\sà\s|\bto\s|\band\s|\bet\s|,\s)(\d{1,2}\.\d{2,3})\b/g, (all, pre, num, off) => {
+    if (!SEC_PARA.has(num)) return all;
+    // Hors du SEC, seulement si le renvoi vise bien le SEC (« ESA 2010 paragraphs 20.29 and 20.30 »).
+    if (c.doc !== "SEC" && !/ESA|SEC|paragraph/.test(pre) && !/ESA|SEC/.test(html.slice(Math.max(0, off - 80), off))) return all;
+    return `${pre}<a class="x" href="#p=${SEC_PARA.get(num).i}">${num}</a>`;
+  });
+}
+
+let CITED = null;
+function citedBy(c) {
+  if (c.doc !== "SEC" || !c.para) return [];
+  if (!CITED) {
+    CITED = new Map();
+    CH.forEach(x => { if (x.doc === "SEC") return;
+      for (const m of x.text.matchAll(/\b(?:ESA|SEC)\s*2010(?:[^.;]|\.(?=\d)){0,100}/g)) for (const n of m[0].matchAll(/\b(\d{1,2}\.\d{2,3})\b/g)) {
+        const l = CITED.get(n[1]) || []; if (!l.includes(x)) l.push(x); CITED.set(n[1], l); } });
+  }
+  return CITED.get(c.para) || [];
+}
+
+function renderResults() {
+  const main = $("#main"); const q = state.q.trim();
+  if (!q) { renderWelcome(); return; }
+  const direct = lookup(q);
+  const hits = search(q, state.doc);
+  let html = "";
+  if (direct) {
+    const d = direct.section ? `<a href="#s=${direct.section.i}">${esc(direct.section.title)}</a>` : `<a href="#p=${direct.i}">${esc(direct.ref)}</a>`;
+    html += `<p class="status">Aller directement à ${d}</p>`;
+  }
+  html += `<p class="status">${hits.length ? hits.length + " passage" + (hits.length > 1 ? "s" : "") + (hits.length > 100 ? " — 100 premiers" : "") : "Aucun passage ne contient tous ces mots."}</p>`;
+  if (!hits.length && !direct) html += `<p class="empty">Essayer l'autre langue (le SEC est en français, le MGDD en anglais), un début de mot avec <code>*</code>, ou moins de mots.</p>`;
+  html += hits.slice(0, 100).map(c => `<div class="hit" data-i="${c.i}">
+      <span class="tag">${c.doc}</span><span class="ref">${esc(c.ref)}</span><a class="pg-link" href="${pdf(c.doc, c.page)}" target="_blank" rel="noopener">${pages(c)} ↗</a>
+      <div class="crumb">${esc(secPath(SECS[c.sec]).join(" › "))}</div>
+      <div class="snip">${snippet(c, q)}</div></div>`).join("");
+  main.innerHTML = html;
+  main.querySelectorAll(".hit").forEach(el => el.addEventListener("click", e => { if (!e.target.closest("a")) location.hash = "p=" + el.dataset.i; }));
+}
+
+function renderReader(sec, target) {
+  // On affiche la section de rattachement (et ses sous-sections) avec le paragraphe visé en surbrillance.
+  const main = $("#main"); const q = state.q.trim();
+  const list = []; (function walk(s, depth) { list.push([s, depth]); s.kids.forEach(k => walk(k, depth + 1)); })(sec, 0);
+  const all = list.flatMap(([s]) => s.chunks);
+  const prevSec = SECS[sec.i - 1], nextSec = SECS[sec.i + 1 + list.length - 1];
+  let html = `<div class="reader-head">
+      <h1><span class="tag">${sec.doc}</span>${esc(sec.title)}</h1>
+      ${prevSec ? `<a class="btn" href="#s=${prevSec.i}" title="${esc(prevSec.title)}">← Précédent</a>` : ""}
+      ${nextSec && nextSec.doc === sec.doc ? `<a class="btn" href="#s=${nextSec.i}" title="${esc(nextSec.title)}">Suivant →</a>` : ""}
+      ${sec.parent !== null ? `<a class="btn" href="#s=${sec.parent}">↑ Section parente</a>` : ""}
+      ${q ? `<a class="btn" href="#q=${encodeURIComponent(q)}${state.doc ? "&d=" + state.doc : ""}">Résultats</a>` : ""}
+    </div><div class="crumb">${esc(secPath(sec).slice(0, -1).join(" › "))}</div>`;
+  if (all.length > 400) { html += `<p class="empty">Section longue (${all.length} passages) : choisir une sous-partie dans le plan.</p>`; }
+  else for (const [s, depth] of list) {
+    if (depth) html += `<div class="subhead" id="s${s.i}">${esc(s.title)} <a class="pg-link" href="${pdf(s.doc, s.page)}" target="_blank" rel="noopener">p. ${s.page} ↗</a></div>`;
+    for (const c of s.chunks) {
+      const cb = citedBy(c);
+      html += `<div class="para${c === target ? " target" : ""}" id="c${c.i}">
+        <a class="ref" href="#p=${c.i}">${esc(c.ref)}</a><a class="pg-link" href="${pdf(c.doc, c.page)}" target="_blank" rel="noopener">${pages(c)} ↗</a>
+        <div class="body">${linkify(c, highlight(c.text, q))}</div>
+        ${cb.length ? `<div class="citedby">Cité par : ${cb.slice(0, 12).map(x => `<a href="#p=${x.i}">${esc(x.ref)}</a>`).join(" · ")}${cb.length > 12 ? " …" : ""}</div>` : ""}
+      </div>`;
+    }
+  }
+  if (!all.length && list.length === 1) html += `<p class="empty">Pas de texte propre à cette section : voir ses sous-sections dans le plan.</p>`;
+  main.innerHTML = html;
+  markToc(sec);
+  const el = target && document.getElementById("c" + target.i);
+  window.scrollTo(0, el ? el.getBoundingClientRect().top + scrollY - 12 : 0);
+}
+
+function renderWelcome() {
+  $("#main").innerHTML = `<p class="status">${CH.length.toLocaleString("fr-FR")} passages indexés.</p>` +
+    DATA.sources.map(s => `<div class="hit" style="cursor:default"><span class="tag">${s.id}</span><b>${esc(s.title)}</b>
+      <div class="crumb">${s.pages} pages · ${s.lang === "fr" ? "français" : "anglais"} · <a href="${s.url}" target="_blank" rel="noopener">PDF officiel</a> · <a href="${s.info}" target="_blank" rel="noopener">page Eurostat</a></div></div>`).join("") +
+    `<p class="hint" style="margin-top:14px">Exemples : <a href="#q=test%20marchand%2050">test marchand 50</a> · <a href="#q=capital%20injection%20loss&d=MGDD">capital injection loss</a> · <a href="#q=20.309">20.309</a> · <a href="#q=MGDD%207.4.2">MGDD 7.4.2</a></p>`;
+}
+
+// ------------------------------------------------------------------ plan
+function renderToc() {
+  const doc = state.doc || "SEC";
+  $("#toc-title").textContent = "Plan — " + SRC[doc].cite;
+  const node = s => s.kids.length
+    ? `<details data-s="${s.i}"><summary data-s="${s.i}">${esc(s.title)}<span class="pg">${s.page}</span></summary>${s.kids.map(node).join("")}</details>`
+    : `<span class="leaf" data-s="${s.i}">${esc(s.title)}<span class="pg">${s.page}</span></span>`;
+  $("#toc").innerHTML = SECS.filter(s => s.doc === doc && s.parent === null).map(node).join("");
+}
+function markToc(sec) {
+  if ((state.doc || "SEC") !== sec.doc) { state.doc = sec.doc; renderDocs(); renderToc(); }
+  document.querySelectorAll("#toc .on").forEach(e => e.classList.remove("on"));
+  for (let s = sec; s; s = s.parent === null ? null : SECS[s.parent]) { const d = document.querySelector(`#toc details[data-s="${s.i}"]`); if (d) d.open = true; }
+  const el = document.querySelector(`#toc [data-s="${sec.i}"]`);
+  if (el) {  // défiler le plan seul, pas la page
+    el.classList.add("on");
+    const side = $(".side"), r = el.getBoundingClientRect(), b = side.getBoundingClientRect();
+    if (r.top < b.top || r.bottom > b.bottom) side.scrollTop += r.top - b.top - side.clientHeight / 3;
+  }
+}
+$("#toc").addEventListener("click", e => {
+  const el = e.target.closest("[data-s]"); if (!el) return;
+  if (el.tagName === "SUMMARY") { if (e.offsetX > 16) { e.preventDefault(); location.hash = "s=" + el.dataset.s; el.parentElement.open = true; } }
+  else location.hash = "s=" + el.dataset.s;
+});
+
+function renderDocs() {
+  $("#docs").innerHTML = [["", "Tous"], ...DATA.sources.map(s => [s.id, s.id])]
+    .map(([id, l]) => `<button data-d="${id}" aria-pressed="${state.doc === id}">${l}</button>`).join("");
+}
+$("#docs").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  state.doc = b.dataset.d; renderDocs(); renderToc();
+  if (state.q) go(); else renderWelcome();
+});
+
+// ------------------------------------------------------------------ navigation (adresse = état, pour les favoris)
+function go() { const h = state.q ? "q=" + encodeURIComponent(state.q) + (state.doc ? "&d=" + state.doc : "") : ""; if (location.hash.slice(1) !== h) location.hash = h; else route(); }
+let timer;
+$("#q").addEventListener("input", e => { state.q = e.target.value; clearTimeout(timer); timer = setTimeout(() => history.replaceState(null, "", "#q=" + encodeURIComponent(state.q) + (state.doc ? "&d=" + state.doc : "")) || renderResults(), 180); });
+$("#q").addEventListener("keydown", e => { if (e.key === "Enter") { const d = lookup(state.q); if (d) location.hash = d.section ? "s=" + d.section.i : "p=" + d.i; } });
+
+function route() {
+  const h = new URLSearchParams(location.hash.slice(1));
+  if (h.has("q")) { state.q = h.get("q"); state.doc = h.get("d") || ""; $("#q").value = state.q; renderDocs(); renderToc(); renderResults(); return; }
+  if (h.has("p")) { const c = CH[+h.get("p")]; if (c) return renderReader(SECS[c.sec], c); }
+  if (h.has("s")) { const s = SECS[+h.get("s")]; if (s) return renderReader(s, null); }
+  renderDocs(); renderToc(); renderResults();
+}
+window.addEventListener("hashchange", route);
+
+$("#stamp").textContent = "Index du " + new Date(DATA.built).toLocaleDateString("fr-FR");
+$("#foot").innerHTML = `Textes officiels publiés par Eurostat ; extraction automatique du texte des PDF (tableaux et schémas peuvent être imparfaits). Les pages indiquées sont celles du PDF. En cas de doute, le PDF fait foi.`;
+renderDocs(); renderToc(); route();
+</script>
+</body>
+</html>
