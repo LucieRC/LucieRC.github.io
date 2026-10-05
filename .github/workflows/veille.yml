@@ -1,0 +1,50 @@
+# Collecte chaque matin de semaine, enregistre la base dans le dépôt et publie la page sur GitHub Pages.
+# Lancement manuel : onglet Actions → Veille → Run workflow.
+name: Veille
+
+on:
+  schedule:
+    - cron: "30 5 * * 1-5"   # 7 h 30 à Paris l'été, 6 h 30 l'hiver (GitHub peut retarder de quelques minutes)
+  workflow_dispatch:
+
+permissions:
+  contents: write   # pousser data/veille.sqlite
+  pages: write
+  id-token: write
+
+concurrency:
+  group: veille
+  cancel-in-progress: false
+
+jobs:
+  veille:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Collecte et génération
+        run: python update.py
+        env:
+          VEILLE_REPERES_URL: ""   # Repères FiPu ne tourne qu'en local : lien masqué en ligne
+      - name: Enregistrer la base
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898208+github-actions[bot]@users.noreply.github.com"
+          git add data/veille.sqlite
+          if ! git diff --cached --quiet; then
+            git commit -m "Collecte du $(date -u +%F)"
+            git push
+          fi
+      - run: mkdir _site && cp dist/veille-fipu.html _site/index.html && touch _site/.nojekyll
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4
