@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portail FiPu</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f7f6f3; --surface: #fcfcfb; --surface-2: #f0efeb; --line: #e2e0da;
+  --ink: #16150f; --ink-2: #52514e; --ink-3: #7c7a74;
+  --accent: #2a78d6; --accent-soft: #e6effa; --bad: #b8322f; --warn-bg: #fff4d6; --warn-ink: #7a5300;
+  --radius: 10px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #121211; --surface: #1a1a19; --surface-2: #23231f; --line: #34332e;
+    --ink: #f4f3ee; --ink-2: #c3c2b7; --ink-3: #8f8d84;
+    --accent: #3987e5; --accent-soft: #1d2b3d; --bad: #ef6b6a; --warn-bg: #3a2f12; --warn-ink: #f2cf7a;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121211; --surface: #1a1a19; --surface-2: #23231f; --line: #34332e;
+  --ink: #f4f3ee; --ink-2: #c3c2b7; --ink-3: #8f8d84;
+  --accent: #3987e5; --accent-soft: #1d2b3d; --bad: #ef6b6a; --warn-bg: #3a2f12; --warn-ink: #f2cf7a;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 var(--font); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 28px max(16px, 3vw) 64px; }
+.head { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+h1 { font-size: 22px; letter-spacing: -0.015em; margin: 0; font-weight: 680; flex: 1; }
+h1 small { display: block; font-size: 13px; font-weight: 400; color: var(--ink-3); letter-spacing: 0; margin-top: 2px; }
+h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); margin: 30px 0 10px; font-weight: 600; }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 13px; cursor: pointer; font: inherit; font-size: 13px; color: var(--ink); display: inline-block; }
+.btn:hover { border-color: var(--accent); text-decoration: none; }
+.btn:disabled { opacity: .5; cursor: default; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.tiles { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; color: var(--ink); display: block; }
+.tile:hover { border-color: var(--accent); text-decoration: none; }
+.tile .n { font-size: 12px; color: var(--ink-3); }
+.tile .v { font-size: 26px; font-weight: 650; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; margin: 2px 0; }
+.tile .v small { font-size: 13px; font-weight: 500; color: var(--ink-2); margin-left: 4px; letter-spacing: 0; }
+.tile .d { font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+.tools { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
+.tool { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.tool h3 { margin: 0; font-size: 17px; font-weight: 650; }
+.tool p { margin: 0; color: var(--ink-2); font-size: 13px; }
+.tool .when { font-size: 12px; color: var(--ink-3); }
+.tool .state { font-size: 12px; }
+.tool .state.ko { color: var(--bad); font-weight: 600; }
+.tool .state.run { color: var(--accent); }
+.tool .acts { display: flex; gap: 8px; margin-top: auto; padding-top: 6px; }
+.tool pre { margin: 0; font-size: 11px; color: var(--ink-3); white-space: pre-wrap; max-height: 3.2em; overflow: hidden; }
+.banner { background: var(--warn-bg); color: var(--warn-ink); border-radius: var(--radius); padding: 10px 14px; font-size: 13px; margin-top: 16px; }
+.foot { margin-top: 36px; font-size: 12px; color: var(--ink-3); max-width: 80ch; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="head">
+    <h1>Portail FiPu<small id="today"></small></h1>
+    <button class="btn primary" id="all" type="button">Tout actualiser</button>
+  </div>
+  <div id="alerts"></div>
+
+  <h2>Derniers chiffres publiés</h2>
+  <div class="tiles" id="tiles"><p class="tile n">Chargement…</p></div>
+
+  <h2>Outils</h2>
+  <div class="tools" id="tools"></div>
+
+  <p class="foot" id="foot">Tout fonctionne sur ce poste (adresse 127.0.0.1) à partir de sources publiques ; rien n'est envoyé ailleurs que vers ces sources.
+  Chaque outil garde aussi son propre lanceur dans son dossier.</p>
+</main>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+// Version publiée (site/build.py) : l'état des outils est figé dans la page, sans bouton d'actualisation.
+const STATIC = window.FIPU_OVERVIEW || null;
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const NAMES = {deficit: "Solde public", dette: "Dette publique", po: "Prélèvements obligatoires", depense: "Dépense publique", interets: "Charge d'intérêts"};
+const unit = u => /produit intérieur brut/i.test(u) ? "% du PIB" : u;
+const num = (x, d = 1) => x.toLocaleString("fr-FR", {minimumFractionDigits: d, maximumFractionDigits: d});
+const when = iso => iso ? new Date(iso).toLocaleString("fr-FR", {dateStyle: "medium", timeStyle: "short"}) : "–";
+$("#today").textContent = new Date().toLocaleDateString("fr-FR", {weekday: "long", day: "numeric", month: "long", year: "numeric"});
+
+function tiles(o) {
+  if (!o.figures || !o.figures.length) {
+    $("#tiles").innerHTML = `<p class="tile n">${esc(o.donnees_error || "Aucune donnée : actualiser l'outil Données.")}</p>`;
+    return;
+  }
+  $("#tiles").innerHTML = o.figures.map(f => {
+    const diff = f.previous == null ? "" : f.value - f.previous;
+    const pts = diff === "" ? "" : `${diff > 0 ? "+" : diff < 0 ? "−" : "±"}${num(Math.abs(diff))} pt sur un an`;
+    return `<a class="tile" href="donnees/#k=${encodeURIComponent(f.alias)}" title="${esc(f.label)}">
+      <div class="n">${esc(NAMES[f.alias] || f.alias)} · ${esc(f.period)}</div>
+      <div class="v">${num(f.value)}<small>${esc(unit(f.unit))}</small></div>
+      <div class="d">${esc(pts)}</div></a>`;
+  }).join("");
+}
+
+function tools(o) {
+  $("#tools").innerHTML = o.tools.map(t => {
+    const j = t.job;
+    let last = t.generated ? `Page générée le ${when(t.generated)}` : "";
+    if (t.id === "donnees" && o.donnees) last = `${o.donnees.n_series.toLocaleString("fr-FR")} séries · dernière collecte le ${when(o.donnees.last)}`;
+    let state = "", cls = "";
+    if (j.running) { state = "Actualisation en cours…"; cls = "run"; }
+    else if (j.ok === false) { state = j.error || "Échec de l'actualisation"; cls = "ko"; }
+    else if (j.ok) state = `Actualisé le ${when(j.finished)}`;
+    if (t.id === "donnees" && o.donnees && o.donnees.failed.length && !j.running) { state = `Sources en échec : ${o.donnees.failed.join(", ")}`; cls = "ko"; }
+    if (!t.installed) { state = "Dossier introuvable à côté du portail"; cls = "ko"; }
+    return `<div class="tool">
+      <h3>${esc(t.label)}</h3>
+      <p>${esc(t.desc)}</p>
+      <div class="when">${esc(last)}</div>
+      <div class="state ${cls}">${esc(state)}</div>
+      <div class="acts">
+        <a class="btn primary" href="${t.id}/">Ouvrir</a>
+        ${STATIC ? "" : `<button class="btn" type="button" data-refresh="${t.id}" ${j.running || !t.installed ? "disabled" : ""}>Actualiser</button>`}
+      </div></div>`;
+  }).join("");
+}
+
+let timer;
+async function refreshView() {
+  clearTimeout(timer);
+  let o;
+  try { o = STATIC || await (await fetch("/api/overview", {cache: "no-store"})).json(); }
+  catch { $("#alerts").innerHTML = `<div class="banner">Portail injoignable : relancer FiPu.command (macOS) ou FiPu.bat (Windows).</div>`; return; }
+  $("#alerts").innerHTML = "";
+  tiles(o); tools(o);
+  const running = o.tools.some(t => t.job.running);
+  $("#all").disabled = running;
+  if (running) timer = setTimeout(refreshView, 2000);
+}
+$("#tools").addEventListener("click", async e => {
+  const b = e.target.closest("[data-refresh]"); if (!b) return;
+  b.disabled = true;
+  await fetch(`/${b.dataset.refresh}/api/refresh`, {method: "POST"});
+  refreshView();
+});
+$("#all").addEventListener("click", async () => {
+  $("#all").disabled = true;
+  await fetch("/api/refresh-all", {method: "POST"});
+  refreshView();
+});
+if (STATIC) { $("#all").hidden = true; $("#foot").textContent = STATIC.note || ""; }
+refreshView();
+</script>
+</body>
+</html>

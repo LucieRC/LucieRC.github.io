@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Données FiPu</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f7f6f3; --surface: #fcfcfb; --surface-2: #f0efeb; --line: #e2e0da;
+  --ink: #16150f; --ink-2: #52514e; --ink-3: #7c7a74;
+  --accent: #2a78d6; --accent-soft: #e6effa;
+  --bad: #b8322f; --warn-bg: #fff4d6; --warn-ink: #7a5300;
+  --grid: #ebe9e4; --axis: #c9c7c0;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s6: #008300; --s7: #4a3aa7; --s8: #e34948;
+  --radius: 10px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #121211; --surface: #1a1a19; --surface-2: #23231f; --line: #34332e;
+    --ink: #f4f3ee; --ink-2: #c3c2b7; --ink-3: #8f8d84;
+    --accent: #3987e5; --accent-soft: #1d2b3d; --bad: #ef6b6a; --warn-bg: #3a2f12; --warn-ink: #f2cf7a;
+    --grid: #2a2a26; --axis: #4a4943;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121211; --surface: #1a1a19; --surface-2: #23231f; --line: #34332e;
+  --ink: #f4f3ee; --ink-2: #c3c2b7; --ink-3: #8f8d84;
+  --accent: #3987e5; --accent-soft: #1d2b3d; --bad: #ef6b6a; --warn-bg: #3a2f12; --warn-ink: #f2cf7a;
+  --grid: #2a2a26; --axis: #4a4943;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 var(--font); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select { font: inherit; color: inherit; }
+.wrap { max-width: 1280px; margin: 0 auto; padding-inline: max(16px, 3vw); padding-block: 0 64px; }
+
+header.top { border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: center; gap: 16px; padding-block: 12px; flex-wrap: wrap; }
+.brand { font-weight: 650; font-size: 15px; letter-spacing: -0.01em; flex: 1; }
+.brand small { font-weight: 400; color: var(--ink-3); margin-left: 6px; }
+@media (max-width: 600px) { .brand small { display: none; } }
+.stamp { font-size: 12px; color: var(--ink-3); }
+
+.layout { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 20px; padding-top: 20px; align-items: start; }
+@media (max-width: 860px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; min-width: 0; }
+.panel h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); margin: 0 0 10px; font-weight: 600; }
+.side { position: sticky; top: 12px; max-height: calc(100vh - 24px); display: flex; flex-direction: column; }
+@media (max-width: 860px) { .side { position: static; max-height: none; } }
+
+.field { width: 100%; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.field:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.side .row + .row { margin-top: 8px; }
+.hint { font-size: 12px; color: var(--ink-3); margin: 8px 0 0; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface-2); border-radius: 999px; padding: 2px 10px; font-size: 12.5px; cursor: pointer; max-width: 100%; }
+.chip:hover { border-color: var(--accent); }
+.chip .x { color: var(--ink-3); font-size: 14px; line-height: 1; }
+.chip .sw { width: 12px; height: 3px; border-radius: 2px; flex: none; }
+.chip span.t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+
+.results { margin-top: 10px; overflow-y: auto; min-height: 120px; border-top: 1px solid var(--line); }
+.res { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 8px 2px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.res:hover { background: var(--surface-2); }
+.res .l { font-size: 13px; }
+.res .k { font-size: 11px; color: var(--ink-3); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; word-break: break-all; }
+.res .add { align-self: center; border: 1px solid var(--line); border-radius: 6px; padding: 0 8px; color: var(--accent); font-size: 16px; background: var(--surface); }
+.res.on .add { color: var(--ink-3); }
+.more { font-size: 12px; color: var(--ink-3); padding: 8px 2px; }
+
+.tabs { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.tabs button { border: 0; background: var(--surface); padding: 5px 12px; cursor: pointer; font-size: 13px; color: var(--ink-2); }
+.tabs button + button { border-left: 1px solid var(--line); }
+.tabs button[aria-selected="true"] { background: var(--accent-soft); color: var(--ink); font-weight: 600; }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 5px 12px; cursor: pointer; font-size: 13px; }
+.btn:hover { border-color: var(--accent); }
+.btn:disabled { opacity: .5; cursor: default; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+label.inl { font-size: 12.5px; color: var(--ink-2); display: inline-flex; gap: 6px; align-items: center; }
+label.inl .field { width: auto; padding: 4px 8px; }
+.spacer { flex: 1; }
+
+.work { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; min-width: 0; }
+.empty { color: var(--ink-3); padding: 40px 10px; text-align: center; }
+.chart { position: relative; }
+.chart + .chart { margin-top: 22px; }
+.chart h3 { font-size: 14px; margin: 0; font-weight: 620; }
+.chart .sub { font-size: 12px; color: var(--ink-3); margin: 0 0 6px; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12.5px; color: var(--ink-2); margin: 4px 0 6px; }
+.legend i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+svg { display: block; width: 100%; height: auto; overflow: visible; }
+svg text { fill: var(--ink-3); font-size: 11px; font-family: var(--font); }
+svg .lab { fill: var(--ink-2); font-size: 11.5px; }
+.tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 9px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.12); white-space: nowrap; z-index: 5; }
+.tip b { display: block; margin-bottom: 2px; }
+.tip .r { display: flex; gap: 8px; align-items: center; justify-content: space-between; }
+.tip .r i { width: 10px; height: 3px; border-radius: 2px; display: inline-block; margin-right: 6px; }
+.tip .v { font-variant-numeric: tabular-nums; font-weight: 600; }
+
+.tablewrap { overflow: auto; max-height: 70vh; border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+th, td { padding: 5px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; position: sticky; left: 0; background: var(--surface); }
+thead th { position: sticky; top: 0; background: var(--surface-2); font-weight: 600; color: var(--ink-2); z-index: 1; vertical-align: bottom; white-space: normal; min-width: 90px; }
+thead th:first-child { z-index: 2; background: var(--surface-2); }
+td.rev { background: var(--accent-soft); }
+td.na { color: var(--ink-3); }
+
+.sources { font-size: 12px; color: var(--ink-2); margin: 0; padding-left: 18px; }
+.sources li + li { margin-top: 3px; }
+.sources code { font-size: 11px; color: var(--ink-3); }
+.banner { background: var(--warn-bg); color: var(--warn-ink); border-radius: var(--radius); padding: 10px 14px; font-size: 13px; }
+details.status summary { cursor: pointer; font-size: 13px; color: var(--ink-2); }
+.ok { color: var(--ink-2); }
+.ko { color: var(--bad); font-weight: 600; }
+pre.log { font-size: 11.5px; color: var(--ink-3); white-space: pre-wrap; margin: 8px 0 0; max-height: 160px; overflow: auto; }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand">Données FiPu <small>séries publiques de finances publiques, versions conservées</small></div>
+  <div class="stamp" id="stamp"></div>
+</div></header>
+
+<main class="wrap">
+  <div id="alerts"></div>
+  <div class="layout">
+    <aside class="panel side">
+      <h2>Trouver une série</h2>
+      <input class="field" id="q" type="search" placeholder="Mots du libellé ou de la clé : tva .FR, cofog sante…" aria-label="Rechercher une série" autocomplete="off">
+      <div class="row"><select class="field" id="source" aria-label="Source"></select></div>
+      <p class="hint">Raccourcis :</p>
+      <div class="chips" id="aliases"></div>
+      <div class="results" id="results"></div>
+    </aside>
+
+    <section class="work">
+      <div class="panel">
+        <div class="row" style="justify-content: space-between">
+          <h2 style="margin:0">Sélection</h2>
+          <button class="btn" id="clear" type="button">Tout retirer</button>
+        </div>
+        <div class="chips" id="selection" style="margin-top:8px"></div>
+        <div class="row" style="margin-top:12px">
+          <div class="tabs" role="tablist" id="views">
+            <button type="button" role="tab" data-v="graph">Graphique</button>
+            <button type="button" role="tab" data-v="table">Tableau</button>
+            <button type="button" role="tab" data-v="rev">Révisions</button>
+          </div>
+          <label class="inl">Depuis <input class="field" id="depuis" size="8" placeholder="2010"></label>
+          <label class="inl" title="Valeurs telles que connues à cette date (versions enregistrées)">Version au <input class="field" id="au" type="date"></label>
+          <span class="spacer"></span>
+          <button class="btn" id="copy" type="button" title="Copier le tableau (collable dans Excel ou Word)">Copier</button>
+          <a class="btn" id="xlsx" href="#" download>Excel</a>
+        </div>
+      </div>
+      <div class="panel" id="view"></div>
+      <div class="panel" id="meta" hidden>
+        <h2>Sources</h2>
+        <ul class="sources" id="sources"></ul>
+      </div>
+      <details class="panel status" id="status">
+        <summary>État des collectes</summary>
+        <div class="row" style="margin-top:10px">
+          <button class="btn primary" id="refresh" type="button">Actualiser les données</button>
+          <span class="hint" id="refresh-hint" style="margin:0"></span>
+        </div>
+        <pre class="log" id="log" hidden></pre>
+        <div class="tablewrap" style="margin-top:10px"><table id="runs"></table></div>
+      </details>
+    </section>
+  </div>
+</main>
+
+<div class="tip" id="tip" hidden></div>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const LIVE = location.protocol.startsWith("http");
+const MAX = 8;
+const state = {k: [], slots: {}, depuis: "", au: "", vue: "graph", rev: null, data: null};
+let catalogue = {sources: [], alias: []};
+
+// Version publiée (sans serveur) : `window.FIPU_STATIC` est défini par site/build.py, qui exporte la base
+// dans un fichier JSON ; les réponses de web.py sont alors recalculées ici, à l'identique.
+const STATIC = window.FIPU_STATIC || null;
+let staticDb;
+const fold = s => s.normalize("NFKD").replace(/[^\x00-\x7f]/g, "").toLowerCase();
+async function staticApi(path, p) {
+  staticDb = staticDb || fetch(STATIC.data).then(r => { if (!r.ok) throw new Error("fichier de données introuvable"); return r.json(); });
+  const db = await staticDb;
+  const one = name => [p[name]].flat()[0] || "";
+  const resolve = n => {
+    const key = db.alias[n] || n;
+    if (!db.meta[key]) throw new Error(`série inconnue : '${n}'`);
+    return key;
+  };
+  const meta = key => { const [source, label, unit, freq, ref, updated] = db.meta[key]; return {key, source, label, unit, freq, ref, updated}; };
+  if (path === "catalogue") return db.catalogue;
+  if (path === "etat") return db.etat;
+  if (path === "cherche") {
+    const mots = fold(one("q")).split(/\s+/).filter(Boolean), source = one("source");
+    const byKey = Object.fromEntries(Object.entries(db.alias).map(([a, k]) => [k, a]));
+    const keep = Object.keys(db.meta).sort().map(meta)
+      .filter(m => (!source || m.source === source) && mots.every(w => fold(m.key + " " + m.label + " " + m.unit).includes(w)));
+    return {total: keep.length, results: keep.slice(0, 300).map(m => ({key: m.key, alias: byKey[m.key] || "", source: m.source, label: m.label, unit: m.unit, freq: m.freq}))};
+  }
+  if (path === "series") {
+    const au = one("au") || "9999-12-31", depuis = one("depuis");
+    return {au: one("au") || null, series: [p.k].flat().map(n => {
+      const key = resolve(n), last = new Map();
+      for (const [period, value, v] of db.obs[key] || []) if (db.vintages[v] <= au) last.set(period, value); // lignes triées par version
+      const obs = [...last].filter(([period]) => !depuis || period >= depuis).sort((a, b) => a[0] < b[0] ? -1 : 1);
+      return {name: n, ...meta(key), obs};
+    })};
+  }
+  if (path === "revisions") {
+    const n = one("k"), key = resolve(n), depuis = one("depuis"), rows = db.obs[key] || [];
+    const vs = [...new Set(rows.map(r => r[2]))].sort((a, b) => a - b);
+    const byPeriod = new Map();
+    for (const [period, value, v] of rows) { if (!byPeriod.has(period)) byPeriod.set(period, {}); byPeriod.get(period)[v] = value; }
+    const out = [...byPeriod].filter(([period]) => !depuis || period >= depuis).sort((a, b) => a[0] < b[0] ? -1 : 1).map(([period, at]) => {
+      let prev = null; // une valeur non révisée reste valable dans les versions suivantes
+      return {period, values: vs.map(v => prev = at[v] ?? prev)};
+    });
+    return {name: n, vintages: vs.map(v => db.vintages[v]), rows: out};
+  }
+  throw new Error("indisponible dans la version publiée");
+}
+
+// Export Excel sans serveur : mêmes feuilles que donnees.export (« données », « sources »).
+async function staticExport() {
+  if (!window.XLSX) await new Promise((ok, ko) => {
+    const s = document.createElement("script");
+    s.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"; s.onload = ok; s.onerror = () => ko(new Error("bibliothèque Excel indisponible"));
+    document.head.append(s);
+  });
+  const series = state.data.series;
+  const periods = [...new Set(series.flatMap(s => s.obs.map(o => o[0])))].sort();
+  const maps = series.map(s => Object.fromEntries(s.obs));
+  const data = [["période", ...series.map(s => s.name)], ...periods.map(p => [p, ...maps.map(m => m[p] ?? null)])];
+  const au = state.au || new Date().toISOString().slice(0, 10);
+  const src = [["colonne", "clé", "libellé", "unité", "origine", "mise à jour par la source", "valeurs telles que connues au"],
+    ...series.map(s => [s.name, s.key, s.label, s.unit, s.ref, s.updated, au])];
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(data), "données");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(src), "sources");
+  XLSX.writeFile(wb, `donnees-fipu-${au}.xlsx`);
+}
+
+async function api(path, params) {
+  if (STATIC) return staticApi(path, params || {});
+  const u = new URL("api/" + path, location.href);
+  for (const [k, v] of Object.entries(params || {})) (Array.isArray(v) ? v : [v]).forEach(x => x && u.searchParams.append(k, x));
+  const r = await fetch(u, {cache: "no-store"});
+  const j = await r.json();
+  if (!r.ok) throw new Error(j.error || r.statusText);
+  return j;
+}
+
+// ---------- formats ----------
+const UNITS = [
+  [/^Pourcentage du produit intérieur brut/i, "% du PIB"], [/^Millions d'euros/i, "M€"], [/^EUROS \(×10\^6\)/i, "M€"],
+  [/^EUROS \(×10\^9\)/i, "Md€"], [/^Pourcentage du total/i, "% du total"], [/^Prix courants, millions d'euros/i, "M€ courants"],
+  [/^POURCENT/i, "%"],
+];
+const shortUnit = u => { for (const [re, s] of UNITS) if (re.test(u || "")) return s; return u || ""; };
+function decimals(values) {
+  const v = values.filter(x => x != null);
+  const big = v.length && Math.max(...v.map(Math.abs)) >= 1000;
+  if (big) return 0;
+  let d = 0;
+  for (const x of v) { const s = String(x); const i = s.indexOf("."); if (i >= 0) d = Math.max(d, Math.min(2, s.length - i - 1)); }
+  return d;
+}
+const fmt = (x, d) => x == null ? "–" : x.toLocaleString("fr-FR", {minimumFractionDigits: d, maximumFractionDigits: d});
+const plain = (x, d) => x == null ? "" : x.toFixed(d).replace(".", ",");
+function t(period) { // période → abscisse numérique
+  let m;
+  if ((m = /^(\d{4})-Q(\d)$/.exec(period))) return +m[1] + (m[2] - 1) / 4;
+  if ((m = /^(\d{4})-(\d{2})$/.exec(period))) return +m[1] + (m[2] - 1) / 12;
+  if ((m = /^(\d{4})-S(\d)$/.exec(period))) return +m[1] + (m[2] - 1) / 2;
+  return +period;
+}
+const FREQ = {A: "annuel", Q: "trimestriel", M: "mensuel", S: "semestriel"};
+
+// Libellés : on retire les segments communs à toutes les séries affichées ensemble.
+function names(series) {
+  const segs = series.map(s => s.label.split(" — "));
+  const common = segs[0].filter(x => segs.every(a => a.includes(x)));
+  return {
+    common: common.join(" — "),
+    each: series.map((s, i) => {
+      const own = segs[i].filter(x => !common.includes(x)).join(" — ");
+      return own || (s.name !== s.key ? s.name : s.label);
+    }),
+  };
+}
+
+// ---------- état / URL ----------
+function readHash() {
+  const h = new URLSearchParams(location.hash.slice(1));
+  state.k = (h.get("k") || "").split(",").filter(Boolean).slice(0, MAX);
+  state.depuis = h.get("depuis") || "";
+  state.au = h.get("au") || "";
+  state.vue = h.get("vue") || "graph";
+  state.rev = h.get("rev") || null;
+  state.slots = {};
+  state.k.forEach((k, i) => state.slots[k] = i + 1);
+}
+function writeHash() {
+  const h = new URLSearchParams();
+  if (state.k.length) h.set("k", state.k.join(","));
+  if (state.depuis) h.set("depuis", state.depuis);
+  if (state.au) h.set("au", state.au);
+  if (state.vue !== "graph") h.set("vue", state.vue);
+  if (state.rev) h.set("rev", state.rev);
+  history.replaceState(null, "", "#" + h.toString());
+}
+// La couleur suit la série : un emplacement attribué à l'ajout n'est jamais réattribué tant qu'elle reste sélectionnée.
+function slotFor(k) {
+  if (!state.slots[k]) {
+    const used = new Set(Object.values(state.slots));
+    for (let i = 1; i <= MAX; i++) if (!used.has(i)) { state.slots[k] = i; break; }
+  }
+  return state.slots[k];
+}
+function add(k) {
+  if (state.k.includes(k)) return remove(k);
+  if (state.k.length >= MAX) return alertMsg(`${MAX} séries au plus : en retirer une avant d'en ajouter.`);
+  state.k.push(k); slotFor(k); load();
+}
+function remove(k) {
+  state.k = state.k.filter(x => x !== k); delete state.slots[k];
+  if (state.rev === k) state.rev = null;
+  load();
+}
+function alertMsg(msg) {
+  $("#alerts").innerHTML = msg ? `<div class="banner" style="margin-top:16px">${esc(msg)}</div>` : "";
+}
+
+// ---------- recherche ----------
+let searchTimer;
+async function search() {
+  const q = $("#q").value.trim(), source = $("#source").value;
+  if (!q && !source) { $("#results").innerHTML = `<p class="more">Saisir des mots ou choisir une source.</p>`; return; }
+  const r = await api("cherche", {q, source});
+  $("#results").innerHTML = r.results.map(x => `
+    <div class="res${state.k.includes(x.alias || x.key) || state.k.includes(x.key) ? " on" : ""}" data-k="${esc(x.alias || x.key)}" title="${esc(x.key)}">
+      <div><div class="l">${esc(x.label)}</div><div class="k">${x.alias ? `<b>${esc(x.alias)}</b> · ` : ""}${esc(x.key)} · ${esc(shortUnit(x.unit))} · ${esc(FREQ[x.freq] || x.freq)}</div></div>
+      <button class="add" type="button" aria-label="Ajouter">${state.k.includes(x.alias || x.key) ? "✓" : "+"}</button>
+    </div>`).join("") + `<p class="more">${r.total ? `${r.total.toLocaleString("fr-FR")} série(s)${r.total > r.results.length ? ` — ${r.results.length} affichées, préciser la recherche` : ""}` : "Aucune série."}</p>`;
+}
+$("#results").addEventListener("click", e => { const el = e.target.closest(".res"); if (el) { add(el.dataset.k); search(); } });
+$("#q").addEventListener("input", () => { clearTimeout(searchTimer); searchTimer = setTimeout(search, 200); });
+$("#source").addEventListener("change", search);
+$("#aliases").addEventListener("click", e => { const el = e.target.closest(".chip"); if (el) add(el.dataset.k); });
+$("#selection").addEventListener("click", e => { const el = e.target.closest(".chip"); if (el) remove(el.dataset.k); });
+$("#clear").addEventListener("click", () => { state.k = []; state.slots = {}; state.rev = null; load(); });
+$("#views").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { state.vue = b.dataset.v; render(); } });
+$("#depuis").addEventListener("change", e => { state.depuis = e.target.value.trim(); load(); });
+$("#au").addEventListener("change", e => { state.au = e.target.value; load(); });
+
+// ---------- chargement ----------
+async function load() {
+  writeHash();
+  alertMsg("");
+  $("#depuis").value = state.depuis; $("#au").value = state.au;
+  if (!state.k.length) { state.data = null; return render(); }
+  try {
+    state.data = await api("series", {k: state.k, depuis: state.depuis, au: state.au});
+  } catch (e) {
+    // série disparue (clé collée à la main, alias supprimé…) : on la retire et on recommence
+    const bad = state.k.find(k => e.message.includes(`'${k}'`));
+    if (bad) { alertMsg(e.message); state.k = state.k.filter(x => x !== bad); return load(); }
+    alertMsg(e.message); state.data = null;
+  }
+  render();
+}
+
+function render() {
+  document.querySelectorAll("#views button").forEach(b => b.setAttribute("aria-selected", b.dataset.v === state.vue));
+  const series = state.data ? state.data.series : [];
+  const nm = series.length ? names(series) : {each: []};
+  $("#selection").innerHTML = series.length ? series.map((s, i) => `
+    <span class="chip" data-k="${esc(s.name)}" title="Retirer — ${esc(s.label)}">
+      <i class="sw" style="background:var(--s${state.slots[s.name]})"></i><span class="t">${esc(nm.each[i])}</span><span class="x">×</span></span>`).join("")
+    : `<span class="hint" style="margin:0">Aucune série : en ajouter depuis la recherche ou les raccourcis.</span>`;
+  const q = new URLSearchParams(); state.k.forEach(k => q.append("k", k));
+  if (state.depuis) q.set("depuis", state.depuis); if (state.au) q.set("au", state.au);
+  $("#xlsx").href = "api/export?" + q; $("#xlsx").toggleAttribute("hidden", !series.length || !LIVE);
+  $("#copy").disabled = !series.length;
+  $("#clear").hidden = !series.length;
+  $("#meta").hidden = !series.length;
+  $("#sources").innerHTML = series.map(s => `<li><b>${esc(s.name)}</b> — ${esc(s.label)} [${esc(s.unit)}]<br><code>${esc(s.ref)}</code> · mise à jour par la source : ${esc((s.updated || "").slice(0, 10) || "n.d.")}</li>`).join("");
+  document.querySelectorAll("#results .res").forEach(el => {
+    const on = state.k.includes(el.dataset.k); el.classList.toggle("on", on); el.querySelector(".add").textContent = on ? "✓" : "+";
+  });
+  const v = $("#view");
+  if (!series.length) { v.innerHTML = `<div class="empty">Choisir une ou plusieurs séries.<br>Les séries de même unité et même fréquence sont tracées ensemble ; les autres sur des graphiques séparés.</div>`; return; }
+  if (state.vue === "table") return renderTable(v, series, nm);
+  if (state.vue === "rev") return renderRevisions(v, series, nm);
+  renderCharts(v, series);
+}
+
+// ---------- graphiques ----------
+function niceTicks(lo, hi, n) {
+  const span = hi - lo || Math.abs(hi) || 1;
+  const step0 = span / n, mag = 10 ** Math.floor(Math.log10(step0));
+  const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => span / s <= n) || 10 * mag;
+  const out = [];
+  // graduations englobantes : la première sous le minimum, la dernière au-dessus du maximum
+  for (let x = Math.floor(lo / step) * step; x < hi + step - step * 1e-9; x += step) out.push(+x.toFixed(10));
+  return {ticks: out, step};
+}
+
+function renderCharts(v, series) {
+  const groups = [];
+  for (const s of series) {
+    const key = shortUnit(s.unit) + "|" + s.freq;
+    let g = groups.find(x => x.key === key);
+    if (!g) groups.push(g = {key, unit: shortUnit(s.unit), freq: s.freq, series: []});
+    g.series.push(s);
+  }
+  v.innerHTML = (groups.length > 1 ? `<p class="hint" style="margin:0 0 10px">Unités ou fréquences différentes : un graphique par groupe (jamais deux échelles sur un même graphique).</p>` : "")
+    + groups.map((g, i) => `<div class="chart" data-g="${i}"></div>`).join("");
+  groups.forEach((g, i) => drawChart(v.querySelector(`[data-g="${i}"]`), g));
+}
+
+function drawChart(el, g) {
+  const nm = names(g.series);
+  const pts = g.series.map(s => s.obs.filter(o => o[1] != null).map(([p, y]) => ({p, x: t(p), y})));
+  const all = pts.flat();
+  const head = `<h3>${esc(g.series.length === 1 ? g.series[0].label : (nm.common || "Séries sélectionnées"))}</h3>
+    <p class="sub">${esc(g.unit)} · ${esc(FREQ[g.freq] || g.freq)}${state.au ? ` · valeurs connues au ${esc(state.au)}` : ""}</p>`;
+  if (!all.length) { el.innerHTML = head + `<p class="empty">Pas de valeur sur la période.</p>`; return; }
+  const W = Math.max(320, el.clientWidth || 700), H = 300;
+  const direct = g.series.length > 1 && g.series.length <= 4 && W >= 560;
+  const labW = direct ? Math.min(170, W * 0.24) : 0;
+  const M = {l: 52, r: 14 + labW, t: 10, b: 26};
+  const xs = all.map(d => d.x), ys = all.map(d => d.y);
+  let x0 = Math.min(...xs), x1 = Math.max(...xs); if (x0 === x1) { x0 -= 1; x1 += 1; }
+  let y0 = Math.min(...ys), y1 = Math.max(...ys);
+  const pad = (y1 - y0 || Math.abs(y1) || 1) * 0.08; y0 -= pad; y1 += pad;
+  const yt = niceTicks(y0, y1, 5); y0 = yt.ticks[0]; y1 = yt.ticks[yt.ticks.length - 1];
+  const X = x => M.l + (x - x0) / (x1 - x0) * (W - M.l - M.r);
+  const Y = y => M.t + (1 - (y - y0) / (y1 - y0)) * (H - M.t - M.b);
+  const d = decimals(ys);
+  const yearSpan = Math.ceil(x1) - Math.floor(x0);
+  const xStep = [1, 2, 5, 10, 20].find(s => yearSpan / s <= Math.max(3, Math.floor((W - M.l - M.r) / 70))) || 20;
+  const xt = []; for (let y = Math.ceil(x0 / xStep) * xStep; y <= x1; y += xStep) xt.push(y);
+
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(nm.common || g.series[0].label)}">`;
+  svg += yt.ticks.map(v => `<line x1="${M.l}" x2="${W - M.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/>
+    <text x="${M.l - 8}" y="${Y(v) + 4}" text-anchor="end">${fmt(v, yt.step < 1 ? Math.min(2, Math.ceil(-Math.log10(yt.step))) : 0)}</text>`).join("");
+  if (y0 < 0 && y1 > 0) svg += `<line x1="${M.l}" x2="${W - M.r}" y1="${Y(0)}" y2="${Y(0)}" stroke="var(--axis)" stroke-width="1.5"/>`;
+  svg += `<line x1="${M.l}" x2="${W - M.r}" y1="${H - M.b}" y2="${H - M.b}" stroke="var(--axis)"/>`;
+  svg += xt.map(x => `<text x="${X(x)}" y="${H - M.b + 16}" text-anchor="middle">${x}</text>`).join("");
+  g.series.forEach((s, i) => {
+    let path = "", prev = null;
+    for (const o of s.obs) {
+      if (o[1] == null) { prev = null; continue; }
+      path += (prev ? "L" : "M") + X(t(o[0])).toFixed(1) + "," + Y(o[1]).toFixed(1);
+      prev = o;
+    }
+    const lone = pts[i].length === 1 ? `<circle cx="${X(pts[i][0].x)}" cy="${Y(pts[i][0].y)}" r="4" fill="var(--s${state.slots[s.name]})"/>` : "";
+    svg += `<path d="${path}" fill="none" stroke="var(--s${state.slots[s.name]})" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${lone}`;
+  });
+  if (direct) { // étiquettes en bout de ligne, écartées pour ne pas se chevaucher
+    const labs = g.series.map((s, i) => { const last = pts[i][pts[i].length - 1]; return last ? {i, y: Y(last.y), x: X(last.x), s} : null; }).filter(Boolean).sort((a, b) => a.y - b.y);
+    for (let k = 1; k < labs.length; k++) labs[k].y = Math.max(labs[k].y, labs[k - 1].y + 15);
+    const maxChars = Math.floor((labW - 18) / 6.2);
+    labs.forEach(l => {
+      const txt = nm.each[l.i].length > maxChars ? nm.each[l.i].slice(0, maxChars - 1) + "…" : nm.each[l.i];
+      svg += `<line x1="${W - M.r + 6}" x2="${W - M.r + 16}" y1="${l.y}" y2="${l.y}" stroke="var(--s${state.slots[l.s.name]})" stroke-width="2"/>
+        <text class="lab" x="${W - M.r + 20}" y="${l.y + 4}"><title>${esc(nm.each[l.i])}</title>${esc(txt)}</text>`;
+    });
+  }
+  svg += `<g class="hover" pointer-events="none"></g><rect class="hit" x="${M.l}" y="${M.t}" width="${W - M.l - M.r}" height="${H - M.t - M.b}" fill="transparent"/></svg>`;
+  const legend = g.series.length > 1 ? `<div class="legend">${g.series.map((s, i) => `<span><i style="background:var(--s${state.slots[s.name]})"></i>${esc(nm.each[i])}</span>`).join("")}</div>` : "";
+  el.innerHTML = head + legend + svg;
+
+  // survol : ligne verticale + infobulle avec toutes les séries à la période la plus proche
+  const svgEl = el.querySelector("svg"), hover = el.querySelector(".hover"), tip = $("#tip");
+  const periods = [...new Set(all.map(p => p.p))].sort((a, b) => t(a) - t(b));
+  const byPeriod = g.series.map(s => Object.fromEntries(s.obs));
+  function move(ev) {
+    const r = svgEl.getBoundingClientRect(), scale = W / r.width;
+    const mx = (ev.clientX - r.left) * scale;
+    const xv = x0 + (mx - M.l) / (W - M.l - M.r) * (x1 - x0);
+    const p = periods.reduce((a, b) => Math.abs(t(b) - xv) < Math.abs(t(a) - xv) ? b : a);
+    const px = X(t(p));
+    hover.innerHTML = `<line x1="${px}" x2="${px}" y1="${M.t}" y2="${H - M.b}" stroke="var(--axis)"/>` + g.series.map((s, i) => {
+      const y = byPeriod[i][p]; return y == null ? "" : `<circle cx="${px}" cy="${Y(y)}" r="4.5" fill="var(--s${state.slots[s.name]})" stroke="var(--surface)" stroke-width="2"/>`;
+    }).join("");
+    tip.innerHTML = `<b>${esc(p)}</b>` + g.series.map((s, i) => `<div class="r"><span><i style="background:var(--s${state.slots[s.name]})"></i>${esc(nm.each[i].length > 50 ? nm.each[i].slice(0, 49) + "…" : nm.each[i])}</span><span class="v">${fmt(byPeriod[i][p] ?? null, d)}</span></div>`).join("");
+    tip.hidden = false;
+    const tw = tip.offsetWidth, left = ev.pageX + 14 + tw > window.scrollX + document.documentElement.clientWidth ? ev.pageX - tw - 14 : ev.pageX + 14;
+    tip.style.left = left + "px"; tip.style.top = (ev.pageY + 14) + "px";
+  }
+  const hit = el.querySelector(".hit");
+  hit.addEventListener("pointermove", move);
+  hit.addEventListener("pointerleave", () => { hover.innerHTML = ""; tip.hidden = true; });
+}
+
+// ---------- tableau ----------
+function tableData(series, nm) {
+  const periods = [...new Set(series.flatMap(s => s.obs.map(o => o[0])))].sort((a, b) => t(a) - t(b) || a.localeCompare(b));
+  const maps = series.map(s => Object.fromEntries(s.obs));
+  const dec = series.map(s => decimals(s.obs.map(o => o[1])));
+  return {periods, maps, dec, heads: series.map((s, i) => `${nm.each[i]} (${shortUnit(s.unit)})`)};
+}
+function renderTable(v, series, nm) {
+  const td = tableData(series, nm);
+  v.innerHTML = (nm.common && series.length > 1 ? `<p class="hint" style="margin:0 0 8px">${esc(nm.common)}</p>` : "")
+    + `<div class="tablewrap"><table><thead><tr><th>Période</th>${td.heads.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>`
+    + td.periods.slice().reverse().map(p => `<tr><td>${esc(p)}</td>${td.maps.map((m, i) => `<td class="${m[p] == null ? "na" : ""}">${fmt(m[p] ?? null, td.dec[i])}</td>`).join("")}</tr>`).join("")
+    + `</tbody></table></div>`;
+}
+$("#copy").addEventListener("click", async () => {
+  if (!state.data) return;
+  const series = state.data.series, nm = names(series);
+  let tsv;
+  if (state.vue === "rev" && state.revData) {
+    const r = state.revData;
+    tsv = ["Période\t" + r.vintages.join("\t"), ...r.rows.map(x => x.period + "\t" + x.values.map(v => plain(v, r.dec)).join("\t"))].join("\n");
+  } else {
+    const td = tableData(series, nm);
+    tsv = ["Période\t" + td.heads.join("\t"), ...td.periods.map(p => p + "\t" + td.maps.map((m, i) => plain(m[p] ?? null, td.dec[i])).join("\t"))].join("\n");
+  }
+  try { await navigator.clipboard.writeText(tsv); flash("#copy", "Copié ✓"); }
+  catch { flash("#copy", "Copie impossible"); }
+});
+function flash(sel, txt) { const b = $(sel), old = b.textContent; b.textContent = txt; setTimeout(() => b.textContent = old, 1400); }
+
+// ---------- révisions ----------
+async function renderRevisions(v, series, nm) {
+  const k = state.k.includes(state.rev) ? state.rev : state.k[0];
+  const pick = series.length > 1 ? `<label class="inl" style="margin-bottom:10px">Série <select class="field" id="revk">${series.map((s, i) => `<option value="${esc(s.name)}"${s.name === k ? " selected" : ""}>${esc(nm.each[i])}</option>`).join("")}</select></label>` : "";
+  v.innerHTML = pick + `<p class="hint">Chargement…</p>`;
+  const r = await api("revisions", {k, depuis: state.depuis});
+  const s = series.find(x => x.name === k);
+  r.dec = decimals(r.rows.flatMap(x => x.values));
+  state.revData = r;
+  const n = r.vintages.length;
+  const note = n < 2
+    ? `Une seule version enregistrée pour l'instant (collecte du ${esc(r.vintages[0] || "–")}). Les révisions apparaîtront ici au fil des collectes suivantes.`
+    : `${n} versions enregistrées ; les cellules surlignées ont été révisées par rapport à la version précédente.`;
+  v.innerHTML = pick + `<p class="hint" style="margin:0 0 8px">${esc(s ? s.label : k)} [${esc(shortUnit(s ? s.unit : ""))}] — ${note}</p>`
+    + `<div class="tablewrap"><table><thead><tr><th>Période</th>${r.vintages.map(x => `<th>version du ${esc(x)}</th>`).join("")}</tr></thead><tbody>`
+    + r.rows.slice().reverse().map(row => `<tr><td>${esc(row.period)}</td>${row.values.map((val, j) => {
+        const prev = j ? row.values[j - 1] : undefined, changed = j > 0 && val !== prev && !(val == null && prev == null);
+        return `<td class="${changed ? "rev" : ""}${val == null ? " na" : ""}"${changed ? ` title="révisé : ${fmt(prev ?? null, r.dec)} → ${fmt(val, r.dec)}"` : ""}>${fmt(val, r.dec)}</td>`;
+      }).join("")}</tr>`).join("") + `</tbody></table></div>`;
+  const sel = $("#revk");
+  if (sel) sel.addEventListener("change", e => { state.rev = e.target.value; writeHash(); render(); });
+}
+
+// ---------- état des collectes et actualisation ----------
+async function loadStatus() {
+  const e = await api("etat");
+  const last = e.runs.map(r => r["dernière collecte"]).sort().pop();
+  $("#stamp").textContent = `${e.n_series.toLocaleString("fr-FR")} séries · dernière collecte ${last ? new Date(last).toLocaleString("fr-FR", {dateStyle: "medium", timeStyle: "short"}) : "–"}`;
+  const ko = e.runs.filter(r => !r.ok);
+  if (ko.length) $("#status").open = true;
+  const label = Object.fromEntries(catalogue.sources.map(s => [s.id, s.label]));
+  $("#runs").innerHTML = `<thead><tr><th>Source</th><th>Dernière collecte</th><th>Séries</th><th>Valeurs nouvelles ou révisées</th><th>État</th></tr></thead><tbody>`
+    + e.runs.map(r => `<tr><td title="${esc(r.source)}">${esc(label[r.source] || r.source)}</td><td>${esc(new Date(r["dernière collecte"]).toLocaleString("fr-FR", {dateStyle: "short", timeStyle: "short"}))}</td><td>${r["séries"] ?? "–"}</td><td>${r["valeurs changées"] ?? "–"}</td><td class="${r.ok ? "ok" : "ko"}">${r.ok ? "ok" : esc("échec : " + (r["erreur"] || ""))}</td></tr>`).join("") + `</tbody>`;
+}
+async function poll() {
+  const btn = $("#refresh"), log = $("#log");
+  btn.disabled = true; log.hidden = false;
+  for (;;) {
+    let s; try { s = await api("status"); } catch { break; }
+    log.textContent = (s.log || []).join("\n"); log.scrollTop = log.scrollHeight;
+    if (!s.running) {
+      btn.disabled = false;
+      $("#refresh-hint").textContent = s.ok ? "Données à jour." : "Échec : " + (s.error || "voir le journal");
+      if (s.ok) { await loadStatus(); load(); }
+      break;
+    }
+    await new Promise(r => setTimeout(r, 1000));
+  }
+}
+$("#xlsx").addEventListener("click", e => {
+  if (!STATIC) return;
+  e.preventDefault();
+  if (state.data) staticExport().catch(err => alertMsg("Export impossible : " + err.message));
+});
+$("#refresh").addEventListener("click", async () => {
+  const r = await fetch("api/refresh", {method: "POST"});
+  if (r.ok || r.status === 409) poll();
+});
+
+// ---------- démarrage ----------
+(async function init() {
+  if (!LIVE) { alertMsg("Cette page doit être ouverte par le portail (FiPu.command / FiPu.bat) : elle interroge la base locale."); return; }
+  try { catalogue = await api("catalogue"); }
+  catch (e) { alertMsg("Base inaccessible : " + e.message + ". Lancer d'abord une collecte (update.py)."); return; }
+  $("#source").innerHTML = `<option value="">Toutes les sources</option>` + catalogue.sources.map(s => `<option value="${esc(s.id)}">${esc(s.label)} (${s.n})</option>`).join("");
+  $("#aliases").innerHTML = catalogue.alias.map(a => `<span class="chip" data-k="${esc(a.alias)}" title="${esc(a.label)}">${esc(a.alias)}</span>`).join("");
+  readHash();
+  if (!state.k.length) { state.k = ["deficit", "dette"]; state.k.forEach(slotFor); }
+  search(); load(); loadStatus();
+  if (STATIC) { $("#refresh").hidden = true; $("#refresh-hint").textContent = STATIC.note || ""; }
+  else api("status").then(s => { if (s.running) poll(); }).catch(() => {});
+  let w = innerWidth;
+  addEventListener("resize", () => { if (Math.abs(innerWidth - w) > 40 && state.vue === "graph") { w = innerWidth; render(); } });
+  addEventListener("hashchange", () => { readHash(); load(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lucie Ricq</title>
+<meta name="description" content="Lucie Ricq — public finance analysis at the French Treasury; PhD in energy economics and applied mathematics (CIRED).">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f7f6f3; --surface: #fcfcfb; --surface-2: #f0efeb; --line: #e2e0da;
+  --ink: #16150f; --ink-2: #52514e; --ink-3: #7c7a74;
+  --accent: #4f5d3a; --accent-2: #6b7a4f; --accent-soft: #eef0e6;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #121211; --surface: #1a1a19; --surface-2: #23231f; --line: #34332e;
+    --ink: #f4f3ee; --ink-2: #c3c2b7; --ink-3: #8f8d84;
+    --accent: #b5c58f; --accent-2: #a3b37d; --accent-soft: #262b1d;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121211; --surface: #1a1a19; --surface-2: #23231f; --line: #34332e;
+  --ink: #f4f3ee; --ink-2: #c3c2b7; --ink-3: #8f8d84;
+  --accent: #b5c58f; --accent-2: #a3b37d; --accent-soft: #262b1d;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.6 var(--font); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); }
+
+.top { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 12px; padding: 10px max(16px, 3vw);
+  background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.top .me { font-weight: 650; color: var(--ink); text-decoration: none; flex: 1; }
+.top .bercy { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; font-size: 14px; font-weight: 600;
+  text-decoration: none; background: var(--accent); color: var(--bg); }
+.top .bercy:hover { background: var(--accent-2); }
+
+.wrap { max-width: 880px; margin: 0 auto; padding: 40px max(16px, 3vw) 72px; }
+.hero { display: grid; grid-template-columns: 168px 1fr; gap: 32px; align-items: center; }
+.hero img { width: 168px; height: 168px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); }
+h1 { font-size: 34px; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 6px; font-weight: 700; }
+.role { font-size: 17px; margin: 0; color: var(--ink); }
+.sub { margin: 6px 0 0; color: var(--ink-2); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.tags span { font-size: 12.5px; padding: 2px 10px; border-radius: 99px; background: var(--accent-soft); color: var(--accent); }
+
+h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin: 44px 0 14px; font-weight: 650;
+  display: flex; align-items: center; gap: 12px; }
+h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+.thesis { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+.thesis h3 { margin: 0 0 8px; font-size: 17px; line-height: 1.35; }
+.thesis p { margin: 0 0 8px; color: var(--ink-2); }
+.thesis p:last-child { margin: 0; }
+
+.tl { list-style: none; margin: 0; padding: 0; }
+.tl li { display: grid; grid-template-columns: 112px 1fr; gap: 16px; padding: 10px 0; border-top: 1px solid var(--line); }
+.tl li:first-child { border-top: 0; }
+.tl .when { color: var(--ink-3); font-variant-numeric: tabular-nums; font-size: 14px; padding-top: 1px; }
+.tl b { display: block; font-weight: 620; }
+.tl .where { color: var(--ink-2); }
+.tl .what { color: var(--ink-2); font-style: italic; }
+
+.cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+.card h3 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); font-weight: 600; }
+.card ul { margin: 0; padding: 0; list-style: none; }
+.card li { padding: 3px 0; }
+.card li small { color: var(--ink-3); }
+
+.plain { margin: 0; padding-left: 18px; color: var(--ink-2); }
+.plain li { padding: 3px 0; }
+.plain b { color: var(--ink); font-weight: 600; }
+
+.foot { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); }
+
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; gap: 18px; text-align: left; }
+  .hero img { width: 120px; height: 120px; }
+  h1 { font-size: 28px; }
+  .cols { grid-template-columns: 1fr; }
+  .tl li { grid-template-columns: 1fr; gap: 2px; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="me" href="./">Lucie Ricq</a>
+  <a class="bercy" href="bercy/" title="Public finance tools: daily watch, key facts, data">Bercy <span aria-hidden="true">→</span></a>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <img src="photo.jpg" alt="Portrait of Lucie Ricq" width="168" height="168">
+    <div>
+      <h1>Lucie Ricq</h1>
+      <p class="role">Deputy Head of the FIPU4 unit (public finance analysis), Directorate General of the Treasury</p>
+      <p class="sub">Civil servant (ITPE corps) · PhD candidate at CIRED, supervised by Philippe Quirion and Laurent Lamy (doctoral school: ENPC)</p>
+      <div class="tags"><span>Economics</span><span>Applied mathematics</span><span>Energy systems</span><span>Public finance</span></div>
+    </div>
+  </section>
+
+  <h2>Doctoral research</h2>
+  <div class="thesis">
+    <h3>Prospective optimisation of the energy system and its financing mechanisms under sector coupling</h3>
+    <p>Modelling of a long-term partial equilibrium with risk-averse investors (effects on the energy mix and on social welfare).
+      Assessment of long-term contracts (mitigation of perceived risk and reduction of investment distortions).</p>
+    <p>Disciplines: economics, applied mathematics.</p>
+  </div>
+
+  <h2>Experience</h2>
+  <ul class="tl">
+    <li><span class="when">2026 –</span><div><b>Deputy Head of Unit, FIPU4</b><span class="where">Directorate General of the Treasury (DG Trésor), public finance analysis</span></div></li>
+    <li><span class="when">2025</span><div><b>Lecturer</b><span class="where">ENSTA — Introduction to electricity markets</span></div></li>
+    <li><span class="when">2023</span><div><b>Research intern</b><span class="where">CIRED, 6 months</span><br><span class="what">Impacts of electric-vehicle flexibility on the European energy system</span></div></li>
+    <li><span class="when">2022</span><div><b>Research intern</b><span class="where">LUT University, Finland, 6 months</span><br><span class="what">Sustainability of BECCS</span></div></li>
+    <li><span class="when">2021</span><div><b>Research intern</b><span class="where">Navier laboratory, ENPC, 2 months</span><br><span class="what">LCA and material properties</span></div></li>
+    <li><span class="when">2020</span><div><b>Research collaboration (TIPE)</b><span class="where">IFREMER centre</span><br><span class="what">Sampling diatoms at sea; observation and counting under the microscope</span></div></li>
+    <li><span class="when">2018</span><div><b>Research collaboration (TPE)</b><span class="where">INRIA laboratory</span><br><span class="what">Design of soft robots</span></div></li>
+  </ul>
+
+  <h2>Education</h2>
+  <ul class="tl">
+    <li><span class="when">2023 – 2026</span><div><b>PhD in economics and applied mathematics</b><span class="where">CIRED, Nogent-sur-Marne</span></div></li>
+    <li><span class="when">2023 – 2025</span><div><b>MSc “Energy system analysis”</b><span class="where">DTU, Copenhagen</span></div></li>
+    <li><span class="when">2022 – 2023</span><div><b>Master 2 EEET</b><span class="where">Université Lumière Lyon 2</span></div></li>
+    <li><span class="when">2020 – 2023</span><div><b>Engineering degree</b><span class="where">ENTPE, Lyon</span></div></li>
+    <li><span class="when">2021 – 2022</span><div><b>Public policy studies</b><span class="where">Sciences Po Lyon</span></div></li>
+    <li><span class="when">2020 – 2021</span><div><b>Architecture studies</b><span class="where">ENSAL, Lyon</span></div></li>
+    <li><span class="when">2018 – 2020</span><div><b>Classe préparatoire BCPST</b><span class="where">Lycée Faidherbe, Lille</span></div></li>
+  </ul>
+
+  <h2>Skills and degrees</h2>
+  <div class="cols">
+    <div class="card"><h3>Languages</h3><ul>
+      <li>French <small>native</small></li>
+      <li>English <small>C1 · TOEIC 965 · TOEFL 98</small></li>
+      <li>Spanish <small>B2</small></li>
+      <li>German <small>A2</small></li>
+    </ul></div>
+    <div class="card"><h3>Programming</h3><ul>
+      <li>Python</li><li>Julia / GAMS</li><li>HTML / CSS / JS</li><li>C / C++</li>
+    </ul></div>
+    <div class="card"><h3>Degrees</h3><ul>
+      <li>Master's in economics <small>2023</small></li>
+      <li>Engineering degree <small>2023</small></li>
+      <li>Certificate in public policy studies <small>2022</small></li>
+      <li>BCPST preparatory class <small>2020</small></li>
+      <li>Scientific baccalaureate <small>2018</small></li>
+    </ul></div>
+  </div>
+
+  <h2>Beyond work</h2>
+  <ul class="plain">
+    <li>Member of <b>Wikipedia</b> (2022–2025) and <b>openmod</b> (2023–2025)</li>
+    <li>Member of <b>COP2 étudiante</b> and of the sustainability (DD&amp;RS) committee (2020–2022)</li>
+    <li>Founder and president of <b>Enactus ENTPE</b> (2020–2022)</li>
+    <li>President of the <b>sustainability club</b> at ENTPE (2021–2022)</li>
+    <li>Member of <b>Together for the Planet</b>, Lyon (2021–2022)</li>
+    <li>Member of <b>The Shifters</b>, Lyon local group (2021–2022)</li>
+  </ul>
+
+  <p class="foot">The <a href="bercy/">Bercy</a> section gathers small tools built on public sources: a daily public-finance watch, key facts and officials, and Eurostat/Insee series. They are updated automatically every weekday morning.</p>
+</main>
+</body>
+</html>

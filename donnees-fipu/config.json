@@ -1,0 +1,74 @@
+{
+  "_doc": "Tout ce que l'outil collecte est décrit ici. Une entrée = une requête à une source ; chaque combinaison de valeurs des filtres devient une série. Ajouter une série = ajouter une entrée (ou une valeur à une liste de filtres) puis relancer update.py.",
+
+  "comparateurs": ["FR", "DE", "IT", "ES", "NL", "BE", "EA20", "EU27_2020"],
+
+  "alias": {
+    "deficit": "gov_10dd_edpt1.PC_GDP.S13.B9.FR",
+    "deficit_md": "gov_10dd_edpt1.MIO_EUR.S13.B9.FR",
+    "dette": "gov_10dd_edpt1.PC_GDP.S13.GD.FR",
+    "dette_md": "gov_10dd_edpt1.MIO_EUR.S13.GD.FR",
+    "depense": "gov_10a_main.PC_GDP.S13.TE.FR",
+    "recettes": "gov_10a_main.PC_GDP.S13.TR.FR",
+    "interets": "gov_10a_main.PC_GDP.S13.D41PAY.FR",
+    "po": "gov_10a_taxag.PC_GDP.S13.D2_D5_D91_D61_M_D995.FR",
+    "po_md": "gov_10a_taxag.MIO_EUR.S13.D2_D5_D91_D61_M_D995.FR",
+    "pib": "nama_10_gdp.CP_MEUR.B1GQ.FR",
+    "pib_vol": "nama_10_gdp.CLV_PCH_PRE.B1GQ.FR",
+    "dette_trim": "insee.010777608",
+    "budget_etat_solde": "insee.001717255"
+  },
+
+  "sources": [
+    {"id": "notif_pde", "label": "Notification PDE : solde et dette (annuel)", "provider": "eurostat", "dataset": "gov_10dd_edpt1",
+     "filters": {"unit": ["PC_GDP", "MIO_EUR"], "sector": ["S13", "S1311", "S1313", "S1314"], "na_item": ["B9", "GD", "D41PAY", "B1GQ"], "geo": "$comparateurs"},
+     "since": "1995"},
+
+    {"id": "apu_annuel", "label": "Comptes annuels des APU : principaux agrégats", "provider": "eurostat", "dataset": "gov_10a_main",
+     "filters": {"unit": ["PC_GDP", "MIO_EUR"], "sector": ["S13", "S1311", "S1313", "S1314"], "geo": "$comparateurs",
+                 "na_item": ["TE", "TR", "B9", "D41PAY", "P51G", "D1PAY", "P2", "D3PAY", "D62PAY", "D632PAY", "D7PAY", "D9PAY",
+                             "D2REC", "D211REC", "D5REC", "D51A_C1REC", "D51B_C2REC", "D61REC", "D91REC", "P11_P12_P131", "D4REC", "D7REC", "D9REC"]},
+     "since": "1995"},
+
+    {"id": "cofog", "label": "Dépenses des APU par fonction (COFOG, niveau 1)", "provider": "eurostat", "dataset": "gov_10a_exp",
+     "filters": {"unit": ["PC_GDP", "MIO_EUR", "PC_TOT"], "sector": ["S13", "S1311", "S1313", "S1314"], "na_item": "TE", "geo": "$comparateurs",
+                 "cofog99": ["TOTAL", "GF01", "GF02", "GF03", "GF04", "GF05", "GF06", "GF07", "GF08", "GF09", "GF10"]},
+     "since": "1995"},
+
+    {"id": "cofog_fr_detail", "label": "Dépenses des APU par fonction et opération (COFOG, tous niveaux) — France", "provider": "eurostat", "dataset": "gov_10a_exp",
+     "filters": {"unit": ["PC_GDP", "MIO_EUR"], "sector": "S13", "geo": "FR",
+                 "na_item": ["TE", "D1", "P2", "D3", "D62_D632", "P51G", "D41", "D7", "D9"]},
+     "since": "1995"},
+
+    {"id": "prelevements", "label": "Impôts et cotisations sociales par catégorie — France", "provider": "eurostat", "dataset": "gov_10a_taxag",
+     "filters": {"unit": ["PC_GDP", "MIO_EUR"], "sector": ["S13", "S1311", "S1313", "S1314"], "geo": "FR"},
+     "since": "1995"},
+
+    {"id": "prelevements_ue", "label": "Taux de prélèvements obligatoires — comparaison", "provider": "eurostat", "dataset": "gov_10a_taxag",
+     "filters": {"unit": "PC_GDP", "sector": "S13", "geo": "$comparateurs", "na_item": ["D2_D5_D91_D61_M_D995", "D2", "D211", "D5", "D51A_C1", "D51B_C2", "D61"]},
+     "since": "1995"},
+
+    {"id": "apu_trim", "label": "Comptes trimestriels des APU (Eurostat)", "provider": "eurostat", "dataset": "gov_10q_ggnfa",
+     "filters": {"unit": ["PC_GDP", "MIO_EUR"], "s_adj": ["NSA", "SCA"], "sector": "S13", "geo": "FR",
+                 "na_item": ["TE", "TR", "B9", "D41PAY", "D2REC", "D211REC", "D5REC", "D61REC", "D2_D5_D91_D61_M_D995", "D1PAY", "D62PAY", "P51G"]},
+     "since": "2010-Q1"},
+
+    {"id": "dette_trim_ue", "label": "Dette trimestrielle au sens de Maastricht — comparaison", "provider": "eurostat", "dataset": "gov_10q_ggdebt",
+     "filters": {"unit": "PC_GDP", "sector": "S13", "na_item": "GD", "geo": "$comparateurs"},
+     "since": "2010-Q1"},
+
+    {"id": "pib", "label": "PIB : valeur, volume, prix", "provider": "eurostat", "dataset": "nama_10_gdp",
+     "filters": {"unit": ["CP_MEUR", "CLV_PCH_PRE", "PD_PCH_PRE_EUR"], "na_item": "B1GQ", "geo": "$comparateurs"},
+     "since": "1995"},
+
+    {"id": "budget_etat", "label": "Situation mensuelle du budget de l'État (cumul depuis janvier)", "provider": "insee", "dataflow": "COMPTES-ETAT", "since": "2000-01"},
+
+    {"id": "dette_trim_insee", "label": "Dette trimestrielle des APU au sens de Maastricht (Insee, base 2020)", "provider": "insee", "dataflow": "DETTE-TRIM-APU-2020", "since": "2000-Q1"},
+
+    {"id": "dette_etat", "label": "Dette négociable de l'État", "provider": "insee", "dataflow": "DETTE-NEGOCIABLE-ETAT", "since": "2000-01"},
+
+    {"id": "apu_trim_insee", "label": "Comptes trimestriels des APU (Insee, base 2020)", "provider": "insee", "dataflow": "CNT-2020-CSI", "title": "administrations publiques", "since": "2000-Q1"},
+
+    {"id": "pib_trim_insee", "label": "PIB trimestriel (Insee, base 2020)", "provider": "insee", "dataflow": "CNT-2020-PIB-EQB-RF", "title": "^Produit intérieur brut total", "since": "2000-Q1"}
+  ]
+}

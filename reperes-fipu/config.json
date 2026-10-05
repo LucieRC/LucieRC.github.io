@@ -1,0 +1,90 @@
+{
+  "_doc": "Tout ce que l'outil collecte est décrit ici. Modifier ce fichier suffit pour ajouter un poste, une série, un filtre du JO ou une page de référence ; aucune donnée n'est écrite à la main.",
+
+  "history_since": 2002,
+  "stale_page_days": 120,
+
+  "history": {
+    "governments": {"page": "Liste des gouvernements de la France", "table_header": "Nombre de membres"},
+    "economy": {"page": "Liste des ministres français de l'Économie et des Finances", "table_header": "Intitulé"},
+    "budget": {"page": "Ministre chargé du Budget", "table_header": "Ministre de tutelle"}
+  },
+
+  "officials": [
+    {"key": "president", "group": "Exécutif", "label": "Président de la République", "kind": "infobox", "page": "Président de la République française", "field": "titulaire actuel", "since_from": "president"},
+    {"key": "pm", "group": "Exécutif", "label": "Premier ministre", "kind": "infobox", "page": "Premier ministre français", "field": "titulaire actuel", "since_from": "pm"},
+    {"key": "eco", "group": "Exécutif", "label": "Ministre de l'Économie", "kind": "government_role", "pattern": "^ministre de l'Économie", "since_from": "economy"},
+    {"key": "budget", "group": "Exécutif", "label": "Ministre chargé du Budget", "kind": "government_role", "pattern": "^ministre (de l'Action et )?des Comptes publics|^ministre chargée? du Budget|^ministre du Budget", "since_from": "budget"},
+    {"key": "dgt", "group": "Administration", "label": "Directeur général du Trésor", "kind": "prose", "page": "Direction générale du Trésor", "regex": "actuel(?:le)? direct(?:eur|rice) général(?:e)? est \\[\\[([^\\]|]+)(?:\\|([^\\]]+))?\\]\\](.{0,200})"},
+    {"key": "db", "group": "Administration", "label": "Directeur du Budget", "kind": "infobox", "page": "Direction du Budget", "field": "dirigeant"},
+    {"key": "ccomptes", "group": "Contrôle", "label": "Premier président de la Cour des comptes", "kind": "list_last_row", "page": "Liste des premiers présidents de la Cour des comptes", "name_header": "Premier président", "date_header": "Début"},
+    {"key": "bdf", "group": "Contrôle", "label": "Gouverneur de la Banque de France", "kind": "infobox", "page": "Banque de France", "field": "gouverneur"},
+    {"key": "pan", "group": "Parlement", "label": "Présidence de l'Assemblée nationale", "kind": "infobox", "page": "Président de l'Assemblée nationale (France)", "field": "titulaire actuel"},
+    {"key": "cfan", "group": "Parlement", "label": "Présidence de la commission des finances (AN)", "kind": "infobox", "page": "Commission des Finances (Assemblée nationale)", "field": "président"},
+    {"key": "rgan", "group": "Parlement", "label": "Rapporteur général du budget (AN)", "kind": "infobox", "page": "Commission des Finances (Assemblée nationale)", "field": "rapporteur général"},
+    {"key": "psen", "group": "Parlement", "label": "Présidence du Sénat", "kind": "infobox", "page": "Président du Sénat (France)", "field": "titulaire actuel"},
+    {"key": "cfsen", "group": "Parlement", "label": "Présidence de la commission des finances (Sénat)", "kind": "infobox", "page": "Commission des Finances (Sénat)", "field": "président"},
+    {"key": "rgsen", "group": "Parlement", "label": "Rapporteur général du budget (Sénat)", "kind": "infobox", "page": "Commission des Finances (Sénat)", "field": "rapporteur général"}
+  ],
+
+  "jorf": {
+    "index": "https://echanges.dila.gouv.fr/OPENDATA/JORF/",
+    "days_initial": 90,
+    "retention_days": 400,
+    "all_texts_days": 7,
+    "filters": [
+      {"id": "gouv", "label": "Composition du Gouvernement", "title": "composition du Gouvernement"},
+      {"id": "bercy_nom", "label": "Nominations — Bercy", "section": "Mesures nominatives", "ministry": "économie|comptes publics|budget"},
+      {"id": "cabinets", "label": "Cabinets — Bercy", "title": "cabinet", "ministry": "économie|comptes publics|budget"},
+      {"id": "tresor", "label": "Trésor", "title": "Trésor"},
+      {"id": "fipu", "label": "Textes financiers", "title": "loi de finances|financement de la sécurité sociale|programmation des finances publiques|(ouverture|annulation|report|virement|transfert)s? de crédits|loi spéciale"},
+      {"id": "bercy_tg", "label": "Textes généraux — Bercy", "section": "Textes généraux", "ministry": "économie|comptes publics|budget"},
+      {"id": "pm_nom", "label": "Nominations — Premier ministre", "section": "Mesures nominatives", "ministry": "^Premier ministre"}
+    ]
+  },
+
+  "budget_pages": ["Budget de l'État français en {year}"],
+
+  "reference": [
+    {"group": "Constitution", "pages": [
+      "Article 40 de la Constitution de la Cinquième République française",
+      "Article 47 de la Constitution de la Cinquième République française",
+      "Article 49 de la Constitution de la Cinquième République française"]},
+    {"group": "Lois de finances et programmation", "pages": [
+      "Loi organique relative aux lois de finances",
+      "Loi de finances",
+      "Loi de financement de la Sécurité sociale",
+      "Loi de programmation des finances publiques",
+      "Loi spéciale",
+      "Commission mixte paritaire"]},
+    {"group": "Institutions", "pages": [
+      "Haut Conseil des finances publiques",
+      "Direction générale du Trésor",
+      "Direction du Budget"]},
+    {"group": "Cadre européen", "pages": [
+      "Pacte de stabilité et de croissance",
+      "Semestre européen"]},
+    {"group": "Notions", "pages": [
+      "Administration publique",
+      "Déficit budgétaire et déficit public",
+      "Dette publique de la France",
+      "Objectif national de dépenses d'assurance maladie"]}
+  ],
+
+  "calendar": [
+    {"page": "Budget de l'État français", "section": "Calendrier"},
+    {"page": "Loi de financement de la Sécurité sociale", "section": "Calendrier et procédure d'adoption"},
+    {"page": "Semestre européen", "section": "Calendrier"}
+  ],
+
+  "eurostat": [
+    {"key": "deficit", "label": "Solde public", "unit": "% PIB", "decimals": 1, "dataset": "gov_10dd_edpt1", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "B9"}, "since": "2002"},
+    {"key": "debt_q", "label": "Dette publique (trimestrielle)", "unit": "% PIB", "decimals": 1, "dataset": "gov_10q_ggdebt", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "GD"}, "since": "2019-Q1"},
+    {"key": "spending", "label": "Dépense publique", "unit": "% PIB", "decimals": 1, "dataset": "gov_10a_main", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "TE"}, "since": "2002"},
+    {"key": "revenue", "label": "Recettes publiques", "unit": "% PIB", "decimals": 1, "dataset": "gov_10a_main", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "TR"}, "since": "2002"},
+    {"key": "interest", "label": "Intérêts versés", "unit": "% PIB", "decimals": 1, "dataset": "gov_10a_main", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "D41PAY"}, "since": "2002"},
+    {"key": "debt", "label": "Dette publique (annuelle)", "unit": "% PIB", "decimals": 1, "dataset": "gov_10dd_edpt1", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "GD"}, "since": "2002", "tile": false},
+    {"key": "oat10", "label": "Taux à 10 ans — France", "unit": "%", "decimals": 2, "dataset": "irt_lt_mcby_m", "filters": {"geo": "FR"}, "since": "2019-01"},
+    {"key": "spread", "label": "Écart de taux à 10 ans France – Allemagne", "unit": "pb", "decimals": 0, "dataset": "irt_lt_mcby_m", "filters": {"geo": ["FR", "DE"]}, "since": "2019-01", "spread": ["FR", "DE"], "scale": 100}
+  ]
+}

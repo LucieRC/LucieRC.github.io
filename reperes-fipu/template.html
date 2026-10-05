@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Repères FiPu</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f7f6f3; --surface: #fcfcfb; --surface-2: #f0efeb; --line: #e2e0da;
+  --ink: #16150f; --ink-2: #52514e; --ink-3: #7c7a74;
+  --accent: #2a78d6; --accent-soft: #e6effa; --spark: #a8a69f;
+  --ok: #1b7a3d; --bad: #b8322f; --warn-bg: #fff4d6; --warn-ink: #7a5300;
+  --radius: 10px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #121211; --surface: #1a1a19; --surface-2: #23231f; --line: #34332e;
+    --ink: #f4f3ee; --ink-2: #c3c2b7; --ink-3: #8f8d84;
+    --accent: #3987e5; --accent-soft: #1d2b3d; --spark: #6c6a63;
+    --ok: #4cc38a; --bad: #ef6b6a; --warn-bg: #3a2f12; --warn-ink: #f2cf7a;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121211; --surface: #1a1a19; --surface-2: #23231f; --line: #34332e;
+  --ink: #f4f3ee; --ink-2: #c3c2b7; --ink-3: #8f8d84;
+  --accent: #3987e5; --accent-soft: #1d2b3d; --spark: #6c6a63;
+  --ok: #4cc38a; --bad: #ef6b6a; --warn-bg: #3a2f12; --warn-ink: #f2cf7a;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 var(--font); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: max(16px, 3vw); padding-block: 0 64px; }
+
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: center; gap: 14px 20px; padding-block: 10px; flex-wrap: wrap; }
+.brand { font-weight: 650; font-size: 15px; letter-spacing: -0.01em; }
+nav { display: flex; gap: 2px; flex-wrap: wrap; flex: 1; }
+nav a { color: var(--ink-2); padding: 4px 8px; border-radius: 6px; font-size: 13px; }
+nav a:hover { background: var(--surface-2); text-decoration: none; }
+.stamp { font-size: 12px; color: var(--ink-3); }
+.btn { font: inherit; font-size: 13px; font-weight: 600; border: 1px solid var(--accent); background: var(--accent); color: #fff; padding: 6px 14px; border-radius: 8px; cursor: pointer; }
+.btn:disabled { opacity: .6; cursor: progress; }
+.btn.ghost { background: transparent; color: var(--accent); }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; margin-top: 16px; font-size: 13px; }
+.panel pre { margin: 8px 0 0; font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; color: var(--ink-2); max-height: 220px; overflow: auto; }
+
+section { padding-top: 36px; scroll-margin-top: 64px; }
+h2 { font-size: 19px; letter-spacing: -0.01em; margin: 0 0 4px; font-weight: 650; }
+.lede { color: var(--ink-2); margin: 0 0 14px; max-width: 80ch; }
+h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); margin: 22px 0 8px; font-weight: 600; }
+
+.banner { background: var(--warn-bg); color: var(--warn-ink); border-radius: var(--radius); padding: 10px 14px; margin-top: 16px; font-size: 13px; }
+.checks summary { cursor: pointer; font-weight: 600; }
+.checks ul { list-style: none; padding: 0; margin: 8px 0 0; }
+.checks li { padding: 4px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 22px 1fr; gap: 4px; }
+.checks li span { color: var(--ink-3); font-size: 12px; grid-column: 2; }
+.lvl-ok { color: var(--ok); } .lvl-warn { color: var(--warn-ink); } .lvl-error { color: var(--bad); }
+
+.grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; min-width: 0; display: grid; grid-template-columns: auto 1fr; gap: 0 12px; align-content: start; }
+.card > .body { min-width: 0; }
+.photo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: top; background: var(--surface-2); }
+.photo.none { display: grid; place-items: center; color: var(--ink-3); font-weight: 600; font-size: 15px; }
+.role { font-size: 12px; color: var(--ink-3); }
+.who { font-size: 16px; font-weight: 620; margin: 1px 0; }
+.meta { font-size: 12px; color: var(--ink-2); }
+.bio { font-size: 12.5px; color: var(--ink-2); margin-top: 6px; grid-column: 1 / -1; }
+.card .src { grid-column: 1 / -1; }
+.src { font-size: 11.5px; color: var(--ink-3); margin-top: 6px; }
+.src a { color: var(--ink-3); text-decoration: underline; text-decoration-color: var(--line); }
+.old { color: var(--warn-ink); background: var(--warn-bg); border-radius: 4px; padding: 0 5px; }
+.card.stale { border-style: dashed; }
+.note { font-size: 12px; color: var(--warn-ink); }
+
+.filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+.filters button { font: inherit; font-size: 12.5px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.filters button b { font-weight: 600; margin-left: 4px; opacity: .7; }
+.search { width: 100%; max-width: 380px; font: inherit; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); margin-bottom: 12px; }
+.jo { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.jo .day { padding: 6px 14px; font-size: 12px; font-weight: 600; color: var(--ink-3); background: var(--surface-2); border-top: 1px solid var(--line); }
+.jo .day:first-child { border-top: 0; border-radius: var(--radius) var(--radius) 0 0; }
+.jo .item { padding: 8px 14px; border-top: 1px solid var(--line); }
+.jo .item .p { font-size: 12px; color: var(--ink-3); }
+.more { margin-top: 8px; }
+mark { background: var(--accent-soft); color: inherit; border-radius: 2px; }
+
+.changes { display: grid; gap: 10px; }
+.change { display: grid; grid-template-columns: 120px 1fr; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; }
+.change time { font-weight: 620; font-size: 13px; }
+.change p { margin: 2px 0 6px; color: var(--ink-2); }
+.chip { display: inline-block; font-size: 11.5px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 1px 8px; margin: 2px 4px 0 0; color: var(--ink-2); }
+@media (max-width: 560px) { .change { grid-template-columns: 1fr; gap: 2px; } }
+
+.ministries { columns: 2 340px; column-gap: 10px; }
+.ministry { break-inside: avoid; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 14px; margin-bottom: 10px; }
+.ministry.bercy { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+.ministry h4 { margin: 0 0 6px; font-size: 13.5px; font-weight: 620; }
+.ministry ul { list-style: none; margin: 0; padding: 0; }
+.ministry li { padding: 3px 0; border-top: 1px solid var(--line); font-size: 13px; }
+.ministry li:first-child { border-top: 0; }
+.ministry li span { color: var(--ink-3); font-size: 12px; display: block; }
+
+.tiles { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px 10px; position: relative; min-width: 0; }
+.tile .label { font-size: 12.5px; color: var(--ink-2); }
+.tile .value { font-size: 28px; font-weight: 640; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.tile .value small { font-size: 13px; font-weight: 500; color: var(--ink-3); margin-left: 3px; }
+.tile .delta { font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.spark { display: block; width: 100%; height: 46px; margin-top: 6px; overflow: visible; touch-action: none; }
+.spark .ln { fill: none; stroke: var(--spark); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.spark .zero { stroke: var(--line); stroke-width: 1; }
+.spark .hair { stroke: var(--ink-3); stroke-width: 1; }
+.dot { position: absolute; width: 9px; height: 9px; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; border: 2px solid var(--surface); background: var(--accent); }
+.axis { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-3); margin-top: 2px; }
+.tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--bg); font-size: 12px; padding: 3px 7px; border-radius: 6px; white-space: nowrap; transform: translate(-50%, -115%); font-variant-numeric: tabular-nums; }
+details.data { margin-top: 12px; }
+details summary { cursor: pointer; color: var(--ink-2); font-size: 13px; }
+
+.tablewrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 7px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; color: var(--ink-3); font-weight: 600; background: var(--surface-2); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+tr:last-child td { border-bottom: 0; }
+tr.hit td { background: var(--accent-soft); }
+td .sub, .sub { color: var(--ink-3); font-size: 12px; }
+
+.tabs { display: flex; gap: 4px; margin-bottom: 10px; flex-wrap: wrap; align-items: center; }
+.tabs button { font: inherit; font-size: 13px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); padding: 5px 12px; border-radius: 999px; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.tabs label { margin-left: auto; font-size: 13px; color: var(--ink-2); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.tabs input[type=date] { font: inherit; padding: 4px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); }
+.lookup { background: var(--surface); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin-bottom: 10px; font-size: 13px; }
+.lookup dl, dl.kv { display: grid; grid-template-columns: max-content 1fr; gap: 2px 14px; margin: 4px 0 0; }
+.lookup dt { color: var(--ink-3); }
+.lookup dd { margin: 0; }
+
+.doc { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 14px; margin-bottom: 10px; }
+.doc h4 { margin: 0 0 4px; font-size: 14px; }
+.doc p { margin: 6px 0 0; color: var(--ink-2); white-space: pre-line; }
+.doc h5 { margin: 12px 0 2px; font-size: 13px; }
+.doc ul { margin: 4px 0; padding-left: 18px; color: var(--ink-2); }
+.doc .tablewrap { margin-top: 8px; }
+.cols { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); align-items: start; }
+
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 12px; }
+.ok { color: var(--ok); } .ko { color: var(--bad); }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+@media (max-width: 560px) { .lookup dl { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand">Repères FiPu</div>
+  <nav>
+    <a href="#poste">En poste</a><a href="#mouvements">Mouvements (JO)</a><a href="#gouvernement">Gouvernement</a>
+    <a href="#chiffres">Chiffres</a><a href="#budget">Budget</a><a href="#historique">Historique</a><a href="#reference">Références</a>
+  </nav>
+  <span class="stamp" id="stamp"></span>
+  <button class="btn" id="refresh" type="button">Actualiser</button>
+</div></header>
+
+<main class="wrap">
+  <div id="refresh-panel" class="panel" hidden></div>
+  <div id="alerts"></div>
+  <div id="checks"></div>
+
+  <section id="poste">
+    <h2>Qui est en poste</h2>
+    <p class="lede">Titulaires extraits des pages sources. Le texte sous chaque nom est le début de la page Wikipédia de la personne, repris tel quel.</p>
+    <div id="officials"></div>
+  </section>
+
+  <section id="mouvements">
+    <h2>Mouvements — Journal officiel</h2>
+    <p class="lede" id="jo-lede"></p>
+    <div class="filters" id="jo-filters" role="group" aria-label="Filtres"></div>
+    <input class="search" id="jo-search" type="search" placeholder="Rechercher dans les intitulés…" aria-label="Rechercher dans les intitulés">
+    <div class="jo" id="jo-list"></div>
+    <div class="more"><button class="btn ghost" id="jo-more" type="button" hidden>Afficher plus</button></div>
+    <div id="changelog"></div>
+  </section>
+
+  <section id="gouvernement">
+    <h2 id="gov-title">Gouvernement</h2>
+    <p class="lede" id="gov-lede"></p>
+    <input class="search" id="gov-search" type="search" placeholder="Filtrer : nom, portefeuille…" aria-label="Filtrer le gouvernement">
+    <div class="ministries" id="ministries"></div>
+    <h3>Évolution de la composition</h3>
+    <div class="changes" id="changes"></div>
+  </section>
+
+  <section id="chiffres">
+    <h2>Chiffres clés</h2>
+    <p class="lede">Séries Eurostat, France. Dernière valeur publiée et évolution sur la période. Survoler une courbe pour lire les valeurs.</p>
+    <div class="tiles" id="tiles"></div>
+    <details class="data"><summary>Séries en tableau et définitions Eurostat</summary><div id="fig-tables"></div></details>
+  </section>
+
+  <section id="budget">
+    <h2>Budget</h2>
+    <div id="budgets"></div>
+  </section>
+
+  <section id="historique">
+    <h2>Historique</h2>
+    <p class="lede">Choisir une date pour voir qui était en poste ce jour-là.</p>
+    <div class="tabs" role="tablist" id="hist-tabs">
+      <button role="tab" data-k="governments" aria-selected="true">Gouvernements</button>
+      <button role="tab" data-k="economy" aria-selected="false">Ministres de l'Économie</button>
+      <button role="tab" data-k="budget" aria-selected="false">Ministres du Budget</button>
+      <label>Qui était en poste le <input type="date" id="asof"></label>
+    </div>
+    <div id="lookup"></div>
+    <div class="tablewrap" id="hist-table"></div>
+    <div class="src" id="hist-src"></div>
+  </section>
+
+  <section id="reference">
+    <h2>Références</h2>
+    <p class="lede">Textes repris tels quels depuis les pages indiquées (introduction ou section citée).</p>
+    <h3>Calendrier</h3>
+    <div id="calendar"></div>
+    <div id="refs"></div>
+  </section>
+
+  <footer>
+    <p id="how"></p>
+    <div class="tablewrap"><table id="status"></table></div>
+  </footer>
+</main>
+
+<script>
+const DATA = /*__DATA__*/null;
+const B = DATA.blocks || {};
+const LIVE = location.protocol.startsWith("http");
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const TODAY = new Date();
+const toDate = iso => new Date(iso.length === 4 ? iso + "-07-01T12:00:00" : iso.length === 7 ? iso + "-15T12:00:00" : iso.length === 10 ? iso + "T12:00:00" : iso);
+const fmtDate = (iso, opt = {day: "numeric", month: "long", year: "numeric"}) => !iso ? "" :
+  iso.length === 4 ? iso : iso.length === 7 ? toDate(iso).toLocaleDateString("fr-FR", {month: "long", year: "numeric"}) : toDate(iso).toLocaleDateString("fr-FR", opt);
+const SHORT = {day: "numeric", month: "short", year: "numeric"};
+const STAMP = {...SHORT, hour: "2-digit", minute: "2-digit"};
+const since = iso => !iso ? "" : iso.length === 4 ? "depuis " + iso : (iso.length === 7 ? "depuis " : "depuis le ") + fmtDate(iso);
+const fmtNum = (v, d = 1) => v.toLocaleString("fr-FR", {minimumFractionDigits: d, maximumFractionDigits: d});
+const link = (name, url) => url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(name)}</a>` : esc(name);
+const daysSince = iso => iso ? (TODAY - toDate(iso)) / 864e5 : null;
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const hl = (s, q) => q ? esc(s).replace(new RegExp("(" + reEsc(esc(q)) + ")", "gi"), "<mark>$1</mark>") : esc(s);
+const STALE = DATA.stale_page_days || 120;
+
+function tenure(iso) {
+  if (!iso || iso.length === 4) return "";
+  const d = toDate(iso.length === 7 ? iso + "-01" : iso);
+  let m = (TODAY.getFullYear() - d.getFullYear()) * 12 + TODAY.getMonth() - d.getMonth();
+  if (TODAY.getDate() < d.getDate()) m--;
+  const y = Math.floor(m / 12), r = m % 12, parts = [];
+  if (y) parts.push(y + (y > 1 ? " ans" : " an"));
+  if (r) parts.push(r + " mois");
+  return parts.length ? parts.join(" ") : "moins d'un mois";
+}
+function srcLine(page, url, updated, label = "Wikipédia", flagOld = true) {
+  if (!url) return "";
+  const age = daysSince(updated);
+  const old = flagOld && age != null && age > STALE;
+  return `<div class="src">${label} : ${link(page || "source", url)}${updated ? ` · page modifiée le ${fmtDate(updated)}` : ""}${old ? ` <span class="old">non modifiée depuis ${Math.round(age / 30)} mois</span>` : ""}</div>`;
+}
+
+/* ---------- refresh ---------- */
+(() => {
+  const btn = $("#refresh"), panel = $("#refresh-panel");
+  const show = html => { panel.innerHTML = html; panel.hidden = false; };
+  const poll = async () => {
+    btn.disabled = true; btn.textContent = "Actualisation…";
+    for (;;) {
+      let s;
+      try { s = await (await fetch("/api/status", {cache: "no-store"})).json(); }
+      catch (e) { show(`<b>Serveur injoignable.</b> Relancer « Repères FiPu » depuis le dossier de l'outil.`); break; }
+      show(`<b>${s.running ? "Actualisation en cours" : s.ok ? "Terminé" : "Échec"}</b><pre>${esc((s.log || []).join("\n"))}${s.error ? "\n" + esc(s.error) : ""}</pre>`);
+      if (!s.running) { if (s.ok) location.reload(); break; }
+      await new Promise(r => setTimeout(r, 1000));
+    }
+    btn.disabled = false; btn.textContent = "Actualiser";
+  };
+  btn.addEventListener("click", async () => {
+    if (!LIVE) {
+      show(`<b>Cette copie est figée</b> (données du ${fmtDate(DATA.generated_at, STAMP)}). Pour l'actualiser, ouvrir l'outil via le lanceur <code>Repères FiPu.command</code> (Mac) ou <code>Repères FiPu.bat</code> (Windows) du dossier de l'outil, ou lancer <code>python3 serve.py</code>.`);
+      return;
+    }
+    try {
+      const r = await fetch("/api/refresh", {method: "POST"});
+      if (r.status !== 202 && r.status !== 409) throw new Error(r.status);
+    } catch (e) { show(`<b>Impossible de lancer l'actualisation</b> (${esc(e.message)}).`); return; }
+    poll();
+  });
+  if (LIVE) fetch("/api/status", {cache: "no-store"}).then(r => r.json()).then(s => { if (s.running) poll(); }).catch(() => {});
+})();
+
+/* ---------- header, alerts, checks, status ---------- */
+$("#stamp").textContent = DATA.generated_at ? "Données du " + fmtDate(DATA.generated_at, STAMP) : "";
+(() => {
+  const st = DATA.status || {};
+  const age = daysSince(DATA.generated_at);
+  let h = "";
+  if (age > 7) h += `<div class="banner"><b>Données anciennes</b> : dernière collecte il y a ${Math.round(age)} jours.</div>`;
+  $("#alerts").innerHTML = h;
+  const cs = DATA.checks || [];
+  const bad = cs.filter(c => !c.ok);
+  const icon = c => c.ok ? "✓" : c.level === "warn" ? "!" : "✗";
+  $("#checks").innerHTML = `<details class="panel checks"${bad.some(c => c.level === "error") ? " open" : ""}><summary>Contrôles de cohérence : ${cs.length - bad.length}/${cs.length} OK${bad.length ? ` — ${bad.length} à regarder` : ""}</summary><ul>` +
+    bad.concat(cs.filter(c => c.ok)).map(c => `<li><b class="lvl-${c.level}">${icon(c)}</b>${esc(c.name)}<span>${esc(c.detail)}</span></li>`).join("") + "</ul></details>";
+  const names = {history: "Historiques (Wikipédia)", government: "Gouvernement (Wikipédia)", officials: "Titulaires (Wikipédia)", budgets: "Budgets (Wikipédia)", reference: "Références (Wikipédia)", figures: "Chiffres (Eurostat)", jorf: "Journal officiel (DILA)"};
+  $("#status").innerHTML = "<thead><tr><th>Bloc</th><th>État</th><th>Dernière collecte réussie</th></tr></thead><tbody>" +
+    Object.entries(names).map(([k, n]) => { const v = st[k] || {}; return `<tr><td>${n}</td><td class="${v.ok ? "ok" : "ko"}">${v.ok ? "✓" : "✗ " + esc(v.error || "jamais collecté")}</td><td>${fmtDate(v.fetched_at, STAMP)}</td></tr>`; }).join("") + "</tbody>";
+  $("#how").innerHTML = `Sources : Wikipédia (API MediaWiki), Journal officiel (open data DILA), Eurostat. Ce qui est collecté est décrit dans <code>config.json</code>. ${LIVE ? "Le bouton « Actualiser » relance la collecte." : "Copie figée : pour actualiser, ouvrir l'outil via son lanceur."} Vérifier auprès du Journal officiel avant toute citation.`;
+})();
+
+/* ---------- officials ---------- */
+(() => {
+  const people = B.officials || [];
+  const groups = [...new Set(people.map(p => p.group))];
+  const initials = n => n.split(/[\s-]+/).filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
+  $("#officials").innerHTML = groups.map(g => `<h3>${esc(g)}</h3><div class="grid">` + people.filter(p => p.group === g).map(p => `
+      <div class="card${p.stale ? " stale" : ""}">
+        ${p.photo ? `<img class="photo" src="${p.photo}" alt="">` : `<div class="photo none" aria-hidden="true">${esc(initials(p.name))}</div>`}
+        <div class="body">
+          <div class="role">${esc(p.label)}</div>
+          <div class="who">${link(p.name, p.url)}</div>
+          <div class="meta">${[since(p.since), tenure(p.since), p.detail].filter(Boolean).map(esc).join(" · ")}</div>
+          ${p.title ? `<div class="meta sub">${esc(p.title)}</div>` : ""}
+          ${p.stale ? `<div class="note">Dernière valeur connue : la source n'a pas pu être lue.</div>` : ""}
+        </div>
+        ${p.bio ? `<div class="bio">${esc(p.bio)}</div>` : ""}
+        ${srcLine(p.page, p.source, p.page_updated, "Source")}
+      </div>`).join("") + "</div>").join("")
+    + ((DATA.status || {}).officials_errors || []).map(e => `<div class="banner">Poste « ${esc(e.label)} » non lu : ${esc(e.error)}</div>`).join("");
+})();
+
+/* ---------- Journal officiel ---------- */
+(() => {
+  const all = DATA.jorf_entries || [];
+  const filters = DATA.jorf_filters || [];
+  const J = B.jorf || {};
+  const recentFrom = new Date(TODAY - (DATA.jorf_all_days || 7) * 864e5).toISOString().slice(0, 10);
+  $("#jo-lede").innerHTML = `Intitulés publiés au Journal officiel (sommaires open data de la DILA), filtrés selon les critères de <code>config.json</code>. Couverture complète depuis le ${fmtDate(J.coverage_from)}.`;
+  const state = {f: filters[0] ? filters[0].id : "*", q: "", n: 60};
+  const count = id => id === "*" ? all.filter(e => e.date >= recentFrom).length : all.filter(e => e.tags.includes(id)).length;
+  const btns = filters.map(f => ({id: f.id, label: f.label})).concat([{id: "*", label: `Tous les textes (${DATA.jorf_all_days} derniers jours)`}]);
+  $("#jo-filters").innerHTML = btns.map(b => `<button type="button" data-id="${esc(b.id)}" aria-pressed="${b.id === state.f}">${esc(b.label)}<b>${count(b.id)}</b></button>`).join("");
+  const render = () => {
+    const q = state.q.trim().toLowerCase();
+    const list = all.filter(e => (state.f === "*" ? e.date >= recentFrom : e.tags.includes(state.f)) && (!q || (e.title + " " + e.path.join(" ")).toLowerCase().includes(q)));
+    let html = "", day = null;
+    for (const e of list.slice(0, state.n)) {
+      if (e.date !== day) { day = e.date; html += `<div class="day">${esc(fmtDate(day, {weekday: "long", day: "numeric", month: "long", year: "numeric"}))} — ${esc(e.jo)}</div>`; }
+      html += `<div class="item"><a href="${esc(e.url)}" target="_blank" rel="noopener">${hl(e.title, state.q.trim())}</a><div class="p">${esc(e.path.slice(1).join(" · "))}</div></div>`;
+    }
+    $("#jo-list").innerHTML = html || `<div class="item">Aucun texte.</div>`;
+    $("#jo-more").hidden = list.length <= state.n;
+    $("#jo-more").textContent = `Afficher plus (${list.length - state.n} restants)`;
+  };
+  $("#jo-filters").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    state.f = b.dataset.id; state.n = 60;
+    $("#jo-filters").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    render();
+  });
+  $("#jo-search").addEventListener("input", e => { state.q = e.target.value; state.n = 60; render(); });
+  $("#jo-more").addEventListener("click", () => { state.n += 100; render(); });
+  render();
+  const log = (DATA.changelog || []).slice().reverse();
+  if (log.length) $("#changelog").innerHTML = `<h3>Changements de titulaires détectés par l'outil</h3><div class="tablewrap"><table><thead><tr><th>Détecté le</th><th>Poste</th><th>Avant</th><th>Après</th></tr></thead><tbody>` +
+    log.map(c => `<tr><td>${fmtDate(c.detected)}</td><td>${esc(c.label)}</td><td>${esc(c.from)}</td><td><b>${esc(c.to)}</b></td></tr>`).join("") + "</tbody></table></div>";
+})();
+
+/* ---------- government ---------- */
+(() => {
+  const g = B.government;
+  if (!g) return;
+  $("#gov-title").textContent = g.page;
+  $("#gov-lede").innerHTML = `${esc(g.org_label)}.` + srcLine(g.page, g.source, g.page_updated);
+  const isBercy = m => /économie|comptes publics|budget/i.test(m.name);
+  const render = q => {
+    const ql = q.trim().toLowerCase();
+    const ms = g.ministries.map(m => ({...m, members: m.members.filter(x => !ql || (m.name + " " + x.name + " " + x.role).toLowerCase().includes(ql))}))
+      .filter(m => m.members.length).sort((a, b) => isBercy(b) - isBercy(a));
+    $("#ministries").innerHTML = ms.map(m => `<div class="ministry${isBercy(m) ? " bercy" : ""}"><h4>${hl(m.name, q.trim())}</h4><ul>` +
+      m.members.map(x => `<li>${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${hl(x.name, q.trim())}</a>` : hl(x.name, q.trim())}<span>${hl(x.role, q.trim())}</span></li>`).join("") + "</ul></div>").join("")
+      || `<p class="lede">Aucun résultat.</p>`;
+  };
+  render("");
+  $("#gov-search").addEventListener("input", e => render(e.target.value));
+  const ch = (g.changes || []).slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  $("#changes").innerHTML = ch.length ? ch.map(c => `
+    <div class="change"><time>${c.date ? fmtDate(c.date) : ""}</time>
+      <div><b>${esc(c.title)}</b><p>${esc(c.text)}</p>
+      ${(c.decrees || []).map(d => `<a class="chip" target="_blank" rel="noopener" href="https://www.legifrance.gouv.fr/search/jorf?query=${encodeURIComponent(d.nor)}" title="${esc(d.label)}">${esc(d.nor)} ↗</a>`).join("")}</div>
+    </div>`).join("") : `<p class="lede">Aucune section « Évolution de la composition » sur la page source.</p>`;
+})();
+
+/* ---------- figures ---------- */
+function spark(points) {
+  const W = 240, H = 46, P = 4;
+  const vs = points.map(p => p[1]);
+  let lo = Math.min(...vs), hi = Math.max(...vs);
+  if (lo > 0 && lo / hi > 0.5) lo -= (hi - lo) * 0.15; else lo = Math.min(lo, 0);
+  if (hi < 0) hi = 0;
+  const x = i => P + i * (W - 2 * P) / Math.max(1, points.length - 1);
+  const y = v => H - P - (v - lo) / ((hi - lo) || 1) * (H - 2 * P);
+  const d = points.map((p, i) => (i ? "L" : "M") + x(i).toFixed(1) + " " + y(p[1]).toFixed(1)).join("");
+  const zero = lo < 0 && hi > 0 ? `<line class="zero" x1="${P}" x2="${W - P}" y1="${y(0)}" y2="${y(0)}" vector-effect="non-scaling-stroke"/>` : "";
+  return {svg: `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-hidden="true">${zero}<path class="ln" d="${d}" vector-effect="non-scaling-stroke"/><line class="hair" hidden x1="0" x2="0" y1="0" y2="${H}" vector-effect="non-scaling-stroke"/></svg>`, x, y, W, H, n: points.length - 1};
+}
+(() => {
+  const F = B.figures;
+  if (!F) return;
+  const tFmt = t => t.replace(/-Q(\d)/, " T$1").replace(/^(\d{4})-(\d{2})$/, (m, y, mo) => new Date(y, mo - 1).toLocaleDateString("fr-FR", {month: "short", year: "numeric"}));
+  const tiles = $("#tiles");
+  Object.values(F).filter(s => s.tile !== false && s.points.length).forEach(s => {
+    const pts = s.points, d = s.decimals ?? 1;
+    const [t, v] = pts[pts.length - 1];
+    const lag = /^\d{4}-\d{2}$/.test(t) ? 12 : /Q/.test(t) ? 4 : 1;
+    const ref = pts[pts.length - 1 - lag];
+    const delta = ref ? `${v - ref[1] > 0 ? "+" : ""}${fmtNum(v - ref[1], d)} ${s.unit === "pb" ? "pb" : "pt"} sur un an` : "";
+    const sp = spark(pts);
+    const el = document.createElement("div");
+    el.className = "tile";
+    el.innerHTML = `<div class="label">${esc(s.label)}</div>
+      <div class="value">${fmtNum(v, d)}<small>${esc(s.unit)}</small></div>
+      <div class="delta">${tFmt(t)}${delta ? " · " + delta : ""}</div>
+      ${sp.svg}<div class="axis"><span>${tFmt(pts[0][0])}</span><span>${tFmt(t)}</span></div>
+      <div class="src">Eurostat <a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.dataset)}</a>${s.updated ? " · publiée le " + fmtDate(s.updated) : ""}</div>`;
+    tiles.appendChild(el);
+    const svg = el.querySelector("svg"), hair = svg.querySelector(".hair");
+    const mk = () => { const x = document.createElement("div"); x.className = "dot"; el.appendChild(x); return x; };
+    const last = mk(), hov = mk(); hov.hidden = true;
+    const tip = document.createElement("div"); tip.className = "tip"; tip.hidden = true; el.appendChild(tip);
+    const pos = i => { const r = svg.getBoundingClientRect(), er = el.getBoundingClientRect(); return [r.left - er.left + sp.x(i) / sp.W * r.width, r.top - er.top + sp.y(pts[i][1]) / sp.H * r.height]; };
+    const putLast = () => { const [px, py] = pos(sp.n); last.style.left = px + "px"; last.style.top = py + "px"; };
+    putLast(); new ResizeObserver(putLast).observe(svg);
+    svg.addEventListener("pointermove", e => {
+      const r = svg.getBoundingClientRect();
+      const i = Math.max(0, Math.min(sp.n, Math.round((e.clientX - r.left) / r.width * sp.n)));
+      const [px, py] = pos(i);
+      hov.hidden = tip.hidden = hair.hidden = false;
+      hov.style.left = tip.style.left = px + "px"; hov.style.top = py + "px"; tip.style.top = (py - 6) + "px";
+      hair.setAttribute("x1", sp.x(i)); hair.setAttribute("x2", sp.x(i));
+      tip.textContent = `${tFmt(pts[i][0])} : ${fmtNum(pts[i][1], d)} ${s.unit}`;
+    });
+    svg.addEventListener("pointerleave", () => { hov.hidden = tip.hidden = hair.hidden = true; });
+  });
+  $("#fig-tables").innerHTML = Object.values(F).map(s => {
+    const pts = /^\d{4}-\d{2}$/.test(s.points[0][0]) ? s.points.slice(-24) : s.points;
+    return `<h3>${esc(s.label)} (${esc(s.unit)})</h3><p class="sub">Eurostat — ${esc(s.dataset_label || s.dataset)} : ${esc((s.official_labels || []).join(" · "))}</p><div class="tablewrap"><table><thead><tr>${pts.map(p => `<th class="num">${tFmt(p[0])}</th>`).join("")}</tr></thead><tbody><tr>${pts.map(p => `<td class="num">${fmtNum(p[1], s.decimals ?? 1)}</td>`).join("")}</tr></tbody></table></div>`;
+  }).join("");
+})();
+
+/* ---------- budgets ---------- */
+(() => {
+  $("#budgets").innerHTML = (B.budgets || []).map(b => `<div class="doc"><h4>${esc(b.page || b.wanted)}</h4>` +
+    (b.extract ? `<p>${esc(b.extract)}</p>${srcLine(b.page, b.url, b.page_updated)}` : `<p class="sub">La page « ${esc(b.wanted)} » n'existe pas (encore).</p>`) + "</div>").join("");
+})();
+
+/* ---------- history ---------- */
+(() => {
+  const H = B.history;
+  if (!H) return;
+  const cur = {k: "governments"};
+  const asof = $("#asof");
+  asof.value = TODAY.toISOString().slice(0, 10);
+  asof.max = asof.value;
+  asof.min = (H.governments.rows[0] || {}).start || "";
+  const inOffice = (r, d) => r.start <= d && (!r.end || r.end > d);
+  const period = r => `${fmtDate(r.start, SHORT)} → ${r.end ? fmtDate(r.end, SHORT) : "en fonction"}`;
+  const cols = {
+    governments: [["Gouvernement", r => link(r.name, r.url)], ["Premier ministre", r => link(r.pm.name, r.pm.url) + ` <span class="sub">${esc(r.party)}</span>`], ["Période", period], ["Président", r => esc(r.president)], ["Membres", r => esc(r.size), "num"]],
+    economy: [["Ministre", r => link(r.name, r.url) + ` <span class="sub">${esc(r.party)}</span>`], ["Intitulé", r => esc(r.title)], ["Période", period], ["Gouvernement", r => esc(r.gov)]],
+    budget: [["Ministre", r => link(r.name, r.url)], ["Intitulé", r => esc(r.title) + (r.boss ? ` <span class="sub">— tutelle : ${esc(r.boss)}</span>` : "")], ["Période", period], ["Gouvernement", r => esc(r.gov)]],
+  };
+  const render = () => {
+    const d = asof.value, h = H[cur.k];
+    $("#hist-table").innerHTML = `<table><thead><tr>${cols[cur.k].map(c => `<th class="${c[2] || ""}">${c[0]}</th>`).join("")}</tr></thead><tbody>` +
+      h.rows.slice().reverse().map(r => `<tr class="${d && inOffice(r, d) ? "hit" : ""}">${cols[cur.k].map(c => `<td class="${c[2] || ""}">${c[1](r)}</td>`).join("")}</tr>`).join("") + "</tbody></table>";
+    $("#hist-src").innerHTML = srcLine(h.page, h.source, null);
+    if (!d) { $("#lookup").innerHTML = ""; return; }
+    const g = H.governments.rows.filter(r => inOffice(r, d));
+    const names = rs => rs.length ? rs.map(r => link(r.name, r.url) + ` <span class="sub">(${esc(r.title)})</span>`).join("<br>") : "—";
+    $("#lookup").innerHTML = `<div class="lookup">Le <b>${fmtDate(d)}</b> :<dl>
+      <dt>Président</dt><dd>${[...new Set(g.map(r => r.president))].map(esc).join(", ") || "—"}</dd>
+      <dt>Gouvernement</dt><dd>${g.map(r => link(r.name, r.url) + " — " + link(r.pm.name, r.pm.url)).join("<br>") || "—"}</dd>
+      <dt>Économie</dt><dd>${names(H.economy.rows.filter(r => inOffice(r, d)))}</dd>
+      <dt>Budget</dt><dd>${names(H.budget.rows.filter(r => inOffice(r, d)))}</dd></dl></div>`;
+  };
+  $("#hist-tabs").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    cur.k = b.dataset.k;
+    $("#hist-tabs").querySelectorAll("button").forEach(x => x.setAttribute("aria-selected", x === b));
+    render();
+  });
+  asof.addEventListener("input", render);
+  render();
+})();
+
+/* ---------- reference ---------- */
+(() => {
+  const R = B.reference;
+  if (!R) return;
+  const block = b => b.type === "h" ? `<h5>${esc(b.text)}</h5>` : b.type === "li" ? `<ul><li>${esc(b.text)}</li></ul>` :
+    b.type === "table" ? `<div class="tablewrap"><table><tbody>${b.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>` : `<p>${esc(b.text)}</p>`;
+  $("#calendar").innerHTML = `<div class="cols">` + R.calendar.map(c => `<div class="doc"><h4>${esc(c.page)} — ${esc(c.section)}</h4>
+    <details><summary>Afficher la section (${c.blocks.length} paragraphes)</summary>${c.blocks.map(block).join("")}</details>${srcLine(c.page, c.url, c.page_updated, "Wikipédia", false)}</div>`).join("") + "</div>";
+  $("#refs").innerHTML = R.groups.map(g => `<h3>${esc(g.group)}</h3><div class="cols">` + g.items.map(i => {
+    const paras = (i.extract || "").split(/\n+/).filter(Boolean);
+    return `<div class="doc"><h4>${link(i.page, i.url)}</h4><p>${esc(paras[0] || "")}</p>${paras.length > 1 ? `<details><summary>Suite de l'introduction</summary>${paras.slice(1).map(p => `<p>${esc(p)}</p>`).join("")}</details>` : ""}${srcLine(i.page, i.url, i.page_updated, "Wikipédia", false)}</div>`;
+  }).join("") + "</div>").join("");
+})();
+</script>
+</body>
+</html>
