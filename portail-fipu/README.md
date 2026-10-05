@@ -4,7 +4,7 @@ Une seule adresse locale pour les trois outils :
 
 | Onglet | Outil | Contenu |
 |---|---|---|
-| Accueil | — | Derniers chiffres publiés, état de chaque outil, « Tout actualiser » |
+| Accueil | — | Derniers chiffres publiés, « Tout actualiser » |
 | Repères | `../reperes-fipu` | Qui est en poste, gouvernement, Journal officiel, chiffres clés, cadre et calendrier |
 | Veille | `../veille-fipu` | Publications et presse classées par mots-clés |
 | Données | `../donnees-fipu` | Séries Eurostat et Insee : recherche, graphiques, tableaux, révisions, export Excel |

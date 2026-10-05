@@ -49,16 +49,6 @@ h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: 
 .tile .v small { font-size: 13px; font-weight: 500; color: var(--ink-2); margin-left: 4px; letter-spacing: 0; }
 .tile .d { font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
 
-.tools { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
-.tool { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.tool h3 { margin: 0; font-size: 17px; font-weight: 650; }
-.tool p { margin: 0; color: var(--ink-2); font-size: 13px; }
-.tool .when { font-size: 12px; color: var(--ink-3); }
-.tool .state { font-size: 12px; }
-.tool .state.ko { color: var(--bad); font-weight: 600; }
-.tool .state.run { color: var(--accent); }
-.tool .acts { display: flex; gap: 8px; margin-top: auto; padding-top: 6px; }
-.tool pre { margin: 0; font-size: 11px; color: var(--ink-3); white-space: pre-wrap; max-height: 3.2em; overflow: hidden; }
 .banner { background: var(--warn-bg); color: var(--warn-ink); border-radius: var(--radius); padding: 10px 14px; font-size: 13px; margin-top: 16px; }
 .foot { margin-top: 36px; font-size: 12px; color: var(--ink-3); max-width: 80ch; }
 </style>
@@ -73,9 +63,6 @@ h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: 
 
   <h2>Derniers chiffres publiés</h2>
   <div class="tiles" id="tiles"><p class="tile n">Chargement…</p></div>
-
-  <h2>Outils</h2>
-  <div class="tools" id="tools"></div>
 
   <p class="foot" id="foot">Tout fonctionne sur ce poste (adresse 127.0.0.1) à partir de sources publiques ; rien n'est envoyé ailleurs que vers ces sources.
   Chaque outil garde aussi son propre lanceur dans son dossier.</p>
@@ -108,29 +95,6 @@ function tiles(o) {
   }).join("");
 }
 
-function tools(o) {
-  $("#tools").innerHTML = o.tools.map(t => {
-    const j = t.job;
-    let last = t.generated ? `Page générée le ${when(t.generated)}` : "";
-    if (t.id === "donnees" && o.donnees) last = `${o.donnees.n_series.toLocaleString("fr-FR")} séries · dernière collecte le ${when(o.donnees.last)}`;
-    let state = "", cls = "";
-    if (j.running) { state = "Actualisation en cours…"; cls = "run"; }
-    else if (j.ok === false) { state = j.error || "Échec de l'actualisation"; cls = "ko"; }
-    else if (j.ok) state = `Actualisé le ${when(j.finished)}`;
-    if (t.id === "donnees" && o.donnees && o.donnees.failed.length && !j.running) { state = `Sources en échec : ${o.donnees.failed.join(", ")}`; cls = "ko"; }
-    if (!t.installed) { state = "Dossier introuvable à côté du portail"; cls = "ko"; }
-    return `<div class="tool">
-      <h3>${esc(t.label)}</h3>
-      <p>${esc(t.desc)}</p>
-      <div class="when">${esc(last)}</div>
-      <div class="state ${cls}">${esc(state)}</div>
-      <div class="acts">
-        <a class="btn primary" href="${t.id}/">Ouvrir</a>
-        ${STATIC ? "" : `<button class="btn" type="button" data-refresh="${t.id}" ${j.running || !t.installed ? "disabled" : ""}>Actualiser</button>`}
-      </div></div>`;
-  }).join("");
-}
-
 let timer;
 async function refreshView() {
   clearTimeout(timer);
@@ -138,17 +102,11 @@ async function refreshView() {
   try { o = STATIC || await (await fetch("/api/overview", {cache: "no-store"})).json(); }
   catch { $("#alerts").innerHTML = `<div class="banner">Portail injoignable : relancer FiPu.command (macOS) ou FiPu.bat (Windows).</div>`; return; }
   $("#alerts").innerHTML = "";
-  tiles(o); tools(o);
+  tiles(o);
   const running = o.tools.some(t => t.job.running);
   $("#all").disabled = running;
   if (running) timer = setTimeout(refreshView, 2000);
 }
-$("#tools").addEventListener("click", async e => {
-  const b = e.target.closest("[data-refresh]"); if (!b) return;
-  b.disabled = true;
-  await fetch(`/${b.dataset.refresh}/api/refresh`, {method: "POST"});
-  refreshView();
-});
 $("#all").addEventListener("click", async () => {
   $("#all").disabled = true;
   await fetch("/api/refresh-all", {method: "POST"});
