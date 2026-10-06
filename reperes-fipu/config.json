@@ -77,8 +77,13 @@
     {"page": "Semestre européen", "section": "Calendrier"}
   ],
 
+  "insee_pages": {
+    "fp": {"url": "https://www.insee.fr/fr/statistiques/8988841?sommaire=8988934", "table": "Principaux agrégats de Finances Publiques",
+           "note": "Comptes de la Nation, édition annuelle (fin mai) : adresse à mettre à jour chaque année ; un contrôle le signale après le 15 juin."}
+  },
+
   "eurostat": [
-    {"key": "deficit", "label": "Solde public", "unit": "% PIB", "decimals": 1, "dataset": "gov_10dd_edpt1", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "B9"}, "since": "2002"},
+    {"key": "deficit", "label": "Solde public", "unit": "% PIB", "decimals": 1, "dataset": "gov_10dd_edpt1", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "B9"}, "insee": {"page": "fp", "row": "^Déficit au sens de Maastricht", "negate": true}, "since": "2002"},
     {
       "key": "debt_q",
       "label": "Dette publique (trimestrielle)",
@@ -89,10 +94,10 @@
       "note": "Insee plutôt qu'Eurostat (gov_10q_ggdebt) : la dette trimestrielle paraît environ trois semaines plus tôt",
       "since": "2019-Q1"
     },
-    {"key": "spending", "label": "Dépense publique", "unit": "% PIB", "decimals": 1, "dataset": "gov_10a_main", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "TE"}, "since": "2002"},
-    {"key": "revenue", "label": "Recettes publiques", "unit": "% PIB", "decimals": 1, "dataset": "gov_10a_main", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "TR"}, "since": "2002"},
+    {"key": "spending", "label": "Dépense publique", "unit": "% PIB", "decimals": 1, "dataset": "gov_10a_main", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "TE"}, "insee": {"page": "fp", "row": "^Dépenses$"}, "since": "2002"},
+    {"key": "revenue", "label": "Recettes publiques", "unit": "% PIB", "decimals": 1, "dataset": "gov_10a_main", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "TR"}, "insee": {"page": "fp", "row": "^Recettes$"}, "since": "2002"},
     {"key": "interest", "label": "Intérêts versés", "unit": "% PIB", "decimals": 1, "dataset": "gov_10a_main", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "D41PAY"}, "since": "2002"},
-    {"key": "debt", "label": "Dette publique (annuelle)", "unit": "% PIB", "decimals": 1, "dataset": "gov_10dd_edpt1", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "GD"}, "since": "2002", "tile": false},
+    {"key": "debt", "label": "Dette publique (annuelle)", "unit": "% PIB", "decimals": 1, "dataset": "gov_10dd_edpt1", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "GD"}, "insee": {"page": "fp", "row": "^Dette des administrations publiques \\(brute\\)"}, "since": "2002", "tile": false},
     {"key": "oat10", "label": "Taux à 10 ans — France", "unit": "%", "decimals": 2, "dataset": "irt_lt_mcby_m", "filters": {"geo": "FR"}, "since": "2019-01"},
     {"key": "spread", "label": "Écart de taux à 10 ans France – Allemagne", "unit": "pb", "decimals": 0, "dataset": "irt_lt_mcby_m", "filters": {"geo": ["FR", "DE"]}, "since": "2019-01", "spread": ["FR", "DE"], "scale": 100}
   ]

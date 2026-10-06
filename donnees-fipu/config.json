@@ -3,21 +3,26 @@
 
   "comparateurs": ["FR", "DE", "IT", "ES", "NL", "BE", "EA20", "EU27_2020"],
 
+  "_alias_doc": "Un alias désigne une série, ou une liste de séries équivalentes : on retient alors celle dont la dernière période est la plus récente, la première de la liste en cas d'égalité (l'Insee, qui publie avant Eurostat). « po » est le taux de prélèvements obligatoires au sens national (Insee) ; l'agrégat Eurostat, de définition différente, est « po_eurostat ».",
+
   "alias": {
-    "deficit": "gov_10dd_edpt1.PC_GDP.S13.B9.FR",
-    "deficit_md": "gov_10dd_edpt1.MIO_EUR.S13.B9.FR",
-    "dette": "gov_10dd_edpt1.PC_GDP.S13.GD.FR",
+    "deficit": ["insee.fp.solde_maastricht", "gov_10dd_edpt1.PC_GDP.S13.B9.FR"],
+    "deficit_md": ["insee.apu.S13.B9.B.C", "gov_10dd_edpt1.MIO_EUR.S13.B9.FR"],
+    "dette": ["insee.fp.dette_des_administrations_publiques_brute", "gov_10dd_edpt1.PC_GDP.S13.GD.FR"],
     "dette_md": "gov_10dd_edpt1.MIO_EUR.S13.GD.FR",
-    "depense": "gov_10a_main.PC_GDP.S13.TE.FR",
-    "recettes": "gov_10a_main.PC_GDP.S13.TR.FR",
+    "dette_nette": "insee.fp.dette_nette_des_administrations_publiques",
+    "depense": ["insee.fp.depenses", "gov_10a_main.PC_GDP.S13.TE.FR"],
+    "recettes": ["insee.fp.recettes", "gov_10a_main.PC_GDP.S13.TR.FR"],
     "interets": "gov_10a_main.PC_GDP.S13.D41PAY.FR",
-    "po": "gov_10a_taxag.PC_GDP.S13.D2_D5_D91_D61_M_D995.FR",
+    "po": "insee.fp.prelevements_obligatoires",
+    "po_eurostat": "gov_10a_taxag.PC_GDP.S13.D2_D5_D91_D61_M_D995.FR",
     "po_md": "gov_10a_taxag.MIO_EUR.S13.D2_D5_D91_D61_M_D995.FR",
     "pib": "nama_10_gdp.CP_MEUR.B1GQ.FR",
     "pib_vol": "nama_10_gdp.CLV_PCH_PRE.B1GQ.FR",
     "dette_trim": "insee.010777608",
     "budget_etat_solde": "insee.001717255"
   },
+
 
   "sources": [
     {"id": "notif_pde", "label": "Notification PDE : solde et dette (annuel)", "provider": "eurostat", "dataset": "gov_10dd_edpt1",
@@ -46,6 +51,20 @@
 
     {"id": "prelevements_ue", "label": "Taux de prélèvements obligatoires — comparaison", "provider": "eurostat", "dataset": "gov_10a_taxag",
      "filters": {"unit": "PC_GDP", "sector": "S13", "geo": "$comparateurs", "na_item": ["D2_D5_D91_D61_M_D995", "D2", "D211", "D5", "D51A_C1", "D51B_C2", "D61"]},
+     "since": "1995"},
+
+    {"id": "fp_insee", "label": "Principaux agrégats de finances publiques en % du PIB (Insee, Comptes de la Nation)", "provider": "insee_tableau",
+     "url": "https://www.insee.fr/fr/statistiques/8988841?sommaire=8988934", "table": "Principaux agrégats de Finances Publiques",
+     "prefix": "insee.fp", "label_prefix": "Administrations publiques — ", "unit": "Pourcentage du produit intérieur brut (PIB)",
+     "negate": {"deficit_au_sens_de_maastricht": {"key": "solde_maastricht", "label": "Administrations publiques — Solde public au sens de Maastricht (opposé du déficit publié par l'Insee)"}},
+     "note": "Page de l'édition annuelle des Comptes de la Nation (fin mai) : adresse à mettre à jour chaque année."},
+
+    {"id": "apu_annuel_insee", "label": "Comptes annuels des APU par sous-secteur et opération (Insee, base 2020)", "provider": "insee_melodi",
+     "dataset": "DD_CNA_APU", "prefix": "insee.apu", "key_dims": ["REF_SECTOR", "STO", "ACCOUNTING_ENTRY", "CONSOLIDATION"],
+     "filters": {"REF_SECTOR": ["S13", "S1311", "S13111", "S13112", "S1313", "S13131", "S13132", "S1314"], "UNIT_MEASURE": "XDC", "EXPENDITURE": "_Z",
+                 "COUNTERPART_SECTOR": "S1", "COUNTERPART_AREA": "W0", "INSTR_ASSET": "_Z", "PRICES": "V", "TRANSFORMATION": "N", "VALUATION": "S"},
+     "exclude": {"STO": ["OTE", "OTR", "OPAT", "TEF", "TEHI", "TRAT", "TRHI", "TRICS", "TRP", "_OTE_PPIB", "_OTR_PPIB"]},
+     "note": "Totaux du jeu de données écartés : non consolidés, ils ne correspondent pas aux totaux publiés (tableau 3.201 ; dépenses et recettes en % du PIB : source fp_insee).",
      "since": "1995"},
 
     {"id": "apu_trim", "label": "Comptes trimestriels des APU (Eurostat)", "provider": "eurostat", "dataset": "gov_10q_ggnfa",

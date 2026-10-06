@@ -32,7 +32,19 @@ ROOT = Path(__file__).parent
 
 
 def _alias():
-    return json.loads((ROOT / "config.json").read_text(encoding="utf-8")).get("alias", {})
+    """Alias → clé. Un alias peut lister des séries équivalentes (ex. Insee puis Eurostat) : on retient celle
+    dont la dernière période est la plus récente, la première de la liste en cas d'égalité."""
+    raw = json.loads((ROOT / "config.json").read_text(encoding="utf-8")).get("alias", {})
+    out = {}
+    with store.connect() as con:
+        for name, keys in raw.items():
+            if isinstance(keys, str):
+                out[name] = keys
+                continue
+            last = {k: con.execute("SELECT MAX(period) FROM obs WHERE key=? AND value IS NOT NULL", (k,)).fetchone()[0] or ""
+                    for k in keys}
+            out[name] = max(keys, key=lambda k: (last[k], -keys.index(k)))
+    return out
 
 
 def resolve(name):

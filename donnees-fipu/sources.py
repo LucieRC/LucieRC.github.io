@@ -4,22 +4,37 @@
 
 Les périodes suivent la notation des sources : « 2024 », « 2024-Q3 », « 2024-07 ».
 """
+import csv
+import html
+import io
 import re
+import time
+import unicodedata
 import xml.etree.ElementTree as ET
+import zipfile
+from datetime import datetime
 
 import requests
 
 UA = "DonneesFiPu/0.1 (collecte de statistiques publiques)"
 EUROSTAT = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
 INSEE = "https://bdm.insee.fr/series/sdmx/data/"
+MELODI = "https://api.insee.fr/melodi/"
 SKIP_DIMS = ("time", "freq")
 FREQ_INSEE = {"A": "A", "T": "Q", "M": "M", "S": "S", "B": "M2"}
 
 
-def _get(url, params=None, timeout=180):
-    r = requests.get(url, params=params, timeout=timeout, headers={"User-Agent": UA})
-    r.raise_for_status()
-    return r
+def _get(url, params=None, timeout=180, tries=3):
+    """GET avec nouvelles tentatives : l'Insee coupe parfois les connexions venant des serveurs de GitHub."""
+    for i in range(tries):
+        try:
+            r = requests.get(url, params=params, timeout=timeout, headers={"User-Agent": UA})
+            r.raise_for_status()
+            return r
+        except requests.RequestException:
+            if i == tries - 1:
+                raise
+            time.sleep(5 * (i + 1))
 
 
 def eurostat(src, cfg):
@@ -95,7 +110,95 @@ def insee(src, cfg):
     return out
 
 
-PROVIDERS = {"eurostat": eurostat, "insee": insee}
+def insee_melodi(src, cfg):
+    """Jeu de données du catalogue Insee (API Melodi, fichier CSV complet), filtré sur ses dimensions.
+
+    Une série par combinaison des dimensions `key_dims` ; les autres dimensions doivent être fixées
+    par `filters` (sinon plusieurs valeurs se mélangeraient dans une même série). `exclude` écarte des
+    valeurs de dimension (ex. agrégats « Total des dépenses » non consolidés, qui ne sont pas ceux publiés)."""
+    meta = _get(MELODI + "catalog/" + src["dataset"]).json()
+    product = next(p for p in meta["product"] if p["id"].endswith("_CSV_FR"))
+    url = product.get("url") or product.get("accessURL") or MELODI + f"file/{src['dataset']}/{product['id']}"
+    z = zipfile.ZipFile(io.BytesIO(_get(url).content))
+    names = {n.rsplit("_", 1)[-1]: n for n in z.namelist()}  # …_data.csv, …_metadata.csv
+    labels = {}
+    with z.open(names["metadata.csv"]) as f:
+        for r in csv.DictReader(io.TextIOWrapper(f, encoding="utf-8-sig"), delimiter=";"):
+            labels[(r["COD_VAR"], r["COD_MOD"])] = r["LIB_MOD"]
+    filters = {k: set(v if isinstance(v, list) else [v]) for k, v in src["filters"].items()}
+    exclude = {k: set(v) for k, v in src.get("exclude", {}).items()}
+    dims, since = src["key_dims"], src.get("since", "")
+    updated = meta.get("modified", "")[:10] or None
+    series = {}
+    with z.open(names["data.csv"]) as f:
+        for r in csv.DictReader(io.TextIOWrapper(f, encoding="utf-8-sig"), delimiter=";"):
+            if r["OBS_VALUE"] == "" or r["TIME_PERIOD"] < since or any(r[k] not in vs for k, vs in filters.items()) \
+                    or any(r[k] in vs for k, vs in exclude.items()):
+                continue
+            key = ".".join([src["prefix"]] + [r[k] for k in dims])
+            if key not in series:
+                mult = int(r.get("UNIT_MULT") or 0)
+                unit = labels.get(("UNIT_MEASURE", r["UNIT_MEASURE"]), r["UNIT_MEASURE"])
+                series[key] = {
+                    "key": key,
+                    "label": " — ".join(labels.get((k, r[k]), r[k]) for k in dims),
+                    "unit": "Millions d'euros" if (r["UNIT_MEASURE"], mult) == ("XDC", 6) else unit + (f" (×10^{mult})" if mult else ""),
+                    "freq": r["FREQ"],
+                    "ref": f"Insee, catalogue de données {src['dataset']} : " + ", ".join(f"{k}={r[k]}" for k in dims),
+                    "updated": updated,
+                    "obs": {},
+                }
+            series[key]["obs"][r["TIME_PERIOD"]] = float(r["OBS_VALUE"])
+    if not series:
+        raise RuntimeError("aucune série retenue (filtres trop stricts ?)")
+    return list(series.values())
+
+
+def _slug(s):
+    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().lower()
+    return re.sub(r"[^a-z0-9]+", "_", s).strip("_")
+
+
+def _cell(c):
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", c))).strip()
+
+
+def insee_tableau(src, cfg):
+    """Tableau publié dans une page insee.fr (ex. « Principaux agrégats de finances publiques »), repris tel quel.
+
+    Une série par ligne ; les renvois « (1) » sont retirés des libellés. L'adresse de la page change à chaque
+    édition annuelle : la mettre à jour dans config.json (un contrôle signale quand l'édition semble dépassée)."""
+    page = _get(src["url"]).text
+    tables = [t for t in re.findall(r"<table.*?</table>", page, re.S) if re.search(src["table"], _cell(t), re.I)]
+    if not tables:
+        raise RuntimeError(f"tableau « {src['table']} » introuvable dans la page")
+    rows = [[_cell(c) for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", tr, re.S)] for tr in re.findall(r"<tr.*?</tr>", tables[0], re.S)]
+    years = rows[0][1:]
+    if not all(re.fullmatch(r"\d{4}", y) for y in years):
+        raise RuntimeError(f"en-tête inattendu : {rows[0]}")
+    m = re.search(r"Paru le(?:&nbsp;|\s)*:(?:\s|<[^>]+>)*(\d{2})/(\d{2})/(\d{4})", page)
+    updated = f"{m[3]}-{m[2]}-{m[1]}" if m else None
+    title = _cell(re.search(r"<title>(.*?)</title>", page, re.S)[1]) if "<title>" in page else src["url"]
+    out = []
+    for row in rows[1:]:
+        label = re.sub(r"\s*\(\d+\)\s*", " ", row[0]).strip()
+        vals = {y: float(v.replace(",", ".").replace("−", "-")) for y, v in zip(years, row[1:]) if re.fullmatch(r"[-−]?\d+(,\d+)?", v)}
+        if not vals:
+            continue
+        slug = _slug(label)
+        variants = [(slug, src.get("label_prefix", "") + label, 1)]
+        if slug in src.get("negate", {}):  # ex. solde = − déficit publié, pour garder le signe des séries Eurostat
+            variants.append((src["negate"][slug]["key"], src["negate"][slug]["label"], -1))
+        for k, lab, sign in variants:
+            out.append({"key": f"{src['prefix']}.{k}", "label": lab, "unit": src["unit"], "freq": "A",
+                        "ref": f"{title} — {src['url']}", "updated": updated,
+                        "obs": {y: round(sign * v, 6) for y, v in vals.items()}})
+    if datetime.now() >= datetime(datetime.now().year, 6, 15) and max(years) < str(datetime.now().year - 1):
+        raise RuntimeError(f"édition dépassée (dernière année {max(years)}) : mettre à jour l'adresse de la page dans config.json")
+    return out
+
+
+PROVIDERS = {"eurostat": eurostat, "insee": insee, "insee_melodi": insee_melodi, "insee_tableau": insee_tableau}
 
 
 def fetch(src, cfg):

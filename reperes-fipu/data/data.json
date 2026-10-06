@@ -1802,16 +1802,23 @@
       -5.1
      ]
     ],
-    "updated": "2026-04-22T11:00:00+0200",
-    "source": "Eurostat",
-    "dataset": "gov_10dd_edpt1",
-    "dataset_label": "Déficit/surplus, dette et données associées du gouvernement",
+    "updated": "2026-05-29T00:00:00+00:00",
+    "source": "Insee",
+    "dataset": "Comptes de la Nation",
+    "dataset_label": "Finances publiques en 2025 − Les comptes de la Nation en 2025 | Insee",
     "official_labels": [
-     "Pourcentage du produit intérieur brut (PIB)",
-     "Administrations publiques",
-     "Capacité de financement (+)/besoin de financement (-)"
+     "Déficit au sens de Maastricht (signe inversé)"
     ],
-    "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10dd_edpt1/default/table?lang=fr"
+    "url": "https://www.insee.fr/fr/statistiques/8988841?sommaire=8988934",
+    "insee": {
+     "row": "Déficit au sens de Maastricht",
+     "first": "2018",
+     "last": "2025",
+     "updated": "2026-05-29T00:00:00+00:00",
+     "title": "Finances publiques en 2025 − Les comptes de la Nation en 2025 | Insee",
+     "url": "https://www.insee.fr/fr/statistiques/8988841?sommaire=8988934",
+     "eurostat_last": "2025"
+    }
    },
    "debt_q": {
     "label": "Dette publique (trimestrielle)",
@@ -2049,19 +2056,26 @@
      ],
      [
       "2025",
-      57.2
+      57.3
      ]
     ],
-    "updated": "2026-07-21T11:00:00+0200",
-    "source": "Eurostat",
-    "dataset": "gov_10a_main",
-    "dataset_label": "Principaux agrégats des administrations publiques, y compris recettes et dépenses",
+    "updated": "2026-05-29T00:00:00+00:00",
+    "source": "Insee",
+    "dataset": "Comptes de la Nation",
+    "dataset_label": "Finances publiques en 2025 − Les comptes de la Nation en 2025 | Insee",
     "official_labels": [
-     "Pourcentage du produit intérieur brut (PIB)",
-     "Administrations publiques",
-     "Total des dépenses des administrations publiques"
+     "Dépenses"
     ],
-    "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main/default/table?lang=fr"
+    "url": "https://www.insee.fr/fr/statistiques/8988841?sommaire=8988934",
+    "insee": {
+     "row": "Dépenses",
+     "first": "2018",
+     "last": "2025",
+     "updated": "2026-05-29T00:00:00+00:00",
+     "title": "Finances publiques en 2025 − Les comptes de la Nation en 2025 | Insee",
+     "url": "https://www.insee.fr/fr/statistiques/8988841?sommaire=8988934",
+     "eurostat_last": "2025"
+    }
    },
    "revenue": {
     "label": "Recettes publiques",
@@ -2163,19 +2177,26 @@
      ],
      [
       "2025",
-      52.1
+      52.2
      ]
     ],
-    "updated": "2026-07-21T11:00:00+0200",
-    "source": "Eurostat",
-    "dataset": "gov_10a_main",
-    "dataset_label": "Principaux agrégats des administrations publiques, y compris recettes et dépenses",
+    "updated": "2026-05-29T00:00:00+00:00",
+    "source": "Insee",
+    "dataset": "Comptes de la Nation",
+    "dataset_label": "Finances publiques en 2025 − Les comptes de la Nation en 2025 | Insee",
     "official_labels": [
-     "Pourcentage du produit intérieur brut (PIB)",
-     "Administrations publiques",
-     "Total des recettes des administrations publiques"
+     "Recettes"
     ],
-    "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main/default/table?lang=fr"
+    "url": "https://www.insee.fr/fr/statistiques/8988841?sommaire=8988934",
+    "insee": {
+     "row": "Recettes",
+     "first": "2018",
+     "last": "2025",
+     "updated": "2026-05-29T00:00:00+00:00",
+     "title": "Finances publiques en 2025 − Les comptes de la Nation en 2025 | Insee",
+     "url": "https://www.insee.fr/fr/statistiques/8988841?sommaire=8988934",
+     "eurostat_last": "2025"
+    }
    },
    "interest": {
     "label": "Intérêts versés",
@@ -2363,7 +2384,7 @@
      ],
      [
       "2018",
-      98.5
+      98.6
      ],
      [
       "2019",
@@ -2391,19 +2412,26 @@
      ],
      [
       "2025",
-      115.6
+      115.7
      ]
     ],
-    "updated": "2026-04-22T11:00:00+0200",
-    "source": "Eurostat",
-    "dataset": "gov_10dd_edpt1",
-    "dataset_label": "Déficit/surplus, dette et données associées du gouvernement",
+    "updated": "2026-05-29T00:00:00+00:00",
+    "source": "Insee",
+    "dataset": "Comptes de la Nation",
+    "dataset_label": "Finances publiques en 2025 − Les comptes de la Nation en 2025 | Insee",
     "official_labels": [
-     "Pourcentage du produit intérieur brut (PIB)",
-     "Administrations publiques",
-     "Dette brute consolidée du gouvernement"
+     "Dette des administrations publiques (brute)"
     ],
-    "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10dd_edpt1/default/table?lang=fr"
+    "url": "https://www.insee.fr/fr/statistiques/8988841?sommaire=8988934",
+    "insee": {
+     "row": "Dette des administrations publiques (brute)",
+     "first": "2018",
+     "last": "2025",
+     "updated": "2026-05-29T00:00:00+00:00",
+     "title": "Finances publiques en 2025 − Les comptes de la Nation en 2025 | Insee",
+     "url": "https://www.insee.fr/fr/statistiques/8988841?sommaire=8988934",
+     "eurostat_last": "2025"
+    }
    },
    "oat10": {
     "label": "Taux à 10 ans — France",
@@ -3209,7 +3237,7 @@
   },
   "figures": {
    "ok": true,
-   "fetched_at": "2026-10-06T12:12:00+00:00",
+   "fetched_at": "2026-10-06T19:58:27+00:00",
    "error": null
   },
   "jorf": {
@@ -3219,7 +3247,7 @@
   }
  },
  "changelog": [],
- "generated_at": "2026-10-06T12:12:01+00:00",
+ "generated_at": "2026-10-06T19:58:27+00:00",
  "checks": [
   {
    "name": "Collecte « history »",

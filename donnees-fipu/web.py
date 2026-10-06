@@ -39,7 +39,7 @@ def catalogue(q):
     return {
         "sources": [{"id": s["id"], "label": s["label"], "provider": s["provider"], "n": counts.get(s["id"], 0)}
                     for s in cfg["sources"]],
-        "alias": [{"alias": a, "key": k, "label": labels.get(k, "")} for a, k in cfg.get("alias", {}).items()],
+        "alias": [{"alias": a, "key": k, "label": labels.get(k, "")} for a, k in donnees._alias().items()],
     }
 
 

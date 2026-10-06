@@ -7,6 +7,7 @@ valide est conservée, marquée comme telle, et signalée dans la page.
     python3 fetch.py --only figures jorf # certains blocs
 """
 import argparse
+import html
 import json
 import re
 import sys
@@ -419,8 +420,33 @@ def insee(idbank, since, tries=3):
     return pts, (upd + "T00:00:00+00:00" if upd else None), s.get("TITLE_FR", "")
 
 
+def insee_table(url, table):
+    """Tableau d'une page insee.fr, repris tel quel : {libellé de ligne: [[année, valeur], …]}, date de parution, titre."""
+    for i in range(3):
+        try:
+            r = requests.get(url, timeout=60)
+            r.raise_for_status()
+            break
+        except requests.RequestException:
+            if i == 2:
+                raise
+            time.sleep(5 * (i + 1))
+    page = r.text
+    cell = lambda c: re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", c))).strip()
+    tb = next((t for t in re.findall(r"<table.*?</table>", page, re.S) if re.search(table, cell(t), re.I)), None)
+    if tb is None:
+        raise RuntimeError(f"tableau Insee « {table} » introuvable : {url}")
+    trs = [[cell(c) for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", tr, re.S)] for tr in re.findall(r"<tr.*?</tr>", tb, re.S)]
+    years = trs[0][1:]
+    rows = {re.sub(r"\s*\(\d+\)\s*", " ", tr[0]).strip(): [[y, float(v.replace(",", "."))] for y, v in zip(years, tr[1:])
+                                                          if re.fullmatch(r"-?\d+(,\d+)?", v)] for tr in trs[1:]}
+    m = re.search(r"Paru le(?:&nbsp;|\s)*:(?:\s|<[^>]+>)*(\d{2})/(\d{2})/(\d{4})", page)
+    title = cell(re.search(r"<title>(.*?)</title>", page, re.S)[1])
+    return rows, (f"{m[3]}-{m[2]}-{m[1]}T00:00:00+00:00" if m else None), title
+
+
 def figures(cfg):
-    out = {}
+    out, pages = {}, {}
     for s in cfg["eurostat"]:
         if s.get("provider") == "insee":
             pts, upd, title = insee(s["idbank"], s["since"])
@@ -441,10 +467,33 @@ def figures(cfg):
             pts = series[geo if isinstance(geo, str) else geo[0]]
         if not pts:
             raise RuntimeError(f"série vide : {s['key']}")
-        out[s["key"]] = {**{k: s.get(k) for k in ("label", "unit", "decimals", "tile")},
-                         "points": pts, "updated": upd, "source": "Eurostat", "dataset": s["dataset"],
-                         "dataset_label": ds_label, "official_labels": labels,
-                         "url": f"https://ec.europa.eu/eurostat/databrowser/view/{s['dataset']}/default/table?lang=fr"}
+        fig = {**{k: s.get(k) for k in ("label", "unit", "decimals", "tile")},
+               "points": pts, "updated": upd, "source": "Eurostat", "dataset": s["dataset"],
+               "dataset_label": ds_label, "official_labels": labels,
+               "url": f"https://ec.europa.eu/eurostat/databrowser/view/{s['dataset']}/default/table?lang=fr"}
+        if s.get("insee"):
+            # L'Insee publie les comptes annuels des APU avant Eurostat, qui les reprend : ses valeurs
+            # remplacent celles d'Eurostat sur les années qu'il couvre ; Eurostat garde les années
+            # antérieures, et les plus récentes s'il les publie en premier (avril-mai, avant l'édition Insee).
+            ins = s["insee"]
+            pg = cfg["insee_pages"][ins["page"]]
+            if ins["page"] not in pages:
+                pages[ins["page"]] = insee_table(pg["url"], pg["table"])
+            rows, ins_upd, title = pages[ins["page"]]
+            row = next((k for k in rows if re.search(ins["row"], k)), None)
+            if row is None:
+                raise RuntimeError(f"ligne « {ins['row']} » absente du tableau Insee")
+            ipts = [[y, -v if ins.get("negate") else v] for y, v in rows[row]]
+            merged = dict(pts) | dict(ipts)
+            last_y = max(merged)
+            from_insee = last_y in dict(ipts)
+            fig["points"] = sorted([list(x) for x in merged.items()])
+            fig["insee"] = {"row": row, "first": ipts[0][0], "last": ipts[-1][0], "updated": ins_upd, "title": title,
+                            "url": pg["url"], "eurostat_last": pts[-1][0]}
+            if from_insee:
+                fig.update(source="Insee", dataset="Comptes de la Nation", url=pg["url"], updated=ins_upd,
+                           dataset_label=title, official_labels=[row + (" (signe inversé)" if ins.get("negate") else "")])
+        out[s["key"]] = fig
     return out
 
 
@@ -502,6 +551,10 @@ def checks(cfg, data, jorf_store):
         ", ".join(f"{p['label']} ({p['page_updated'][:10]})" for p in old) or "toutes", "warn")
 
     for s in (B.get("figures") or {}).values():
+        ins = s.get("insee")
+        if ins and date.today() >= date(date.today().year, 6, 15) and ins["last"] < str(date.today().year - 1):
+            add(f"Édition Insee des Comptes de la Nation à jour (« {s['label']} »)", False,
+                f"dernière année {ins['last']} : mettre à jour insee_pages dans config.json", "warn")
         age = (datetime.now(timezone.utc) - datetime.fromisoformat(s["updated"])).days if s.get("updated") else 999
         if age > 400:
             add(f"Série {s.get('source', 'Eurostat')} « {s['label']} » mise à jour depuis moins de 400 jours", False, s.get("updated"), "warn")

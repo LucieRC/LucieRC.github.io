@@ -50,6 +50,8 @@ date de mise à jour par la source, date de version) : de quoi citer le chiffre 
 | `cofog_fr_detail` | Dépenses par fonction, tous niveaux, par opération | France |
 | `prelevements` | Impôts et cotisations par catégorie (93 postes), par sous-secteur | France |
 | `prelevements_ue` | Taux de PO et grandes catégories | comparateurs |
+| `fp_insee` | Principaux agrégats de finances publiques en % du PIB : dépenses, recettes, déficit, dette brute et nette, prélèvements obligatoires (Insee, Comptes de la Nation, depuis 2018) | France |
+| `apu_annuel_insee` | Comptes annuels des APU par sous-secteur et opération, en M€ : impôts par catégorie, cotisations, intérêts, rémunérations, investissement, solde (Insee, catalogue de données `DD_CNA_APU`) | France |
 | `apu_trim`, `dette_trim_ue` | Comptes trimestriels et dette trimestrielle (Eurostat) | France / comparateurs |
 | `pib` | PIB en valeur, volume et prix | comparateurs |
 | `budget_etat` | Situation mensuelle du budget de l'État (cumul depuis janvier) | Insee |
@@ -58,7 +60,17 @@ date de mise à jour par la source, date de version) : de quoi citer le chiffre 
 
 Comparateurs : FR, DE, IT, ES, NL, BE, zone euro, UE (liste `comparateurs`).
 Les **alias** (`deficit`, `dette`, `po`, `pib`, `budget_etat_solde`…) sont définis dans
-`config.json`, section `alias`.
+`config.json`, section `alias`. Un alias peut lister plusieurs séries équivalentes : on retient
+celle dont la dernière année est la plus récente, la première de la liste en cas d'égalité. Pour la
+France, l'Insee est cité en premier, puisqu'il publie avant Eurostat (comptes des APU fin mars et
+fin mai ; Eurostat les reprend en avril et en octobre) : Eurostat ne prend le relais que s'il a une
+année de plus (en avril-mai, avant l'édition Insee de fin mai). `po` est le taux de prélèvements
+obligatoires au sens national (Insee) ; l'agrégat d'Eurostat, de définition différente
+(45,2 % en 2024 contre 42,7 %), reste disponible sous `po_eurostat`.
+
+**Chaque année, fin mai** : mettre à jour l'adresse de la page Insee de `fp_insee` (« Finances
+publiques en <année> », édition des Comptes de la Nation). Passé le 15 juin, la source passe en
+échec tant que l'adresse désigne l'édition précédente.
 
 Ajouter des séries : ajouter une valeur à un filtre ou une entrée à `sources`, puis
 relancer `update.py`. Les codes se trouvent dans le navigateur de données d'Eurostat

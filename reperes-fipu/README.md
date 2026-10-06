@@ -32,7 +32,7 @@ Installation : Python 3.10+, puis `pip install -r requirements.txt`. Première c
 | Titulaires | Wikipédia (infobox, listes, page du gouvernement) | Nom, date de prise de fonction ; début de la page de la personne et sa photo, **uniquement si la source renvoie vers sa page** (pas de recherche par nom : homonymes) |
 | Gouvernement | Page Wikipédia du gouvernement en fonction, trouvée via « Liste des gouvernements de la France » | Organisation fonctionnelle, évolutions de composition, numéros NOR |
 | Historiques | Listes Wikipédia des gouvernements, ministres de l'Économie, ministres du Budget | |
-| Chiffres | Eurostat (API publique, libellés officiels en français) ; Insee (BDM) pour la dette trimestrielle, publiée plus tôt qu'à Eurostat | Séries listées dans `config.json` |
+| Chiffres | Insee d'abord : dette trimestrielle (BDM), solde, dépenses, recettes et dette annuels (tableau « Principaux agrégats de finances publiques » des Comptes de la Nation, 2018 et après) ; Eurostat pour les années antérieures, pour celles qu'il publie en premier, et pour les autres séries | Séries listées dans `config.json` |
 | Budget, références, calendrier | Wikipédia : introductions et sections nommées dans `config.json` | Texte intégral de l'introduction / de la section |
 
 Non retenus : info.gouv.fr (protection anti-robot), Wikidata (titulaires récents
@@ -50,6 +50,8 @@ Tout se fait dans `config.json`, puis `python3 update.py` (ou `build.py` si seul
 - **ajouter une série** : une entrée dans `eurostat` (code du jeu de données et filtres tels
   qu'affichés dans le navigateur de données Eurostat), ou, pour une série Insee,
   `"provider": "insee"` et son `idbank` (numéro affiché sur la page de la série) ;
+- **chaque année, fin mai** : mettre à jour l'adresse de `insee_pages.fp` (page « Finances publiques
+  en <année> » de l'édition des Comptes de la Nation) ; un contrôle le rappelle après le 15 juin ;
 - **ajouter une page de référence ou une section de calendrier** : `reference`, `calendar`.
 
 ## Tenue dans le temps
