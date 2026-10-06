@@ -121,7 +121,8 @@ class Config(unittest.TestCase):
                 if k in f:
                     re.compile(f[k])
         for s in cfg["eurostat"]:
-            self.assertTrue({"key", "label", "dataset", "filters", "since"} <= set(s))
+            need = {"idbank"} if s.get("provider") == "insee" else {"dataset", "filters"}
+            self.assertTrue({"key", "label", "since"} | need <= set(s), s.get("key"))
 
 
 if __name__ == "__main__":

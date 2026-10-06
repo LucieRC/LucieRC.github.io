@@ -32,7 +32,7 @@ Installation : Python 3.10+, puis `pip install -r requirements.txt`. Première c
 | Titulaires | Wikipédia (infobox, listes, page du gouvernement) | Nom, date de prise de fonction ; début de la page de la personne et sa photo, **uniquement si la source renvoie vers sa page** (pas de recherche par nom : homonymes) |
 | Gouvernement | Page Wikipédia du gouvernement en fonction, trouvée via « Liste des gouvernements de la France » | Organisation fonctionnelle, évolutions de composition, numéros NOR |
 | Historiques | Listes Wikipédia des gouvernements, ministres de l'Économie, ministres du Budget | |
-| Chiffres | Eurostat (API publique, libellés officiels en français) | Séries listées dans `config.json` |
+| Chiffres | Eurostat (API publique, libellés officiels en français) ; Insee (BDM) pour la dette trimestrielle, publiée plus tôt qu'à Eurostat | Séries listées dans `config.json` |
 | Budget, références, calendrier | Wikipédia : introductions et sections nommées dans `config.json` | Texte intégral de l'introduction / de la section |
 
 Non retenus : info.gouv.fr (protection anti-robot), Wikidata (titulaires récents
@@ -48,7 +48,8 @@ Tout se fait dans `config.json`, puis `python3 update.py` (ou `build.py` si seul
 - **ajouter un filtre du JO** : une entrée dans `jorf.filters` ; critères `title`, `section`,
   `ministry`, `path` (expressions régulières, insensibles à la casse, toutes requises) ;
 - **ajouter une série** : une entrée dans `eurostat` (code du jeu de données et filtres tels
-  qu'affichés dans le navigateur de données Eurostat) ;
+  qu'affichés dans le navigateur de données Eurostat), ou, pour une série Insee,
+  `"provider": "insee"` et son `idbank` (numéro affiché sur la page de la série) ;
 - **ajouter une page de référence ou une section de calendrier** : `reference`, `calendar`.
 
 ## Tenue dans le temps
@@ -60,7 +61,7 @@ Tout se fait dans `config.json`, puis `python3 update.py` (ou `build.py` si seul
 - **Contrôles de cohérence** (en haut de la page) : un seul gouvernement en fonction, Premier
   ministre identique entre deux pages, ministres identiques entre gouvernement et historiques,
   JO récent, Wikipédia à jour du dernier décret « relatif à la composition du Gouvernement »,
-  pages de titulaires modifiées récemment, séries Eurostat récentes, pages de référence trouvées.
+  pages de titulaires modifiées récemment, séries Eurostat et Insee récentes, pages de référence trouvées.
   Un contrôle en échec indique quel extracteur ou quelle source regarder.
 - `data/changelog.json` garde la trace des changements de titulaires détectés d'une collecte à l'autre.
 - Le JO n'est complet qu'à partir du premier jour lu (date affichée) ; conservation 400 jours.

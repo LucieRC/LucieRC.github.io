@@ -79,7 +79,16 @@
 
   "eurostat": [
     {"key": "deficit", "label": "Solde public", "unit": "% PIB", "decimals": 1, "dataset": "gov_10dd_edpt1", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "B9"}, "since": "2002"},
-    {"key": "debt_q", "label": "Dette publique (trimestrielle)", "unit": "% PIB", "decimals": 1, "dataset": "gov_10q_ggdebt", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "GD"}, "since": "2019-Q1"},
+    {
+      "key": "debt_q",
+      "label": "Dette publique (trimestrielle)",
+      "unit": "% PIB",
+      "decimals": 1,
+      "provider": "insee",
+      "idbank": "010777608",
+      "note": "Insee plutôt qu'Eurostat (gov_10q_ggdebt) : la dette trimestrielle paraît environ trois semaines plus tôt",
+      "since": "2019-Q1"
+    },
     {"key": "spending", "label": "Dépense publique", "unit": "% PIB", "decimals": 1, "dataset": "gov_10a_main", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "TE"}, "since": "2002"},
     {"key": "revenue", "label": "Recettes publiques", "unit": "% PIB", "decimals": 1, "dataset": "gov_10a_main", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "TR"}, "since": "2002"},
     {"key": "interest", "label": "Intérêts versés", "unit": "% PIB", "decimals": 1, "dataset": "gov_10a_main", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "D41PAY"}, "since": "2002"},

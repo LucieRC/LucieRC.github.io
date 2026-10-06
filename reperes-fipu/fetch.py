@@ -10,7 +10,9 @@ import argparse
 import json
 import re
 import sys
+import time
 import traceback
+import xml.etree.ElementTree as ET
 from datetime import date, datetime, timezone
 from pathlib import Path
 
@@ -25,6 +27,7 @@ DATA = ROOT / "data" / "data.json"
 JORF_STORE = ROOT / "data" / "jorf.json"
 CHANGELOG = ROOT / "data" / "changelog.json"
 EUROSTAT = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
+INSEE = "https://bdm.insee.fr/series/sdmx/data/SERIES_BDM/"
 BLOCKS = ["history", "government", "officials", "budgets", "figures", "jorf", "reference"]
 
 
@@ -395,9 +398,39 @@ def eurostat(dataset, filters, since):
     return series, d.get("updated"), d.get("label"), labels
 
 
+def insee(idbank, since, tries=3):
+    """Une série de la BDM Insee (SDMX), par son idbank. L'Insee coupe parfois les connexions
+    venant des serveurs de GitHub : on réessaie avant de déclarer la source en échec."""
+    for i in range(tries):
+        try:
+            r = requests.get(INSEE + idbank, params={"startPeriod": since}, timeout=60)
+            r.raise_for_status()
+            break
+        except requests.RequestException:
+            if i == tries - 1:
+                raise
+            time.sleep(5 * (i + 1))
+    s = next((e for e in ET.fromstring(r.content).iter() if e.tag.endswith("Series")), None)
+    if s is None:
+        raise RuntimeError(f"série Insee introuvable : {idbank}")
+    pts = sorted([o.get("TIME_PERIOD"), float(o.get("OBS_VALUE"))] for o in s
+                 if o.get("OBS_VALUE") not in (None, "", "NaN"))
+    upd = s.get("LAST_UPDATE")  # date seule : rendue comparable aux dates Eurostat
+    return pts, (upd + "T00:00:00+00:00" if upd else None), s.get("TITLE_FR", "")
+
+
 def figures(cfg):
     out = {}
     for s in cfg["eurostat"]:
+        if s.get("provider") == "insee":
+            pts, upd, title = insee(s["idbank"], s["since"])
+            if not pts:
+                raise RuntimeError(f"série vide : {s['key']}")
+            out[s["key"]] = {**{k: s.get(k) for k in ("label", "unit", "decimals", "tile")},
+                             "points": pts, "updated": upd, "source": "Insee", "dataset": s["idbank"],
+                             "dataset_label": "Banque de données macroéconomiques", "official_labels": [title],
+                             "url": f"https://www.insee.fr/fr/statistiques/serie/{s['idbank']}"}
+            continue
         series, upd, ds_label, labels = eurostat(s["dataset"], s["filters"], s["since"])
         if s.get("spread"):
             a, b = s["spread"]
@@ -409,7 +442,7 @@ def figures(cfg):
         if not pts:
             raise RuntimeError(f"série vide : {s['key']}")
         out[s["key"]] = {**{k: s.get(k) for k in ("label", "unit", "decimals", "tile")},
-                         "points": pts, "updated": upd, "dataset": s["dataset"],
+                         "points": pts, "updated": upd, "source": "Eurostat", "dataset": s["dataset"],
                          "dataset_label": ds_label, "official_labels": labels,
                          "url": f"https://ec.europa.eu/eurostat/databrowser/view/{s['dataset']}/default/table?lang=fr"}
     return out
@@ -471,7 +504,7 @@ def checks(cfg, data, jorf_store):
     for s in (B.get("figures") or {}).values():
         age = (datetime.now(timezone.utc) - datetime.fromisoformat(s["updated"])).days if s.get("updated") else 999
         if age > 400:
-            add(f"Série Eurostat « {s['label']} » mise à jour depuis moins de 400 jours", False, s.get("updated"), "warn")
+            add(f"Série {s.get('source', 'Eurostat')} « {s['label']} » mise à jour depuis moins de 400 jours", False, s.get("updated"), "warn")
     ref = B.get("reference") or {}
     if ref.get("missing"):
         add("Pages de référence trouvées", False, " ; ".join(ref["missing"]), "warn")
@@ -523,7 +556,7 @@ def run_all(only=None, progress=print):
     people = run("officials", "Titulaires des postes (Wikipédia)", off)
     run("budgets", "Budgets (Wikipédia)", lambda: budgets(cfg))
     run("reference", "Textes de référence (Wikipédia)", lambda: reference(cfg))
-    run("figures", "Chiffres (Eurostat)", lambda: figures(cfg))
+    run("figures", "Chiffres (Eurostat, Insee)", lambda: figures(cfg))
     jstore = None
 
     def jo():
