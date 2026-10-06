@@ -3183,43 +3183,43 @@
  "status": {
   "history": {
    "ok": true,
-   "fetched_at": "2026-10-06T08:48:31+00:00",
+   "fetched_at": "2026-10-06T12:11:50+00:00",
    "error": null
   },
   "government": {
    "ok": true,
-   "fetched_at": "2026-10-06T08:48:32+00:00",
+   "fetched_at": "2026-10-06T12:11:50+00:00",
    "error": null
   },
   "officials_errors": [],
   "officials": {
    "ok": true,
-   "fetched_at": "2026-10-06T08:48:43+00:00",
+   "fetched_at": "2026-10-06T12:11:54+00:00",
    "error": null
   },
   "budgets": {
    "ok": true,
-   "fetched_at": "2026-10-06T08:48:44+00:00",
+   "fetched_at": "2026-10-06T12:11:55+00:00",
    "error": null
   },
   "reference": {
    "ok": true,
-   "fetched_at": "2026-10-06T08:48:51+00:00",
+   "fetched_at": "2026-10-06T12:11:57+00:00",
    "error": null
   },
   "figures": {
    "ok": true,
-   "fetched_at": "2026-10-06T08:55:49+00:00",
+   "fetched_at": "2026-10-06T12:12:00+00:00",
    "error": null
   },
   "jorf": {
    "ok": true,
-   "fetched_at": "2026-10-06T08:48:55+00:00",
+   "fetched_at": "2026-10-06T12:12:01+00:00",
    "error": null
   }
  },
  "changelog": [],
- "generated_at": "2026-10-06T08:55:49+00:00",
+ "generated_at": "2026-10-06T12:12:01+00:00",
  "checks": [
   {
    "name": "Collecte « history »",
