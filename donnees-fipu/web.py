@@ -87,15 +87,17 @@ def etat(q):
 def resume(q):
     """Derniers chiffres des alias principaux, pour l'accueil du portail."""
     out = []
-    for a in ("deficit", "dette", "po", "depense", "interets"):
+    # dette : la trimestrielle, publiée chaque trimestre, plutôt que l'annuelle
+    for a in ("deficit", "dette_trim", "po", "depense", "interets"):
         try:
             s = donnees.serie(a).dropna()
         except KeyError:
             continue
         if len(s):
+            p = s.index[-1]
+            year_before = str(int(p[:4]) - 1) + p[4:]  # même période un an plus tôt : 2025-Q2 pour 2026-Q2
             out.append({"alias": a, "label": s.attrs["label"], "unit": s.attrs["unit"],
-                        "period": s.index[-1], "value": s.iloc[-1],
-                        "previous": s.iloc[-2] if len(s) > 1 else None})
+                        "period": p, "value": s.iloc[-1], "previous": s.get(year_before)})
     return {"figures": out}
 
 

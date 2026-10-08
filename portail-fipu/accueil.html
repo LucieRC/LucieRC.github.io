@@ -74,8 +74,9 @@ const $ = s => document.querySelector(s);
 // Version publiée (site/build.py) : l'état des outils est figé dans la page, sans bouton d'actualisation.
 const STATIC = window.FIPU_OVERVIEW || null;
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
-const NAMES = {deficit: "Solde public", dette: "Dette publique", po: "Prélèvements obligatoires", depense: "Dépense publique", interets: "Charge d'intérêts"};
+const NAMES = {deficit: "Solde public", dette: "Dette publique", dette_trim: "Dette publique", po: "Prélèvements obligatoires", depense: "Dépense publique", interets: "Charge d'intérêts"};
 const unit = u => /produit intérieur brut/i.test(u) ? "% du PIB" : u;
+const period = p => p.replace(/^(\d{4})-Q(\d)$/, "T$2 $1");
 const num = (x, d = 1) => x.toLocaleString("fr-FR", {minimumFractionDigits: d, maximumFractionDigits: d});
 const when = iso => iso ? new Date(iso).toLocaleString("fr-FR", {dateStyle: "medium", timeStyle: "short"}) : "–";
 $("#today").textContent = new Date().toLocaleDateString("fr-FR", {weekday: "long", day: "numeric", month: "long", year: "numeric"});
@@ -89,7 +90,7 @@ function tiles(o) {
     const diff = f.previous == null ? "" : f.value - f.previous;
     const pts = diff === "" ? "" : `${diff > 0 ? "+" : diff < 0 ? "−" : "±"}${num(Math.abs(diff))} pt sur un an`;
     return `<a class="tile" href="donnees/#k=${encodeURIComponent(f.alias)}" title="${esc(f.label)}">
-      <div class="n">${esc(NAMES[f.alias] || f.alias)} · ${esc(f.period)}</div>
+      <div class="n">${esc(NAMES[f.alias] || f.alias)} · ${esc(period(f.period))}</div>
       <div class="v">${num(f.value)}<small>${esc(unit(f.unit))}</small></div>
       <div class="d">${esc(pts)}</div></a>`;
   }).join("");
