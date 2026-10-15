@@ -5,12 +5,12 @@
     "rows": [
      {
       "name": "Gouvernement Raffarin I",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Raffarin_I",
+      "url": null,
       "start": "2002-05-07",
       "end": "2002-06-17",
       "pm": {
        "name": "Jean-Pierre Raffarin",
-       "url": "https://fr.wikipedia.org/wiki/Jean-Pierre_Raffarin"
+       "url": null
       },
       "party": "DL",
       "president": "Jacques Chirac",
@@ -19,12 +19,12 @@
      },
      {
       "name": "Gouvernement Raffarin II",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Raffarin_II",
+      "url": null,
       "start": "2002-06-17",
       "end": "2004-03-30",
       "pm": {
        "name": "Jean-Pierre Raffarin",
-       "url": "https://fr.wikipedia.org/wiki/Jean-Pierre_Raffarin"
+       "url": null
       },
       "party": "DL puis UMP",
       "president": "Jacques Chirac",
@@ -33,12 +33,12 @@
      },
      {
       "name": "Gouvernement Raffarin III",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Raffarin_III",
+      "url": null,
       "start": "2004-03-31",
       "end": "2005-05-31",
       "pm": {
        "name": "Jean-Pierre Raffarin",
-       "url": "https://fr.wikipedia.org/wiki/Jean-Pierre_Raffarin"
+       "url": null
       },
       "party": "UMP",
       "president": "Jacques Chirac",
@@ -47,12 +47,12 @@
      },
      {
       "name": "Gouvernement Villepin",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Villepin",
+      "url": null,
       "start": "2005-05-31",
       "end": "2007-05-15",
       "pm": {
        "name": "Dominique de Villepin",
-       "url": "https://fr.wikipedia.org/wiki/Dominique_de_Villepin"
+       "url": null
       },
       "party": "UMP",
       "president": "Jacques Chirac",
@@ -61,12 +61,12 @@
      },
      {
       "name": "Gouvernement Fillon I",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Fillon_I",
+      "url": null,
       "start": "2007-05-18",
       "end": "2007-06-18",
       "pm": {
        "name": "François Fillon",
-       "url": "https://fr.wikipedia.org/wiki/Fran%C3%A7ois_Fillon"
+       "url": null
       },
       "party": "UMP",
       "president": "Nicolas Sarkozy",
@@ -75,12 +75,12 @@
      },
      {
       "name": "Gouvernement Fillon II",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Fillon_II",
+      "url": null,
       "start": "2007-06-19",
       "end": "2010-11-13",
       "pm": {
        "name": "François Fillon",
-       "url": "https://fr.wikipedia.org/wiki/Fran%C3%A7ois_Fillon"
+       "url": null
       },
       "party": "UMP",
       "president": "Nicolas Sarkozy",
@@ -89,12 +89,12 @@
      },
      {
       "name": "Gouvernement Fillon III",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Fillon_III",
+      "url": null,
       "start": "2010-11-14",
       "end": "2012-05-10",
       "pm": {
        "name": "François Fillon",
-       "url": "https://fr.wikipedia.org/wiki/Fran%C3%A7ois_Fillon"
+       "url": null
       },
       "party": "UMP",
       "president": "Nicolas Sarkozy",
@@ -103,12 +103,12 @@
      },
      {
       "name": "Gouvernement Ayrault I",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Ayrault_I",
+      "url": null,
       "start": "2012-05-15",
       "end": "2012-06-18",
       "pm": {
        "name": "Jean-Marc Ayrault",
-       "url": "https://fr.wikipedia.org/wiki/Jean-Marc_Ayrault"
+       "url": null
       },
       "party": "PS",
       "president": "François Hollande",
@@ -117,12 +117,12 @@
      },
      {
       "name": "Gouvernement Ayrault II",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Ayrault_II",
+      "url": null,
       "start": "2012-06-21",
       "end": "2014-03-31",
       "pm": {
        "name": "Jean-Marc Ayrault",
-       "url": "https://fr.wikipedia.org/wiki/Jean-Marc_Ayrault"
+       "url": null
       },
       "party": "PS",
       "president": "François Hollande",
@@ -131,12 +131,12 @@
      },
      {
       "name": "Gouvernement Valls I",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Valls_I",
+      "url": null,
       "start": "2014-03-31",
       "end": "2014-08-25",
       "pm": {
        "name": "Manuel Valls",
-       "url": "https://fr.wikipedia.org/wiki/Manuel_Valls"
+       "url": null
       },
       "party": "PS",
       "president": "François Hollande",
@@ -145,12 +145,12 @@
      },
      {
       "name": "Gouvernement Valls II",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Valls_II",
+      "url": null,
       "start": "2014-08-26",
       "end": "2016-12-06",
       "pm": {
        "name": "Manuel Valls",
-       "url": "https://fr.wikipedia.org/wiki/Manuel_Valls"
+       "url": null
       },
       "party": "PS",
       "president": "François Hollande",
@@ -159,12 +159,12 @@
      },
      {
       "name": "Gouvernement Cazeneuve",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Cazeneuve",
+      "url": null,
       "start": "2016-12-06",
       "end": "2017-05-10",
       "pm": {
        "name": "Bernard Cazeneuve",
-       "url": "https://fr.wikipedia.org/wiki/Bernard_Cazeneuve"
+       "url": null
       },
       "party": "PS",
       "president": "François Hollande",
@@ -173,12 +173,12 @@
      },
      {
       "name": "Gouvernement Philippe I",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Philippe_I",
+      "url": null,
       "start": "2017-05-16",
       "end": "2017-06-19",
       "pm": {
        "name": "Édouard Philippe",
-       "url": "https://fr.wikipedia.org/wiki/%C3%89douard_Philippe"
+       "url": null
       },
       "party": "LR",
       "president": "Emmanuel Macron",
@@ -187,12 +187,12 @@
      },
      {
       "name": "Gouvernement Philippe II",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Philippe_II",
+      "url": null,
       "start": "2017-06-21",
       "end": "2020-07-03",
       "pm": {
        "name": "Édouard Philippe",
-       "url": "https://fr.wikipedia.org/wiki/%C3%89douard_Philippe"
+       "url": null
       },
       "party": "LR puis DVD",
       "president": "Emmanuel Macron",
@@ -201,12 +201,12 @@
      },
      {
       "name": "Gouvernement Castex",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Castex",
+      "url": null,
       "start": "2020-07-03",
       "end": "2022-05-16",
       "pm": {
        "name": "Jean Castex",
-       "url": "https://fr.wikipedia.org/wiki/Jean_Castex"
+       "url": null
       },
       "party": "DVD",
       "president": "Emmanuel Macron",
@@ -215,12 +215,12 @@
      },
      {
       "name": "Gouvernement Borne",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Borne",
+      "url": null,
       "start": "2022-05-16",
       "end": "2022-06-19",
       "pm": {
        "name": "Élisabeth Borne",
-       "url": "https://fr.wikipedia.org/wiki/%C3%89lisabeth_Borne"
+       "url": null
       },
       "party": "LREM - TdP , RE",
       "president": "Emmanuel Macron",
@@ -229,12 +229,12 @@
      },
      {
       "name": "Gouvernement Borne",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Borne",
+      "url": null,
       "start": "2022-06-20",
       "end": "2024-01-09",
       "pm": {
        "name": "Élisabeth Borne",
-       "url": "https://fr.wikipedia.org/wiki/%C3%89lisabeth_Borne"
+       "url": null
       },
       "party": "LREM - TdP , RE",
       "president": "Emmanuel Macron",
@@ -243,12 +243,12 @@
      },
      {
       "name": "Gouvernement Attal",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Attal",
+      "url": null,
       "start": "2024-01-09",
       "end": "2024-09-05",
       "pm": {
        "name": "Gabriel Attal",
-       "url": "https://fr.wikipedia.org/wiki/Gabriel_Attal"
+       "url": null
       },
       "party": "RE",
       "president": "Emmanuel Macron",
@@ -257,12 +257,12 @@
      },
      {
       "name": "Gouvernement Barnier",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Barnier",
+      "url": null,
       "start": "2024-09-05",
       "end": "2024-12-13",
       "pm": {
        "name": "Michel Barnier",
-       "url": "https://fr.wikipedia.org/wiki/Michel_Barnier"
+       "url": null
       },
       "party": "LR",
       "president": "Emmanuel Macron",
@@ -271,12 +271,12 @@
      },
      {
       "name": "Gouvernement Bayrou",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Bayrou",
+      "url": null,
       "start": "2024-12-13",
       "end": "2025-09-09",
       "pm": {
        "name": "François Bayrou",
-       "url": "https://fr.wikipedia.org/wiki/Fran%C3%A7ois_Bayrou"
+       "url": null
       },
       "party": "MoDem",
       "president": "Emmanuel Macron",
@@ -285,12 +285,12 @@
      },
      {
       "name": "Gouvernement Lecornu I",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Lecornu_I",
+      "url": null,
       "start": "2025-09-09",
       "end": "2025-10-10",
       "pm": {
        "name": "Sébastien Lecornu",
-       "url": "https://fr.wikipedia.org/wiki/S%C3%A9bastien_Lecornu"
+       "url": null
       },
       "party": "RE",
       "president": "Emmanuel Macron",
@@ -299,12 +299,12 @@
      },
      {
       "name": "Gouvernement Lecornu II",
-      "url": "https://fr.wikipedia.org/wiki/Gouvernement_Lecornu_II",
+      "url": null,
       "start": "2025-10-10",
       "end": null,
       "pm": {
        "name": "Sébastien Lecornu",
-       "url": "https://fr.wikipedia.org/wiki/S%C3%A9bastien_Lecornu"
+       "url": null
       },
       "party": "RE",
       "president": "Emmanuel Macron",
@@ -319,7 +319,7 @@
     "rows": [
      {
       "name": "Francis Mer",
-      "url": "https://fr.wikipedia.org/wiki/Francis_Mer",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de l'Industrie",
       "party": "DVD",
       "gov": "Raffarin I",
@@ -328,7 +328,7 @@
      },
      {
       "name": "Francis Mer",
-      "url": "https://fr.wikipedia.org/wiki/Francis_Mer",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de l'Industrie",
       "party": "DVD",
       "gov": "Raffarin II",
@@ -337,7 +337,7 @@
      },
      {
       "name": "Nicolas Sarkozy",
-      "url": "https://fr.wikipedia.org/wiki/Nicolas_Sarkozy",
+      "url": null,
       "title": "Ministre d'État, ministre de l'Économie, des Finances et de l'Industrie",
       "party": "UMP",
       "gov": "Raffarin III",
@@ -346,7 +346,7 @@
      },
      {
       "name": "Hervé Gaymard",
-      "url": "https://fr.wikipedia.org/wiki/Herv%C3%A9_Gaymard",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de l'Industrie",
       "party": "UMP",
       "gov": "Raffarin III",
@@ -355,7 +355,7 @@
      },
      {
       "name": "Thierry Breton",
-      "url": "https://fr.wikipedia.org/wiki/Thierry_Breton",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de l'Industrie",
       "party": "UMP",
       "gov": "Raffarin III",
@@ -364,7 +364,7 @@
      },
      {
       "name": "Thierry Breton",
-      "url": "https://fr.wikipedia.org/wiki/Thierry_Breton",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de l'Industrie",
       "party": "UMP",
       "gov": "Villepin",
@@ -373,7 +373,7 @@
      },
      {
       "name": "Jean-Louis Borloo",
-      "url": "https://fr.wikipedia.org/wiki/Jean-Louis_Borloo",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de l'Emploi",
       "party": "UMP",
       "gov": "Fillon I",
@@ -382,7 +382,7 @@
      },
      {
       "name": "Christine Lagarde",
-      "url": "https://fr.wikipedia.org/wiki/Christine_Lagarde",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de l'Emploi",
       "party": "UMP",
       "gov": "Fillon II",
@@ -391,7 +391,7 @@
      },
      {
       "name": "Christine Lagarde",
-      "url": "https://fr.wikipedia.org/wiki/Christine_Lagarde",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de l'Industrie",
       "party": "UMP",
       "gov": "Fillon III",
@@ -400,7 +400,7 @@
      },
      {
       "name": "François Baroin",
-      "url": "https://fr.wikipedia.org/wiki/Fran%C3%A7ois_Baroin",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de l'Industrie",
       "party": "UMP",
       "gov": "Fillon III",
@@ -409,7 +409,7 @@
      },
      {
       "name": "Pierre Moscovici",
-      "url": "https://fr.wikipedia.org/wiki/Pierre_Moscovici",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et du Commerce extérieur",
       "party": "PS",
       "gov": "Ayrault I",
@@ -418,7 +418,7 @@
      },
      {
       "name": "Pierre Moscovici",
-      "url": "https://fr.wikipedia.org/wiki/Pierre_Moscovici",
+      "url": null,
       "title": "Ministre de l'Économie et des Finances",
       "party": "PS",
       "gov": "Ayrault II",
@@ -427,7 +427,7 @@
      },
      {
       "name": "Michel Sapin",
-      "url": "https://fr.wikipedia.org/wiki/Michel_Sapin",
+      "url": null,
       "title": "Ministre des Finances et des Comptes publics",
       "party": "PS",
       "gov": "Valls I",
@@ -436,7 +436,7 @@
      },
      {
       "name": "Arnaud Montebourg",
-      "url": "https://fr.wikipedia.org/wiki/Arnaud_Montebourg",
+      "url": null,
       "title": "Ministre de l'Économie, du Redressement productif et du Numérique",
       "party": "PS",
       "gov": "Valls I",
@@ -445,7 +445,7 @@
      },
      {
       "name": "Michel Sapin",
-      "url": "https://fr.wikipedia.org/wiki/Michel_Sapin",
+      "url": null,
       "title": "Ministre des Finances et des Comptes publics",
       "party": "PS",
       "gov": "Valls II",
@@ -454,7 +454,7 @@
      },
      {
       "name": "Emmanuel Macron",
-      "url": "https://fr.wikipedia.org/wiki/Emmanuel_Macron",
+      "url": null,
       "title": "Ministre de l'Économie, de l'Industrie et du Numérique",
       "party": "DVG , EM",
       "gov": "Valls II",
@@ -463,7 +463,7 @@
      },
      {
       "name": "Michel Sapin",
-      "url": "https://fr.wikipedia.org/wiki/Michel_Sapin",
+      "url": null,
       "title": "Ministre de l'Économie et des Finances",
       "party": "PS",
       "gov": "Valls II",
@@ -472,7 +472,7 @@
      },
      {
       "name": "Michel Sapin",
-      "url": "https://fr.wikipedia.org/wiki/Michel_Sapin",
+      "url": null,
       "title": "Ministre de l'Économie et des Finances",
       "party": "PS",
       "gov": "Cazeneuve",
@@ -481,7 +481,7 @@
      },
      {
       "name": "Bruno Le Maire",
-      "url": "https://fr.wikipedia.org/wiki/Bruno_Le_Maire",
+      "url": null,
       "title": "Ministre de l'Économie",
       "party": "LR",
       "gov": "Philippe I",
@@ -490,7 +490,7 @@
      },
      {
       "name": "Bruno Le Maire",
-      "url": "https://fr.wikipedia.org/wiki/Bruno_Le_Maire",
+      "url": null,
       "title": "Ministre de l'Économie et des Finances",
       "party": "LREM/RE",
       "gov": "Philippe II",
@@ -499,7 +499,7 @@
      },
      {
       "name": "Bruno Le Maire",
-      "url": "https://fr.wikipedia.org/wiki/Bruno_Le_Maire",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de la Relance",
       "party": "LREM/RE",
       "gov": "Castex",
@@ -508,7 +508,7 @@
      },
      {
       "name": "Bruno Le Maire",
-      "url": "https://fr.wikipedia.org/wiki/Bruno_Le_Maire",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de la Souveraineté industrielle et numérique",
       "party": "LREM/RE",
       "gov": "Borne",
@@ -517,7 +517,7 @@
      },
      {
       "name": "Bruno Le Maire",
-      "url": "https://fr.wikipedia.org/wiki/Bruno_Le_Maire",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de la Souveraineté industrielle et numérique",
       "party": "LREM/RE",
       "gov": "Attal",
@@ -526,7 +526,7 @@
      },
      {
       "name": "Antoine Armand",
-      "url": "https://fr.wikipedia.org/wiki/Antoine_Armand",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de l'Industrie",
       "party": "RE",
       "gov": "Barnier",
@@ -535,7 +535,7 @@
      },
      {
       "name": "Éric Lombard",
-      "url": "https://fr.wikipedia.org/wiki/%C3%89ric_Lombard",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances, de l'Industrie et de la Souveraineté industrielle et numérique",
       "party": "SE",
       "gov": "Bayrou",
@@ -544,7 +544,7 @@
      },
      {
       "name": "Roland Lescure",
-      "url": "https://fr.wikipedia.org/wiki/Roland_Lescure",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de la Souveraineté industrielle et énergétique",
       "party": "RE",
       "gov": "Lecornu I",
@@ -553,7 +553,7 @@
      },
      {
       "name": "Roland Lescure",
-      "url": "https://fr.wikipedia.org/wiki/Roland_Lescure",
+      "url": null,
       "title": "Ministre de l'Économie, des Finances et de la Souveraineté industrielle, énergétique et numérique",
       "party": "RE",
       "gov": "Lecornu II",
@@ -568,7 +568,7 @@
     "rows": [
      {
       "name": "Alain Lambert",
-      "url": "https://fr.wikipedia.org/wiki/Alain_Lambert_(homme_politique)",
+      "url": null,
       "title": "Ministre délégué au Budget",
       "full_rank": false,
       "boss": "Francis Mer",
@@ -578,7 +578,7 @@
      },
      {
       "name": "Alain Lambert",
-      "url": "https://fr.wikipedia.org/wiki/Alain_Lambert_(homme_politique)",
+      "url": null,
       "title": "Ministre délégué au Budget et à la Réforme budgétaire",
       "full_rank": false,
       "boss": "Francis Mer",
@@ -588,7 +588,7 @@
      },
      {
       "name": "Dominique Bussereau",
-      "url": "https://fr.wikipedia.org/wiki/Dominique_Bussereau",
+      "url": null,
       "title": "Secrétaire d'État au Budget et à la Réforme budgétaire",
       "full_rank": false,
       "boss": "Nicolas Sarkozy",
@@ -598,7 +598,7 @@
      },
      {
       "name": "Jean-François Copé",
-      "url": "https://fr.wikipedia.org/wiki/Jean-Fran%C3%A7ois_Cop%C3%A9",
+      "url": null,
       "title": "Ministre délégué au Budget et à la Réforme budgétaire, porte-parole du Gouvernement",
       "full_rank": false,
       "boss": "Hervé Gaymard",
@@ -608,7 +608,7 @@
      },
      {
       "name": "Jean-François Copé",
-      "url": "https://fr.wikipedia.org/wiki/Jean-Fran%C3%A7ois_Cop%C3%A9",
+      "url": null,
       "title": "Ministre délégué au Budget et à la Réforme budgétaire, porte-parole du Gouvernement",
       "full_rank": false,
       "boss": "Thierry Breton",
@@ -618,7 +618,7 @@
      },
      {
       "name": "Jean-François Copé",
-      "url": "https://fr.wikipedia.org/wiki/Jean-Fran%C3%A7ois_Cop%C3%A9",
+      "url": null,
       "title": "Ministre délégué au Budget et à la Réforme de l'État, porte-parole du Gouvernement",
       "full_rank": false,
       "boss": "Thierry Breton",
@@ -628,7 +628,7 @@
      },
      {
       "name": "Éric Woerth",
-      "url": "https://fr.wikipedia.org/wiki/%C3%89ric_Woerth",
+      "url": null,
       "title": "Ministre du Budget, des Comptes publics et de la Fonction publique (MBCPFP)",
       "full_rank": true,
       "boss": null,
@@ -638,7 +638,7 @@
      },
      {
       "name": "Éric Woerth",
-      "url": "https://fr.wikipedia.org/wiki/%C3%89ric_Woerth",
+      "url": null,
       "title": "Ministre du Budget, des Comptes publics et de la Fonction publique (MBCPFP)",
       "full_rank": true,
       "boss": null,
@@ -648,7 +648,7 @@
      },
      {
       "name": "Éric Woerth",
-      "url": "https://fr.wikipedia.org/wiki/%C3%89ric_Woerth",
+      "url": null,
       "title": "Ministre du Budget, des Comptes publics, de la Fonction publique et de la Réforme de l'État",
       "full_rank": true,
       "boss": null,
@@ -658,7 +658,7 @@
      },
      {
       "name": "François Baroin",
-      "url": "https://fr.wikipedia.org/wiki/Fran%C3%A7ois_Baroin",
+      "url": null,
       "title": "Ministre du Budget, des Comptes publics et de la Réforme de l'État",
       "full_rank": true,
       "boss": null,
@@ -668,7 +668,7 @@
      },
      {
       "name": "François Baroin",
-      "url": "https://fr.wikipedia.org/wiki/Fran%C3%A7ois_Baroin",
+      "url": null,
       "title": "Ministre du Budget, des Comptes publics, de la Fonction publique et de la Réforme de l'État, porte-parole du Gouvernement",
       "full_rank": true,
       "boss": null,
@@ -678,7 +678,7 @@
      },
      {
       "name": "Valérie Pécresse",
-      "url": "https://fr.wikipedia.org/wiki/Val%C3%A9rie_P%C3%A9cresse",
+      "url": null,
       "title": "Ministre du Budget, des Comptes publics et de la Réforme de l'État, porte-parole du Gouvernement",
       "full_rank": true,
       "boss": null,
@@ -688,7 +688,7 @@
      },
      {
       "name": "Jérôme Cahuzac",
-      "url": "https://fr.wikipedia.org/wiki/J%C3%A9r%C3%B4me_Cahuzac",
+      "url": null,
       "title": "Ministre délégué chargé du Budget",
       "full_rank": false,
       "boss": "Pierre Moscovici",
@@ -698,7 +698,7 @@
      },
      {
       "name": "Jérôme Cahuzac",
-      "url": "https://fr.wikipedia.org/wiki/J%C3%A9r%C3%B4me_Cahuzac",
+      "url": null,
       "title": "Ministre délégué chargé du Budget",
       "full_rank": false,
       "boss": "Pierre Moscovici",
@@ -708,7 +708,7 @@
      },
      {
       "name": "Bernard Cazeneuve",
-      "url": "https://fr.wikipedia.org/wiki/Bernard_Cazeneuve",
+      "url": null,
       "title": "Ministre délégué chargé du Budget",
       "full_rank": false,
       "boss": "Pierre Moscovici",
@@ -718,7 +718,7 @@
      },
      {
       "name": "Christian Eckert (à partir du 09/04/2014)",
-      "url": "https://fr.wikipedia.org/wiki/Christian_Eckert",
+      "url": null,
       "title": "Secrétaire d'État chargé du Budget",
       "full_rank": false,
       "boss": "Michel Sapin",
@@ -728,7 +728,7 @@
      },
      {
       "name": "Christian Eckert (à partir du 09/04/2014)",
-      "url": "https://fr.wikipedia.org/wiki/Christian_Eckert",
+      "url": null,
       "title": "Secrétaire d'État chargé du Budget",
       "full_rank": false,
       "boss": "Michel Sapin",
@@ -738,7 +738,7 @@
      },
      {
       "name": "Christian Eckert (à partir du 09/04/2014)",
-      "url": "https://fr.wikipedia.org/wiki/Christian_Eckert",
+      "url": null,
       "title": "Secrétaire d'État chargé du Budget",
       "full_rank": false,
       "boss": "Michel Sapin",
@@ -748,7 +748,7 @@
      },
      {
       "name": "Gérald Darmanin",
-      "url": "https://fr.wikipedia.org/wiki/G%C3%A9rald_Darmanin",
+      "url": null,
       "title": "Ministre de l'Action et des Comptes publics",
       "full_rank": true,
       "boss": null,
@@ -758,7 +758,7 @@
      },
      {
       "name": "Olivier Dussopt",
-      "url": "https://fr.wikipedia.org/wiki/Olivier_Dussopt",
+      "url": null,
       "title": "Ministre délégué chargé des Comptes publics",
       "full_rank": false,
       "boss": "Bruno Le Maire",
@@ -768,7 +768,7 @@
      },
      {
       "name": "Gabriel Attal",
-      "url": "https://fr.wikipedia.org/wiki/Gabriel_Attal",
+      "url": null,
       "title": "Ministre délégué chargé des Comptes publics",
       "full_rank": false,
       "boss": "Bruno Le Maire",
@@ -778,7 +778,7 @@
      },
      {
       "name": "Thomas Cazenave",
-      "url": "https://fr.wikipedia.org/wiki/Thomas_Cazenave",
+      "url": null,
       "title": "Ministre délégué chargé des Comptes publics",
       "full_rank": false,
       "boss": "Bruno Le Maire",
@@ -788,7 +788,7 @@
      },
      {
       "name": "Thomas Cazenave",
-      "url": "https://fr.wikipedia.org/wiki/Thomas_Cazenave",
+      "url": null,
       "title": "Ministre délégué chargé des Comptes publics",
       "full_rank": false,
       "boss": "Bruno Le Maire",
@@ -798,7 +798,7 @@
      },
      {
       "name": "Laurent Saint-Martin",
-      "url": "https://fr.wikipedia.org/wiki/Laurent_Saint-Martin",
+      "url": null,
       "title": "Ministre auprès du Premier ministre, chargé du Budget et des Comptes publics",
       "full_rank": false,
       "boss": "Michel Barnier",
@@ -808,7 +808,7 @@
      },
      {
       "name": "Amélie de Montchalin",
-      "url": "https://fr.wikipedia.org/wiki/Am%C3%A9lie_de_Montchalin",
+      "url": null,
       "title": "Ministre chargée des Comptes publics",
       "full_rank": false,
       "boss": "Éric Lombard",
@@ -818,7 +818,7 @@
      },
      {
       "name": "Amélie de Montchalin",
-      "url": "https://fr.wikipedia.org/wiki/Am%C3%A9lie_de_Montchalin",
+      "url": null,
       "title": "Ministre des Comptes publics",
       "full_rank": true,
       "boss": null,
@@ -828,7 +828,7 @@
      },
      {
       "name": "Amélie de Montchalin",
-      "url": "https://fr.wikipedia.org/wiki/Am%C3%A9lie_de_Montchalin",
+      "url": null,
       "title": "Ministre de l'Action et des Comptes publics",
       "full_rank": true,
       "boss": null,
@@ -838,7 +838,7 @@
      },
      {
       "name": "David Amiel",
-      "url": "https://fr.wikipedia.org/wiki/David_Amiel",
+      "url": null,
       "title": "Ministre de l'Action et des Comptes publics",
       "full_rank": true,
       "boss": null,
@@ -1209,7 +1209,7 @@
     "group": "Exécutif",
     "source": "https://fr.wikipedia.org/wiki/Premier_ministre_français",
     "page_updated": "2026-10-08T12:19:32Z",
-    "bio": "Sébastien Lecornu , né le 11 juin 1986 à Eaubonne (Val-d'Oise), est un homme d'État français, Premier ministre depuis le 9 septembre 2025.\nD'abord membre de l'Union pour un mouvement populaire (UMP) puis des Républicains (LR), il est maire de Vernon entre 2014 et 2015, premier vice-président de la communauté d'agglomération des Portes de l'Eure puis de Seine Normandie Agglomération de 2014 à 2020, ainsi que président du conseil départemental de l'Eure de 2015 à 2017 et de 2021 à 2022.",
+    "bio": "Sébastien Lecornu , né le 11 juin 1986 à Eaubonne (Val-d'Oise), est un homme d'État français, Premier ministre depuis le 9 septembre 2025.\n\nD'abord membre de l'Union pour un mouvement populaire (UMP) puis des Républicains (LR), il est maire de Vernon entre 2014 et 2015, premier vice-président de la communauté d'agglomération des Portes de l'Eure puis de Seine Normandie Agglomération de 2014 à 2020, ainsi que président du conseil départemental de l'Eure de 2015 à 2017 et de 2021 à 2022.",
     "photo": "data:image/jpeg;base64,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"
    },
    {
@@ -1237,7 +1237,7 @@
     "group": "Exécutif",
     "source": "https://fr.wikipedia.org/wiki/Gouvernement_Lecornu_II",
     "page_updated": "2026-09-23T06:51:46Z",
-    "bio": "David Amiel ([david‿ amjɛl]), né le 28 novembre 1992 à Paris, est un homme politique français.\nMembre de Renaissance, il est élu député dans la treizième circonscription de Paris en 2022.",
+    "bio": "David Amiel ([david‿ amjɛl]), né le 28 novembre 1992 à Paris, est un homme politique français.\n\nMembre de Renaissance, il est élu député dans la treizième circonscription de Paris en 2022.",
     "photo": "data:image/jpeg;base64,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"
    },
    {
@@ -1265,16 +1265,14 @@
    },
    {
     "name": "Amélie de Montchalin",
-    "url": "https://fr.wikipedia.org/wiki/Am%C3%A9lie_de_Montchalin",
+    "url": null,
     "since": "2026-02-23",
     "page": "Liste des premiers présidents de la Cour des comptes",
     "key": "ccomptes",
     "label": "Premier président de la Cour des comptes",
     "group": "Contrôle",
     "source": "https://fr.wikipedia.org/wiki/Liste_des_premiers_présidents_de_la_Cour_des_comptes",
-    "page_updated": "2026-08-09T23:47:17Z",
-    "bio": "Amélie de Montchalin, née Bommier le 19 juin 1985 à Lyon 8e, est une femme politique française.\nÉconomiste de formation, elle travaille deux ans dans le secteur privé pour Axa, avant de s'engager en politique en décembre 2016 avec En Marche.",
-    "photo": "data:image/jpeg;base64,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"
+    "page_updated": "2026-08-09T23:47:17Z"
    },
    {
     "name": "Emmanuel Moulin",
@@ -1286,7 +1284,7 @@
     "group": "Contrôle",
     "source": "https://fr.wikipedia.org/wiki/Banque_de_France",
     "page_updated": "2026-09-18T04:32:21Z",
-    "bio": "Emmanuel Moulin, né le 22 octobre 1968 à Versailles (Yvelines), est un haut fonctionnaire français.\nDirecteur du Trésor de 2020 à 2024 puis directeur de cabinet du Premier ministre Gabriel Attal en 2024, il est secrétaire général de la présidence de la République du 15 avril 2025 au 4 mai 2026.",
+    "bio": "Emmanuel Moulin, né le 22 octobre 1968 à Versailles (Yvelines), est un haut fonctionnaire français.\n\nDirecteur du Trésor de 2020 à 2024 puis directeur de cabinet du Premier ministre Gabriel Attal en 2024, il est secrétaire général de la présidence de la République du 15 avril 2025 au 4 mai 2026.",
     "photo": "data:image/jpeg;base64,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"
    },
    {
@@ -1312,7 +1310,7 @@
     "group": "Parlement",
     "source": "https://fr.wikipedia.org/wiki/Commission_des_Finances_(Assemblée_nationale)",
     "page_updated": "2026-09-12T09:30:00Z",
-    "bio": "Éric Coquerel, né le 30 décembre 1958 à Courbevoie (Seine), est un homme politique français.\nMilitant à la Ligue communiste révolutionnaire de 1983 à 1998, il rejoint d'autres mouvements jusqu'à la création du Parti de gauche dont il est coordinateur de 2014 à 2021.",
+    "bio": "Éric Coquerel, né le 30 décembre 1958 à Courbevoie (Seine), est un homme politique français.\n\nMilitant à la Ligue communiste révolutionnaire de 1983 à 1998, il rejoint d'autres mouvements jusqu'à la création du Parti de gauche dont il est coordinateur de 2014 à 2021.",
     "photo": "data:image/jpeg;base64,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"
    },
    {
@@ -1325,7 +1323,7 @@
     "group": "Parlement",
     "source": "https://fr.wikipedia.org/wiki/Commission_des_Finances_(Assemblée_nationale)",
     "page_updated": "2026-09-12T09:30:00Z",
-    "bio": "Philippe Juvin , né le 1er février 1964 à Orléans (Loiret), est professeur de médecine, médecin anesthésiste-réanimateur et homme politique français, membre du parti Les Républicains.\nPhilippe Juvin est maire de La Garenne-Colombes de 2001 à 2022, député européen de 2009 à 2019 et porte-parole de la délégation française au sein du groupe du Parti populaire européen.",
+    "bio": "Philippe Juvin , né le 1er février 1964 à Orléans (Loiret), est professeur de médecine, médecin anesthésiste-réanimateur et homme politique français, membre du parti Les Républicains.\n\nPhilippe Juvin est maire de La Garenne-Colombes de 2001 à 2022, député européen de 2009 à 2019 et porte-parole de la délégation française au sein du groupe du Parti populaire européen.",
     "photo": "data:image/jpeg;base64,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"
    },
    {
@@ -1351,7 +1349,7 @@
     "group": "Parlement",
     "source": "https://fr.wikipedia.org/wiki/Commission_des_Finances_(Sénat)",
     "page_updated": "2026-02-06T14:20:27Z",
-    "bio": "Claude Raynal, né le 10 octobre 1957 à Toulouse (Haute-Garonne), est un homme politique français, membre du Parti socialiste.\nMaire de Tournefeuille entre 1997 et 2015, il est élu sénateur de 2014 à 2026 et préside la commission des finances du Sénat de 2020 à 2026.",
+    "bio": "Claude Raynal, né le 10 octobre 1957 à Toulouse (Haute-Garonne), est un homme politique français, membre du Parti socialiste.\n\nMaire de Tournefeuille entre 1997 et 2015, il est élu sénateur de 2014 à 2026 et préside la commission des finances du Sénat de 2020 à 2026.",
     "photo": "data:image/jpeg;base64,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"
    },
    {
@@ -1364,7 +1362,7 @@
     "group": "Parlement",
     "source": "https://fr.wikipedia.org/wiki/Commission_des_Finances_(Sénat)",
     "page_updated": "2026-02-06T14:20:27Z",
-    "bio": "Jean-François Husson, né le 17 avril 1961, est un homme politique français.\nSénateur de Meurthe-et-Moselle depuis 2011, siégeant d'abord sans groupe puis au sein du groupe UMP/REP, il est rapporteur général du budget du Sénat de 2020 à 2026."
+    "bio": "Jean-François Husson, né le 17 avril 1961, est un homme politique français.\n\nSénateur de Meurthe-et-Moselle depuis 2011, siégeant d'abord sans groupe puis au sein du groupe UMP/REP, il est rapporteur général du budget du Sénat de 2020 à 2026."
    }
   ],
   "budgets": [
@@ -1405,7 +1403,7 @@
       {
        "page": "Article 49 de la Constitution de la Cinquième République française",
        "url": "https://fr.wikipedia.org/wiki/Article_49_de_la_Constitution_de_la_Cinquième_République_française",
-       "extract": "L'article 49 de la Constitution de la Cinquième République française fait partie du Titre V de la Constitution française du 4 octobre 1958 : « Des rapports entre le Parlement et le Gouvernement » (articles 34 à 51). Il organise la responsabilité politique du Gouvernement devant le Parlement. En cela, il donne à la Constitution de la Cinquième République un des traits principaux d'un régime parlementaire. Il s'agit cependant d'un parlementarisme rationalisé, c’est-à-dire cherchant à assurer la stabilité du gouvernement. Il réutilise, en les renforçant, des éléments déjà présents dans la Constitution de la IVe République et introduit, par son alinéa 3, une disposition originale, sans équivalent dans des constitutions antérieures ou à l'étranger, et fournissant une arme très puissante au Gouvernement. Ces dispositions visent à apporter au pays la stabilité gouvernementale qui lui faisait défaut en protégeant le Gouvernement de majorités de circonstance qui défaisaient les gouvernements au gré des alliances, tout en étant incapables de proposer une alternative.\nL'article comprend quatre alinéas et constitue l'un des éléments forts pour éviter les crises ministérielles, telles que la France les a connues sous la IVe République. Il organise :\n\nl'engagement de responsabilité sur un programme ou une déclaration de politique générale (distinct de la « question de confiance », qui a disparu sous la Cinquième République) à l'initiative du Gouvernement (alinéa 1) ;\nla motion de censure à l'initiative de l'Assemblée nationale (alinéa 2) ;\nl'engagement de responsabilité sur un texte, qui permet au Gouvernement de forcer l'adoption d'un texte, sauf si l'Assemblée est prête à le renverser par le biais de la motion de censure (alinéa 3) ;\nla possibilité enfin pour le Gouvernement de demander l'approbation de sa politique par le Sénat, cette dernière ou son refus éventuel étant dépourvus d'effets juridiques (alinéa 4).\nL'article 49 alinéa 2, dit de « censure spontanée » (par opposition à l'alinéa suivant, où la censure est en quelque sorte « provoquée » par le Gouvernement), qui impose l'adoption de la motion par la majorité absolue des membres, change la charge de la preuve et force l'Assemblée à démontrer qu'il y a un rejet effectif du Gouvernement en explicitant les causes dans le texte de la motion. Le Gouvernement ne peut être renversé avec le concours d'indécis qui se contenteraient de s'abstenir. L'article 49 alinéa 2 n'a abouti qu'une seule fois, en octobre 1962 contre le premier gouvernement Georges Pompidou, qui a été aussitôt reconduit et soutenu par une nouvelle majorité issue d'élections législatives anticipées après la dissolution parlementaire décidée par le président Charles de Gaulle.\nL'article 49 alinéa 3, dit de « censure provoquée », permet au Gouvernement, au cours des débats sur un texte qu’il présente, d’engager sa responsabilité. Le texte est alors considéré comme adopté en l’absence de vote, sauf si une motion de censure est déposée contre le Gouvernement dans les 24 heures, dans les mêmes conditions que celles prévues au deuxième alinéa. Une telle motion doit être déposée par un dixième au moins des députés et n’est adoptée que si elle est votée par la majorité absolue de l'Assemblée nationale. L’adoption de la motion entraîne à la fois la démission du Gouvernement et le rejet du texte. Cette pratique a été utilisée une centaine de fois depuis 1958, le second gouvernement de Michel Rocard étant celui qui l'a le plus utilisé (28 fois), devant celui d'Élisabeth Borne (23 fois).\nLes articles 50 et 51 lui sont directement rattachés, apportant pour l'article 50 un complément essentiel à l'alinéa 2 et pour l'article 51 une précision technique sur l'alinéa 3, tandis que l'article 50-1 prévoit la possibilité pour le Gouvernement de faire une déclaration suivie d'un débat.",
+       "extract": "L'article 49 de la Constitution de la Cinquième République française fait partie du Titre V de la Constitution française du 4 octobre 1958 : « Des rapports entre le Parlement et le Gouvernement » (articles 34 à 51). Il organise la responsabilité politique du Gouvernement devant le Parlement. En cela, il donne à la Constitution de la Cinquième République un des traits principaux d'un régime parlementaire. Il s'agit cependant d'un parlementarisme rationalisé, c’est-à-dire cherchant à assurer la stabilité du gouvernement. Il réutilise, en les renforçant, des éléments déjà présents dans la Constitution de la IVe République et introduit, par son alinéa 3, une disposition originale, sans équivalent dans des constitutions antérieures ou à l'étranger, et fournissant une arme très puissante au Gouvernement. Ces dispositions visent à apporter au pays la stabilité gouvernementale qui lui faisait défaut en protégeant le Gouvernement de majorités de circonstance qui défaisaient les gouvernements au gré des alliances, tout en étant incapables de proposer une alternative.\n\nL'article comprend quatre alinéas et constitue l'un des éléments forts pour éviter les crises ministérielles, telles que la France les a connues sous la IVe République. Il organise :\nl'engagement de responsabilité sur un programme ou une déclaration de politique générale (distinct de la « question de confiance », qui a disparu sous la Cinquième République) à l'initiative du Gouvernement (alinéa 1) ;\nla motion de censure à l'initiative de l'Assemblée nationale (alinéa 2) ;\nl'engagement de responsabilité sur un texte, qui permet au Gouvernement de forcer l'adoption d'un texte, sauf si l'Assemblée est prête à le renverser par le biais de la motion de censure (alinéa 3) ;\nla possibilité enfin pour le Gouvernement de demander l'approbation de sa politique par le Sénat, cette dernière ou son refus éventuel étant dépourvus d'effets juridiques (alinéa 4).\n\nL'article 49 alinéa 2, dit de « censure spontanée » (par opposition à l'alinéa suivant, où la censure est en quelque sorte « provoquée » par le Gouvernement), qui impose l'adoption de la motion par la majorité absolue des membres, change la charge de la preuve et force l'Assemblée à démontrer qu'il y a un rejet effectif du Gouvernement en explicitant les causes dans le texte de la motion. Le Gouvernement ne peut être renversé avec le concours d'indécis qui se contenteraient de s'abstenir. L'article 49 alinéa 2 n'a abouti qu'une seule fois, en octobre 1962 contre le premier gouvernement Georges Pompidou, qui a été aussitôt reconduit et soutenu par une nouvelle majorité issue d'élections législatives anticipées après la dissolution parlementaire décidée par le président Charles de Gaulle.\n\nL'article 49 alinéa 3, dit de « censure provoquée », permet au Gouvernement, au cours des débats sur un texte qu’il présente, d’engager sa responsabilité. Le texte est alors considéré comme adopté en l’absence de vote, sauf si une motion de censure est déposée contre le Gouvernement dans les 24 heures, dans les mêmes conditions que celles prévues au deuxième alinéa. Une telle motion doit être déposée par un dixième au moins des députés et n’est adoptée que si elle est votée par la majorité absolue de l'Assemblée nationale. L’adoption de la motion entraîne à la fois la démission du Gouvernement et le rejet du texte. Cette pratique a été utilisée une centaine de fois depuis 1958, le second gouvernement de Michel Rocard étant celui qui l'a le plus utilisé (28 fois), devant celui d'Élisabeth Borne (23 fois).\n\nLes articles 50 et 51 lui sont directement rattachés, apportant pour l'article 50 un complément essentiel à l'alinéa 2 et pour l'article 51 une précision technique sur l'alinéa 3, tandis que l'article 50-1 prévoit la possibilité pour le Gouvernement de faire une déclaration suivie d'un débat.",
        "page_updated": "2026-10-03T15:45:57Z"
       }
      ]
@@ -1416,7 +1414,7 @@
       {
        "page": "Loi organique relative aux lois de finances",
        "url": "https://fr.wikipedia.org/wiki/Loi_organique_relative_aux_lois_de_finances",
-       "extract": "La loi organique relative aux lois de finances (abrégée en LOLF) est un texte juridique qui fixe le cadre des lois de finances en France.\nEn tant que loi organique, elle a une valeur supérieure à la loi ordinaire ; dans une certaine mesure, elle a aussi une valeur supérieure aux autres lois organiques. Parfois qualifiée de « Constitution financière », elle remplace le précédent cadre juridique, datant de 1959, et vise à moderniser la gestion de l'État.\nPromulguée le 1er août 2001 et entrée en vigueur par étapes, elle s'applique à toute l'administration depuis 2006.",
+       "extract": "La loi organique relative aux lois de finances (abrégée en LOLF) est un texte juridique qui fixe le cadre des lois de finances en France.\n\nEn tant que loi organique, elle a une valeur supérieure à la loi ordinaire ; dans une certaine mesure, elle a aussi une valeur supérieure aux autres lois organiques. Parfois qualifiée de « Constitution financière », elle remplace le précédent cadre juridique, datant de 1959, et vise à moderniser la gestion de l'État.\n\nPromulguée le 1er août 2001 et entrée en vigueur par étapes, elle s'applique à toute l'administration depuis 2006.",
        "page_updated": "2026-04-21T11:58:38Z"
       },
       {
@@ -1428,7 +1426,7 @@
       {
        "page": "Loi de financement de la Sécurité sociale",
        "url": "https://fr.wikipedia.org/wiki/Loi_de_financement_de_la_Sécurité_sociale",
-       "extract": "Une loi de financement de la Sécurité sociale (LFSS) est, en France, une loi autorisant le budget de la Sécurité sociale, sur le modèle de la loi de finances. Cette catégorie de lois a été créée par la révision de la Constitution du 22 février 1996.\nDans le prolongement de la loi organique relative aux lois de finances (LOLF), les lois de financement de la Sécurité sociale sont placées sous le régime de la loi organique relative aux lois de financement de la Sécurité sociale (LOLFSS), promulguée le 2 août 2005.",
+       "extract": "Une loi de financement de la Sécurité sociale (LFSS) est, en France, une loi autorisant le budget de la Sécurité sociale, sur le modèle de la loi de finances. Cette catégorie de lois a été créée par la révision de la Constitution du 22 février 1996.\n\nDans le prolongement de la loi organique relative aux lois de finances (LOLF), les lois de financement de la Sécurité sociale sont placées sous le régime de la loi organique relative aux lois de financement de la Sécurité sociale (LOLFSS), promulguée le 2 août 2005.",
        "page_updated": "2026-04-21T11:44:03Z"
       },
       {
@@ -1446,7 +1444,7 @@
       {
        "page": "Commission mixte paritaire",
        "url": "https://fr.wikipedia.org/wiki/Commission_mixte_paritaire",
-       "extract": "La commission mixte paritaire (CMP) est, dans le processus législatif français, une commission composée de sept députés et sept sénateurs, auxquels s’ajoutent autant de membres suppléants, chargée de trouver un compromis entre l'Assemblée nationale et le Sénat en cas de désaccord persistant entre ces assemblées sur un projet ou une proposition de loi. Elle est prévue par l'article 45 de la Constitution de 1958.\nPour chaque texte pour lequel la commission mixte paritaire est convoquée, ses membres sont nommés par le président du Sénat et par le président de l'Assemblée nationale. Traditionnellement, dans chaque chambre, le président de la commission saisie au fond et le rapporteur du texte en font partie ; les autres membres sont désignés sur proposition des groupes politiques pour refléter la composition politique de la chambre.\nLe texte élaboré par la commission est soumis par le gouvernement pour approbation aux deux chambres. Si la commission ne parvient pas à l'adoption d'un texte commun ou si ce texte n'est pas adopté par les chambres, le gouvernement peut, après une nouvelle lecture par l'Assemblée nationale et par le Sénat, demander à l'Assemblée nationale de statuer définitivement.\n20 % des textes adoptés par le Parlement ont été proposés par une commission mixte paritaire, contre 10 % qui ont été adoptés par l'Assemblée nationale avec le dernier mot.",
+       "extract": "La commission mixte paritaire (CMP) est, dans le processus législatif français, une commission composée de sept députés et sept sénateurs, auxquels s’ajoutent autant de membres suppléants, chargée de trouver un compromis entre l'Assemblée nationale et le Sénat en cas de désaccord persistant entre ces assemblées sur un projet ou une proposition de loi. Elle est prévue par l'article 45 de la Constitution de 1958.\n\nPour chaque texte pour lequel la commission mixte paritaire est convoquée, ses membres sont nommés par le président du Sénat et par le président de l'Assemblée nationale. Traditionnellement, dans chaque chambre, le président de la commission saisie au fond et le rapporteur du texte en font partie ; les autres membres sont désignés sur proposition des groupes politiques pour refléter la composition politique de la chambre.\n\nLe texte élaboré par la commission est soumis par le gouvernement pour approbation aux deux chambres. Si la commission ne parvient pas à l'adoption d'un texte commun ou si ce texte n'est pas adopté par les chambres, le gouvernement peut, après une nouvelle lecture par l'Assemblée nationale et par le Sénat, demander à l'Assemblée nationale de statuer définitivement.\n\n20 % des textes adoptés par le Parlement ont été proposés par une commission mixte paritaire, contre 10 % qui ont été adoptés par l'Assemblée nationale avec le dernier mot.",
        "page_updated": "2026-07-02T20:21:10Z"
       }
      ]
@@ -1463,13 +1461,13 @@
       {
        "page": "Direction générale du Trésor",
        "url": "https://fr.wikipedia.org/wiki/Direction_générale_du_Trésor",
-       "extract": "La direction générale du Trésor (ou DG Trésor) est une direction de l'administration publique centrale française, rattachée au ministère de l'Économie et des Finances. Ses prérogatives, le niveau de son recrutement et la présence de nombre de ses anciens agents à des postes clés de l'administration et des affaires en font l'une des plus prestigieuses administrations françaises. Hormis pour son réseau à l'étranger, la DG Trésor est localisée dans le complexe architectural de Bercy.\nLa DG Trésor est chargée de l'analyse économique et du conseil du gouvernement dans l'élaboration et la conduite de la politique économique, commerciale et financière et réalise des prévisions et des évaluations économiques des politiques publiques ; via l'Agence France Trésor (AFT), elle assure la gestion de la dette et de la trésorerie de l'État ; elle est chargée de la régulation du financement de l'économie (secteur bancaire, assurances, marchés financiers) ; elle participe aux analyses et aux chiffrages des réformes économiques et à la rédaction du projet de loi de finances en appui de la direction du Budget. Elle défend et représente également les intérêts français au sein de nombreuses enceintes multilatérales (groupes et comités de la Commission européenne et du Conseil européen ; OMC ; OCDE ; G7 ; G20…). La direction générale du Trésor doit être distinguée de la direction générale des Finances publiques, qui assure la fonction historique de Trésor public (tenue des comptes de l'État, ordonnancement et recouvrement de l'impôt, etc.).\nQuelques-uns de ses services mènent une recherche économique, en particulier sur l'économie française, et publient la revue Économie et Prévision, des éclairages synthétiques (Trésor Éco) et des études et travaux de recherche.\nLa direction générale du Trésor est née en novembre 2004 de la fusion de trois directions stratégiques du ministère : la « direction du Trésor » (DT, créée en 1940), la « direction des relations économiques extérieures » (DREE) et la « direction de la Prévision et de l'Analyse économique » (DPAE).\nFin 2016, elle comptait 1 520 agents, dont 726 en administration centrale, y compris AFT ; 723 dans 112 pays étrangers au sein de 133 implantations ; 71 agents en région (ancienne DIRECCTE).",
+       "extract": "La direction générale du Trésor (ou DG Trésor) est une direction de l'administration publique centrale française, rattachée au ministère de l'Économie et des Finances. Ses prérogatives, le niveau de son recrutement et la présence de nombre de ses anciens agents à des postes clés de l'administration et des affaires en font l'une des plus prestigieuses administrations françaises. Hormis pour son réseau à l'étranger, la DG Trésor est localisée dans le complexe architectural de Bercy.\n\nLa DG Trésor est chargée de l'analyse économique et du conseil du gouvernement dans l'élaboration et la conduite de la politique économique, commerciale et financière et réalise des prévisions et des évaluations économiques des politiques publiques ; via l'Agence France Trésor (AFT), elle assure la gestion de la dette et de la trésorerie de l'État ; elle est chargée de la régulation du financement de l'économie (secteur bancaire, assurances, marchés financiers) ; elle participe aux analyses et aux chiffrages des réformes économiques et à la rédaction du projet de loi de finances en appui de la direction du Budget. Elle défend et représente également les intérêts français au sein de nombreuses enceintes multilatérales (groupes et comités de la Commission européenne et du Conseil européen ; OMC ; OCDE ; G7 ; G20…). La direction générale du Trésor doit être distinguée de la direction générale des Finances publiques, qui assure la fonction historique de Trésor public (tenue des comptes de l'État, ordonnancement et recouvrement de l'impôt, etc.).\n\nQuelques-uns de ses services mènent une recherche économique, en particulier sur l'économie française, et publient la revue Économie et Prévision, des éclairages synthétiques (Trésor Éco) et des études et travaux de recherche.\n\nLa direction générale du Trésor est née en novembre 2004 de la fusion de trois directions stratégiques du ministère : la « direction du Trésor » (DT, créée en 1940), la « direction des relations économiques extérieures » (DREE) et la « direction de la Prévision et de l'Analyse économique » (DPAE).\n\nFin 2016, elle comptait 1 520 agents, dont 726 en administration centrale, y compris AFT ; 723 dans 112 pays étrangers au sein de 133 implantations ; 71 agents en région (ancienne DIRECCTE).",
        "page_updated": "2026-09-24T13:14:05Z"
       },
       {
        "page": "Direction du Budget",
        "url": "https://fr.wikipedia.org/wiki/Direction_du_Budget",
-       "extract": "La direction du Budget (DB) est, en France, une direction d'état-major du ministère de l'Économie et des Finances.\nCréée en 1919 et placée sous l'autorité du ministre chargé du Budget, elle est chargée de l'élaboration du budget de l'État français et joue un rôle essentiel de conception et d’exécution dans le pilotage de l'ensemble des finances publiques. Ainsi, elle :\n\nprépare une trajectoire soutenable des finances publiques, respectant les critères européens, que le Gouvernement propose régulièrement à l'approbation du Parlement ;\nconstruit le budget de l'État par des négociations avec les ministères dits « dépensiers », puis elle accompagne son exécution au cours de l'année ;\nassure la tutelle financière des entreprises publiques et des établissements publics nationaux ;\nréalise des prévisions sur les évolutions des dépenses et des recettes publiques, et donc du déficit budgétaire et du déficit public ;\nanalyse des enjeux financiers des politiques publiques, contre-expertise les projets des ministères, propose au Gouvernement des réformes structurelles renforçant l'efficience des politiques publiques, et défend les positions de plus grande rigueur budgétaire dans le dialogue interministériel.",
+       "extract": "La direction du Budget (DB) est, en France, une direction d'état-major du ministère de l'Économie et des Finances.\n\nCréée en 1919 et placée sous l'autorité du ministre chargé du Budget, elle est chargée de l'élaboration du budget de l'État français et joue un rôle essentiel de conception et d’exécution dans le pilotage de l'ensemble des finances publiques. Ainsi, elle :\nprépare une trajectoire soutenable des finances publiques, respectant les critères européens, que le Gouvernement propose régulièrement à l'approbation du Parlement ;\nconstruit le budget de l'État par des négociations avec les ministères dits « dépensiers », puis elle accompagne son exécution au cours de l'année ;\nassure la tutelle financière des entreprises publiques et des établissements publics nationaux ;\nréalise des prévisions sur les évolutions des dépenses et des recettes publiques, et donc du déficit budgétaire et du déficit public ;\nanalyse des enjeux financiers des politiques publiques, contre-expertise les projets des ministères, propose au Gouvernement des réformes structurelles renforçant l'efficience des politiques publiques, et défend les positions de plus grande rigueur budgétaire dans le dialogue interministériel.",
        "page_updated": "2026-08-31T18:58:24Z"
       }
      ]
@@ -1503,7 +1501,7 @@
       {
        "page": "Déficit budgétaire et déficit public",
        "url": "https://fr.wikipedia.org/wiki/Déficit_budgétaire_et_déficit_public",
-       "extract": "En comptabilité nationale, le déficit budgétaire est la situation dans laquelle les recettes de l'État (hors remboursements d'emprunts) sont inférieures à ses dépenses (hors emprunts) au cours d'une année. Donc, le solde budgétaire est négatif, et le budget est dit déficitaire.\nLe déficit budgétaire se différencie du déficit public par le fait qu'il n'inclut pas le solde des recettes et des dépenses des autres administrations publiques (les ODAC, les collectivités territoriales  et les organismes de sécurité sociale), tandis que le déficit public se compose du déficit du budget de l'État et aussi des déficits de la sécurité sociale, des autorités locales et des autres organismes de l'administration centrale. Autrement dit, il correspond à un solde annuel négatif du budget des administrations publiques; au sens de Maastricht, il traduit le besoin de financement des administrations publiques.\nLe déficit budgétaire peut donner lieu à de nouveaux emprunts contractés par l'État au cours de l'année, en plus de ceux destinés à amortir les emprunts antérieurs arrivés à échéance. Ces emprunts viennent alimenter la dette de l'État, de même que le déficit public augmente la dette publique. Ainsi, ces deux données sont liées mais se distinguent par leur nature : le déficit est un flux alors que la dette est un stock.\nConcrètement, les budgets publics (mesurés avec une périodicité annuelle) sont très souvent déficitaires, dans la majorité des pays ; dans le cas opposé, on parle d’excédent budgétaire. En France, dans le cadre de la loi organique relative aux lois de finances, le solde budgétaire de l'année à venir fait l'objet d'une prévision inscrite dans le projet de loi de finances.",
+       "extract": "En comptabilité nationale, le déficit budgétaire est la situation dans laquelle les recettes de l'État (hors remboursements d'emprunts) sont inférieures à ses dépenses (hors emprunts) au cours d'une année. Donc, le solde budgétaire est négatif, et le budget est dit déficitaire.\n\nLe déficit budgétaire se différencie du déficit public par le fait qu'il n'inclut pas le solde des recettes et des dépenses des autres administrations publiques (les ODAC, les collectivités territoriales  et les organismes de sécurité sociale), tandis que le déficit public se compose du déficit du budget de l'État et aussi des déficits de la sécurité sociale, des autorités locales et des autres organismes de l'administration centrale. Autrement dit, il correspond à un solde annuel négatif du budget des administrations publiques; au sens de Maastricht, il traduit le besoin de financement des administrations publiques.\n \nLe déficit budgétaire peut donner lieu à de nouveaux emprunts contractés par l'État au cours de l'année, en plus de ceux destinés à amortir les emprunts antérieurs arrivés à échéance. Ces emprunts viennent alimenter la dette de l'État, de même que le déficit public augmente la dette publique. Ainsi, ces deux données sont liées mais se distinguent par leur nature : le déficit est un flux alors que la dette est un stock.\n\nConcrètement, les budgets publics (mesurés avec une périodicité annuelle) sont très souvent déficitaires, dans la majorité des pays ; dans le cas opposé, on parle d’excédent budgétaire. En France, dans le cadre de la loi organique relative aux lois de finances, le solde budgétaire de l'année à venir fait l'objet d'une prévision inscrite dans le projet de loi de finances.",
        "page_updated": "2026-10-03T04:06:36Z"
       },
       {
@@ -1537,7 +1535,7 @@
       },
       {
        "type": "p",
-       "text": "Côté recettes, c'est la direction générale des Finances publiques du ministère de l'Économie et des Finances qui a la haute main. Il y a bien quelques mesures politiques issues des autres ministères (type: crédit d'impôts pour telle ou telle dépense des particuliers), mais c'est marginal et de toute façon validé (parfois avec des modifications qui peuvent en réduire la portée) par l'administration fiscale. Il fixe les recettes supposées de l'appareil étatique, dont le montant effectif dépendra de la conjoncture économique: bénéfices des sociétés, consommation, croissance, etc [réf. nécessaire]."
+       "text": "Côté recettes, c'est la direction générale des Finances publiques du ministère de l'Économie et des Finances qui a la haute main. Il y a bien quelques mesures politiques issues des autres ministères (type: crédit d'impôts pour telle ou telle dépense des particuliers), mais c'est marginal et de toute façon validé (parfois avec des modifications qui peuvent en réduire la portée) par l'administration fiscale. Il fixe les recettes supposées de l'appareil étatique, dont le montant effectif dépendra de la conjoncture économique: bénéfices des sociétés, consommation, croissance, etc [ réf. nécessaire ]."
       },
       {
        "type": "p",
@@ -1646,10 +1644,6 @@
       {
        "type": "p",
        "text": "Une fois que le projet de LFSS est déposé sur le bureau de l'Assemblée nationale, il est transmis à la commission des Affaires sociales tandis que la commission des Finances, de l'Économie générale et du Budget se saisit pour avis. Le projet de loi est alors étudié par des rapporteurs (six en 2014) qui rédigent chacun une des parties du rapport sur le projet de loi. La commission des Affaires sociales dispose en son sein de la mission d'évaluation et de contrôle de la Sécurité sociale (MECSS) qui peut suivre l'application de la LFSS tout au long de l'année. Conformément au deuxième alinéa de l' article 42 de la Constitution, la discussion en séance des projets de LFSS porte sur le texte présenté par le Gouvernement. La Conférence des présidents organise le temps de la discussion qui est enserré dans de courts délais. Le temps législatif programmé (la possibilité de fixer la durée maximale de discussion d'un texte) n'est pas applicable aux LFSS (article 121-1 du règlement de l'Assemblée nationale). Les LFSS peuvent être transmises au Conseil constitutionnel pour que celui-ci en étudie la constitutionnalité avant leur promulgation par le président de la République. Depuis leur apparition, toutes les LFSS ont été transmises à ce contrôle de constitutionnalité. En général, la promulgation de la LFSS intervient aux alentours du 20 décembre."
-      },
-      {
-       "type": "p",
-       "text": "Erreur de référence: Des balises <ref> existent pour un groupe nommé « alpha », mais aucune balise <references group=\"alpha\"/> correspondante n’a été trouvée Erreur de référence: Des balises <ref> existent pour un groupe nommé « Note », mais aucune balise <references group=\"Note\"/> correspondante n’a été trouvée"
       }
      ],
      "page_updated": "2026-04-21T11:44:03Z"
@@ -3212,50 +3206,50 @@
   },
   "jorf": {
    "coverage_from": "2026-07-01",
-   "latest_bundle": "JORF_20261014-002349.tar.gz",
-   "count": 7585
+   "latest_bundle": "JORF_20261015-004729.tar.gz",
+   "count": 7703
   }
  },
  "status": {
   "history": {
    "ok": true,
-   "fetched_at": "2026-10-14T10:30:14+00:00",
+   "fetched_at": "2026-10-15T10:13:58+00:00",
    "error": null
   },
   "government": {
    "ok": true,
-   "fetched_at": "2026-10-14T10:30:14+00:00",
+   "fetched_at": "2026-10-15T10:13:59+00:00",
    "error": null
   },
   "officials_errors": [],
   "officials": {
    "ok": true,
-   "fetched_at": "2026-10-14T10:30:22+00:00",
+   "fetched_at": "2026-10-15T10:14:06+00:00",
    "error": null
   },
   "budgets": {
    "ok": true,
-   "fetched_at": "2026-10-14T10:30:22+00:00",
+   "fetched_at": "2026-10-15T10:14:07+00:00",
    "error": null
   },
   "reference": {
    "ok": true,
-   "fetched_at": "2026-10-14T10:30:25+00:00",
+   "fetched_at": "2026-10-15T10:14:09+00:00",
    "error": null
   },
   "figures": {
    "ok": true,
-   "fetched_at": "2026-10-14T10:30:30+00:00",
+   "fetched_at": "2026-10-15T10:14:13+00:00",
    "error": null
   },
   "jorf": {
    "ok": true,
-   "fetched_at": "2026-10-14T10:30:34+00:00",
+   "fetched_at": "2026-10-15T10:14:19+00:00",
    "error": null
   }
  },
  "changelog": [],
- "generated_at": "2026-10-14T10:30:34+00:00",
+ "generated_at": "2026-10-15T10:14:19+00:00",
  "checks": [
   {
    "name": "Collecte « history »",
@@ -3333,7 +3327,7 @@
    "name": "Journal officiel récent (≤ 4 jours)",
    "ok": true,
    "level": "ok",
-   "detail": "dernier numéro lu : 2026-10-14"
+   "detail": "dernier numéro lu : 2026-10-15"
   },
   {
    "name": "Wikipédia à jour du dernier décret de composition du Gouvernement",
