@@ -1,1 +1,14 @@
-[]
+[
+ {
+  "detected": "2026-10-20T10:21:09+00:00",
+  "label": "Présidence de la commission des finances (Sénat)",
+  "from": "Claude Raynal",
+  "to": "Thierry Cozic"
+ },
+ {
+  "detected": "2026-10-20T10:21:09+00:00",
+  "label": "Rapporteur général du budget (Sénat)",
+  "from": "Jean-François Husson",
+  "to": "Christine Lavarde"
+ }
+]
