@@ -8,7 +8,8 @@
 
 `.github/workflows/site.yml` collecte les trois outils chaque matin de semaine (5 h 30 UTC),
 enregistre leurs bases dans le dépôt (`*/data/`) et publie le site ; un push sur `main`
-republie sans collecter. Lancement manuel : *Actions* → *Site* → *Run workflow*.
+republie sans collecter. Toutes les heures en séance (6 h à 17 h UTC, en semaine), il relit
+seulement les cours des taux à 10 ans des Repères et republie, sans rien enregistrer. Lancement manuel : *Actions* → *Site* → *Run workflow*.
 
 En local, rien ne change : `FiPu.command` / `FiPu.bat` ouvrent le portail sur
 http://127.0.0.1:8760. Pour voir la version publiée : `python3 site/build.py`, puis

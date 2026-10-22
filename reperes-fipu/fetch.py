@@ -5,6 +5,7 @@ valide est conservée, marquée comme telle, et signalée dans la page.
 
     python3 fetch.py                     # tout
     python3 fetch.py --only figures jorf # certains blocs
+    python3 fetch.py --only market       # cours de marché seuls (collecte horaire en séance)
 """
 import argparse
 import html
@@ -29,7 +30,8 @@ JORF_STORE = ROOT / "data" / "jorf.json"
 CHANGELOG = ROOT / "data" / "changelog.json"
 EUROSTAT = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
 INSEE = "https://bdm.insee.fr/series/sdmx/data/SERIES_BDM/"
-BLOCKS = ["history", "government", "officials", "budgets", "figures", "jorf", "reference"]
+CNBC = "https://quote.cnbc.com/quote-html-webservice/restQuote/symbolType/symbol"
+BLOCKS = ["history", "government", "officials", "budgets", "figures", "market", "jorf", "reference"]
 
 
 def now():
@@ -497,6 +499,44 @@ def figures(cfg):
     return out
 
 
+def quotes(symbols):
+    """Derniers cours CNBC (rendements en %) : {symbole: {value, prev, time, name}}. Source de marché, non
+    officielle, mais en séance : Eurostat ne publie la moyenne mensuelle qu'environ six semaines plus tard."""
+    r = requests.get(CNBC, params={"symbols": "|".join(symbols), "requestMethod": "itv", "noform": "1",
+                                   "partnerId": "2", "fund": "1", "exthrs": "1", "output": "json"},
+                     headers={"User-Agent": "Mozilla/5.0"}, timeout=30)
+    r.raise_for_status()
+    qs = r.json()["FormattedQuoteResult"]["FormattedQuote"]
+    pct = lambda v: float(v.rstrip("%").replace(",", ""))
+    out = {}
+    for q in qs if isinstance(qs, list) else [qs]:
+        if q.get("code") == 0 and q.get("last") and q.get("last_time"):
+            t = datetime.strptime(q["last_time"], "%Y-%m-%dT%H:%M:%S.%f%z")
+            out[q["symbol"]] = {"value": pct(q["last"]), "prev": pct(q["previous_day_closing"]),
+                                "time": t.isoformat(timespec="seconds"), "name": q.get("name")}
+    missing = [s for s in symbols if s not in out]
+    if missing:
+        raise RuntimeError(f"cours CNBC absent : {', '.join(missing)}")
+    return out
+
+
+def market(cfg):
+    """Dernier cours des séries qui ont un symbole « live » : un symbole, ou deux pour un écart (×scale)."""
+    lives = [s for s in cfg["eurostat"] if s.get("live")]
+    syms = lambda s: s["live"] if isinstance(s["live"], list) else [s["live"]]
+    q = quotes(sorted({x for s in lives for x in syms(s)}))
+    out = {}
+    for s in lives:
+        a = [q[x] for x in syms(s)]
+        k = s.get("scale", 1)
+        v, prev = (a[0]["value"], a[0]["prev"]) if len(a) == 1 else \
+            ((a[0]["value"] - a[1]["value"]) * k, (a[0]["prev"] - a[1]["prev"]) * k)
+        out[s["key"]] = {"value": round(v, 4), "prev_close": round(prev, 4), "time": min(x["time"] for x in a),
+                         "symbols": syms(s), "names": [x["name"] for x in a], "source": "CNBC",
+                         "url": f"https://www.cnbc.com/quotes/{syms(s)[0]}"}
+    return out
+
+
 # =================================================================== checks
 
 def checks(cfg, data, jorf_store):
@@ -558,6 +598,9 @@ def checks(cfg, data, jorf_store):
         age = (datetime.now(timezone.utc) - datetime.fromisoformat(s["updated"])).days if s.get("updated") else 999
         if age > 400:
             add(f"Série {s.get('source', 'Eurostat')} « {s['label']} » mise à jour depuis moins de 400 jours", False, s.get("updated"), "warn")
+    for k, m in (B.get("market") or {}).items():
+        age = (datetime.now(timezone.utc) - datetime.fromisoformat(m["time"])).days
+        add(f"Cours de marché « {k} » de moins de 4 jours", age <= 4, f"cours du {m['time']}", "warn")
     ref = B.get("reference") or {}
     if ref.get("missing"):
         add("Pages de référence trouvées", False, " ; ".join(ref["missing"]), "warn")
@@ -610,6 +653,7 @@ def run_all(only=None, progress=print):
     run("budgets", "Budgets (Wikipédia)", lambda: budgets(cfg))
     run("reference", "Textes de référence (Wikipédia)", lambda: reference(cfg))
     run("figures", "Chiffres (Eurostat, Insee)", lambda: figures(cfg))
+    run("market", "Cours de marché (CNBC)", lambda: market(cfg))
     jstore = None
 
     def jo():

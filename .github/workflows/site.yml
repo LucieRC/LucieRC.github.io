@@ -1,12 +1,14 @@
 # Site lucierc.github.io : CV + outils FiPu (Repères, Veille, Données, Textes) sous /bercy/.
 # - chaque matin de semaine (et via Actions → Site → Run workflow) : collecte des trois outils,
 #   enregistrement de leurs bases dans le dépôt, puis publication ;
-# - à chaque push sur main : publication seule (CV, mises en page, mots-clés…), sans collecte.
+# - toutes les heures en séance : cours des taux à 10 ans (Repères) puis publication, sans rien enregistrer ;
+# - à chaque push sur main : cours des taux à 10 ans et publication, sans collecte.
 name: Site
 
 on:
   schedule:
     - cron: "30 5 * * 1-5"   # 7 h 30 à Paris l'été, 6 h 30 l'hiver (GitHub peut retarder de quelques minutes)
+    - cron: "0 6-17 * * 1-5"  # cours de marché : de 8 h à 19 h à Paris l'été, de 7 h à 18 h l'hiver
   workflow_dispatch:
   push:
     branches: [main]
@@ -27,7 +29,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     env:
-      COLLECT: ${{ github.event_name != 'push' }}
+      COLLECT: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '30 5 * * 1-5' }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
@@ -52,6 +54,12 @@ jobs:
         if: env.COLLECT == 'true'
         working-directory: donnees-fipu
         run: python update.py
+        continue-on-error: true
+      # Hors collecte complète : le cours seul, ni enregistré ni commité (la page publiée suffit).
+      - name: Cours de marché — Repères
+        if: env.COLLECT != 'true'
+        working-directory: reperes-fipu
+        run: python fetch.py --only market
         continue-on-error: true
       - name: Enregistrer les bases
         if: env.COLLECT == 'true'

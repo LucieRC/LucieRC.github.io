@@ -200,7 +200,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1
 
   <section id="chiffres">
     <h2>Chiffres clés</h2>
-    <p class="lede">Séries Eurostat et Insee, France. Dernière valeur publiée et évolution sur la période. Survoler une courbe pour lire les valeurs.</p>
+    <p class="lede">Séries Eurostat et Insee, France. Dernière valeur publiée et évolution sur la période ; pour les taux à 10 ans, dernier cours de marché (actualisé toutes les heures en séance) après les moyennes mensuelles. Survoler une courbe pour lire les valeurs.</p>
     <div class="tiles" id="tiles"></div>
     <details class="data"><summary>Séries en tableau et définitions officielles</summary><div id="fig-tables"></div></details>
   </section>
@@ -318,10 +318,10 @@ $("#stamp").textContent = DATA.generated_at ? "Données du " + fmtDate(DATA.gene
   const icon = c => c.ok ? "✓" : c.level === "warn" ? "!" : "✗";
   $("#checks").innerHTML = `<details class="panel checks"${bad.some(c => c.level === "error") ? " open" : ""}><summary>Contrôles de cohérence : ${cs.length - bad.length}/${cs.length} OK${bad.length ? ` — ${bad.length} à regarder` : ""}</summary><ul>` +
     bad.concat(cs.filter(c => c.ok)).map(c => `<li><b class="lvl-${c.level}">${icon(c)}</b>${esc(c.name)}<span>${esc(c.detail)}</span></li>`).join("") + "</ul></details>";
-  const names = {history: "Historiques (Wikipédia)", government: "Gouvernement (Wikipédia)", officials: "Titulaires (Wikipédia)", budgets: "Budgets (Wikipédia)", reference: "Références (Wikipédia)", figures: "Chiffres (Eurostat, Insee)", jorf: "Journal officiel (DILA)"};
+  const names = {history: "Historiques (Wikipédia)", government: "Gouvernement (Wikipédia)", officials: "Titulaires (Wikipédia)", budgets: "Budgets (Wikipédia)", reference: "Références (Wikipédia)", figures: "Chiffres (Eurostat, Insee)", market: "Cours de marché (CNBC)", jorf: "Journal officiel (DILA)"};
   $("#status").innerHTML = "<thead><tr><th>Bloc</th><th>État</th><th>Dernière collecte réussie</th></tr></thead><tbody>" +
     Object.entries(names).map(([k, n]) => { const v = st[k] || {}; return `<tr><td>${n}</td><td class="${v.ok ? "ok" : "ko"}">${v.ok ? "✓" : "✗ " + esc(v.error || "jamais collecté")}</td><td>${fmtDate(v.fetched_at, STAMP)}</td></tr>`; }).join("") + "</tbody>";
-  $("#how").innerHTML = `Sources : Wikipédia (API MediaWiki), Journal officiel (open data DILA), Eurostat, Insee. Ce qui est collecté est décrit dans <code>config.json</code>. ${LIVE ? "Le bouton « Actualiser » relance la collecte." : "Copie figée : pour actualiser, ouvrir l'outil via son lanceur."} Vérifier auprès du Journal officiel avant toute citation.`;
+  $("#how").innerHTML = `Sources : Wikipédia (API MediaWiki), Journal officiel (open data DILA), Eurostat, Insee, CNBC (cours des taux à 10 ans, toutes les heures en séance). Ce qui est collecté est décrit dans <code>config.json</code>. ${LIVE ? "Le bouton « Actualiser » relance la collecte." : "Copie figée : pour actualiser, ouvrir l'outil via son lanceur."} Vérifier auprès du Journal officiel avant toute citation.`;
 })();
 
 /* ---------- officials ---------- */
@@ -423,22 +423,30 @@ function spark(points) {
 (() => {
   const F = B.figures;
   if (!F) return;
-  const tFmt = t => t.replace(/-Q(\d)/, " T$1").replace(/^(\d{4})-(\d{2})$/, (m, y, mo) => new Date(y, mo - 1).toLocaleDateString("fr-FR", {month: "short", year: "numeric"}));
+  const M = B.market || {};
+  const tFmt = t => t.replace(/-Q(\d)/, " T$1").replace(/^(\d{4})-(\d{2})$/, (m, y, mo) => new Date(y, mo - 1).toLocaleDateString("fr-FR", {month: "short", year: "numeric"}))
+    .replace(/^\d{4}-\d{2}-\d{2}$/, m => fmtDate(m, SHORT));
+  const QT = {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"};
+  // cours de marché retenu s'il est postérieur au dernier mois publié par Eurostat
+  const quote = (k, s) => { const q = M[k], t = s.points[s.points.length - 1][0]; return q && q.time.slice(0, 7) > t ? q : null; };
+  const signed = (x, d, s) => `${x > 0 ? "+" : ""}${fmtNum(x, d)} ${s.unit === "pb" ? "pb" : "pt"}`;
   const tiles = $("#tiles");
-  Object.values(F).filter(s => s.tile !== false && s.points.length).forEach(s => {
-    const pts = s.points, d = s.decimals ?? 1;
+  Object.entries(F).filter(([, s]) => s.tile !== false && s.points.length).forEach(([k, s]) => {
+    const q = quote(k, s), d = s.decimals ?? 1;
+    // le cours devient le dernier point de la courbe, après l'historique mensuel
+    const pts = q ? [...s.points, [q.time.slice(0, 10), q.value]] : s.points;
     const [t, v] = pts[pts.length - 1];
     const lag = /^\d{4}-\d{2}$/.test(t) ? 12 : /Q/.test(t) ? 4 : 1;
     const ref = pts[pts.length - 1 - lag];
-    const delta = ref ? `${v - ref[1] > 0 ? "+" : ""}${fmtNum(v - ref[1], d)} ${s.unit === "pb" ? "pb" : "pt"} sur un an` : "";
+    const delta = q ? `${signed(v - q.prev_close, d, s)} sur une séance` : ref ? `${signed(v - ref[1], d, s)} sur un an` : "";
     const sp = spark(pts);
     const el = document.createElement("div");
     el.className = "tile";
     el.innerHTML = `<div class="label">${esc(s.label)}</div>
       <div class="value">${fmtNum(v, d)}<small>${esc(s.unit)}</small></div>
-      <div class="delta">${tFmt(t)}${delta ? " · " + delta : ""}</div>
+      <div class="delta">${q ? fmtDate(q.time, QT) : tFmt(t)}${delta ? " · " + delta : ""}</div>
       ${sp.svg}<div class="axis"><span>${tFmt(pts[0][0])}</span><span>${tFmt(t)}</span></div>
-      <div class="src">${esc(s.source || "Eurostat")} <a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.dataset)}</a>${s.updated ? " · publiée le " + fmtDate(s.updated) : ""}</div>`;
+      <div class="src">${q ? `Cours ${esc(q.source)} <a href="${esc(q.url)}" target="_blank" rel="noopener">${esc(q.symbols.join(" – "))}</a> (marché, non officiel) · moyennes mensuelles : ` : ""}${esc(s.source || "Eurostat")} <a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.dataset)}</a>${s.updated ? " · publiée le " + fmtDate(s.updated) : ""}</div>`;
     tiles.appendChild(el);
     const svg = el.querySelector("svg"), hair = svg.querySelector(".hair");
     const mk = () => { const x = document.createElement("div"); x.className = "dot"; el.appendChild(x); return x; };
@@ -454,13 +462,14 @@ function spark(points) {
       hov.hidden = tip.hidden = hair.hidden = false;
       hov.style.left = tip.style.left = px + "px"; hov.style.top = py + "px"; tip.style.top = (py - 6) + "px";
       hair.setAttribute("x1", sp.x(i)); hair.setAttribute("x2", sp.x(i));
-      tip.textContent = `${tFmt(pts[i][0])} : ${fmtNum(pts[i][1], d)} ${s.unit}`;
+      tip.textContent = `${q && i === sp.n ? fmtDate(q.time, QT) + " (cours)" : tFmt(pts[i][0])} : ${fmtNum(pts[i][1], d)} ${s.unit}`;
     });
     svg.addEventListener("pointerleave", () => { hov.hidden = tip.hidden = hair.hidden = true; });
   });
-  $("#fig-tables").innerHTML = Object.values(F).map(s => {
+  $("#fig-tables").innerHTML = Object.entries(F).map(([k, s]) => {
     const pts = /^\d{4}-\d{2}$/.test(s.points[0][0]) ? s.points.slice(-24) : s.points;
-    return `<h3>${esc(s.label)} (${esc(s.unit)})</h3><p class="sub">${esc(s.source || "Eurostat")} — ${esc(s.dataset_label || s.dataset)} : ${esc((s.official_labels || []).join(" · "))}</p><div class="tablewrap"><table><thead><tr>${pts.map(p => `<th class="num">${tFmt(p[0])}</th>`).join("")}</tr></thead><tbody><tr>${pts.map(p => `<td class="num">${fmtNum(p[1], s.decimals ?? 1)}</td>`).join("")}</tr></tbody></table></div>`;
+    const q = quote(k, s);
+    return `<h3>${esc(s.label)} (${esc(s.unit)})</h3><p class="sub">${esc(s.source || "Eurostat")} — ${esc(s.dataset_label || s.dataset)} : ${esc((s.official_labels || []).join(" · "))}</p>${q ? `<p class="sub">Dernier cours : ${fmtNum(q.value, s.decimals ?? 1)} ${esc(s.unit)} le ${fmtDate(q.time, QT)} — ${esc(q.source)}, ${esc(q.names.join(" – "))} (${esc(q.symbols.join(" – "))}), source de marché non officielle ; clôture précédente : ${fmtNum(q.prev_close, s.decimals ?? 1)} ${esc(s.unit)}.</p>` : ""}<div class="tablewrap"><table><thead><tr>${pts.map(p => `<th class="num">${tFmt(p[0])}</th>`).join("")}</tr></thead><tbody><tr>${pts.map(p => `<td class="num">${fmtNum(p[1], s.decimals ?? 1)}</td>`).join("")}</tr></tbody></table></div>`;
   }).join("");
 })();
 

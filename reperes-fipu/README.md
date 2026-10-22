@@ -33,6 +33,7 @@ Installation : Python 3.10+, puis `pip install -r requirements.txt`. Première c
 | Gouvernement | Page Wikipédia du gouvernement en fonction, trouvée via « Liste des gouvernements de la France » | Organisation fonctionnelle, évolutions de composition, numéros NOR |
 | Historiques | Listes Wikipédia des gouvernements, ministres de l'Économie, ministres du Budget | |
 | Chiffres | Insee d'abord : dette trimestrielle (BDM), solde, dépenses, recettes et dette annuels (tableau « Principaux agrégats de finances publiques » des Comptes de la Nation, 2018 et après) ; Eurostat pour les années antérieures, pour celles qu'il publie en premier, et pour les autres séries | Séries listées dans `config.json` |
+| Cours des taux à 10 ans | CNBC (`quote.cnbc.com`, symboles `FR10Y-FR` et `DE10Y-DE`) : source de marché non officielle, lue toutes les heures en séance par le site publié | Dernier cours et clôture précédente : valeur des tuiles « Taux à 10 ans » et « Écart de taux », ajoutée après les moyennes mensuelles Eurostat (qui paraissent environ six semaines plus tard) |
 | Budget, références, calendrier | Wikipédia : introductions et sections nommées dans `config.json` | Texte intégral de l'introduction / de la section |
 
 Non retenus : info.gouv.fr (protection anti-robot), Wikidata (titulaires récents
@@ -50,6 +51,9 @@ Tout se fait dans `config.json`, puis `python3 update.py` (ou `build.py` si seul
 - **ajouter une série** : une entrée dans `eurostat` (code du jeu de données et filtres tels
   qu'affichés dans le navigateur de données Eurostat), ou, pour une série Insee,
   `"provider": "insee"` et son `idbank` (numéro affiché sur la page de la série) ;
+- **afficher le dernier cours de marché d'une série** : `"live"` = symbole CNBC (celui de l'adresse
+  `cnbc.com/quotes/…`), ou deux symboles pour un écart (multiplié par `scale`) ; le cours remplace la
+  dernière valeur de la tuile tant qu'il est postérieur au dernier mois publié ;
 - **chaque année, fin mai** : mettre à jour l'adresse de `insee_pages.fp` (page « Finances publiques
   en <année> » de l'édition des Comptes de la Nation) ; un contrôle le rappelle après le 15 juin ;
 - **ajouter une page de référence ou une section de calendrier** : `reference`, `calendar`.
@@ -63,7 +67,8 @@ Tout se fait dans `config.json`, puis `python3 update.py` (ou `build.py` si seul
 - **Contrôles de cohérence** (en haut de la page) : un seul gouvernement en fonction, Premier
   ministre identique entre deux pages, ministres identiques entre gouvernement et historiques,
   JO récent, Wikipédia à jour du dernier décret « relatif à la composition du Gouvernement »,
-  pages de titulaires modifiées récemment, séries Eurostat et Insee récentes, pages de référence trouvées.
+  pages de titulaires modifiées récemment, séries Eurostat et Insee récentes, cours de marché de moins de
+  4 jours, pages de référence trouvées.
   Un contrôle en échec indique quel extracteur ou quelle source regarder.
 - `data/changelog.json` garde la trace des changements de titulaires détectés d'une collecte à l'autre.
 - Le JO n'est complet qu'à partir du premier jour lu (date affichée) ; conservation 400 jours.

@@ -98,7 +98,7 @@
     {"key": "revenue", "label": "Recettes publiques", "unit": "% PIB", "decimals": 1, "dataset": "gov_10a_main", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "TR"}, "insee": {"page": "fp", "row": "^Recettes$"}, "since": "2002"},
     {"key": "interest", "label": "Intérêts versés", "unit": "% PIB", "decimals": 1, "dataset": "gov_10a_main", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "D41PAY"}, "since": "2002"},
     {"key": "debt", "label": "Dette publique (annuelle)", "unit": "% PIB", "decimals": 1, "dataset": "gov_10dd_edpt1", "filters": {"geo": "FR", "unit": "PC_GDP", "sector": "S13", "na_item": "GD"}, "insee": {"page": "fp", "row": "^Dette des administrations publiques \\(brute\\)"}, "since": "2002", "tile": false},
-    {"key": "oat10", "label": "Taux à 10 ans — France", "unit": "%", "decimals": 2, "dataset": "irt_lt_mcby_m", "filters": {"geo": "FR"}, "since": "2019-01"},
-    {"key": "spread", "label": "Écart de taux à 10 ans France – Allemagne", "unit": "pb", "decimals": 0, "dataset": "irt_lt_mcby_m", "filters": {"geo": ["FR", "DE"]}, "since": "2019-01", "spread": ["FR", "DE"], "scale": 100}
+    {"key": "oat10", "label": "Taux à 10 ans — France", "unit": "%", "decimals": 2, "dataset": "irt_lt_mcby_m", "filters": {"geo": "FR"}, "since": "2019-01", "live": "FR10Y-FR"},
+    {"key": "spread", "label": "Écart de taux à 10 ans France – Allemagne", "unit": "pb", "decimals": 0, "dataset": "irt_lt_mcby_m", "filters": {"geo": ["FR", "DE"]}, "since": "2019-01", "spread": ["FR", "DE"], "scale": 100, "live": ["FR10Y-FR", "DE10Y-DE"]}
   ]
 }
