@@ -1383,7 +1383,7 @@
     "page": "Budget de l'État français en 2027",
     "url": "https://fr.wikipedia.org/wiki/Budget_de_l'État_français_en_2027",
     "extract": "Le budget de l'État français en 2027 démarre son parcours parlementaire le 1er octobre 2026.",
-    "page_updated": "2026-10-26T21:59:31Z"
+    "page_updated": "2026-11-05T12:31:42Z"
    }
   ],
   "reference": {
@@ -3213,14 +3213,14 @@
   },
   "jorf": {
    "coverage_from": "2026-07-01",
-   "latest_bundle": "JORF_20261104-004428.tar.gz",
-   "count": 9351
+   "latest_bundle": "JORF_20261105-002736.tar.gz",
+   "count": 9444
   },
   "market": {
    "oat10": {
-    "value": 4.8852,
-    "prev_close": 4.9301,
-    "time": "2026-11-04T14:13:14+01:00",
+    "value": 4.7485,
+    "prev_close": 4.8219,
+    "time": "2026-11-05T14:27:48+01:00",
     "symbols": [
      "FR10Y-FR"
     ],
@@ -3231,9 +3231,9 @@
     "url": "https://www.cnbc.com/quotes/FR10Y-FR"
    },
    "spread": {
-    "value": 157.18,
-    "prev_close": 161.94,
-    "time": "2026-11-04T14:13:14+01:00",
+    "value": 147.26,
+    "prev_close": 153.51,
+    "time": "2026-11-05T14:27:48+01:00",
     "symbols": [
      "FR10Y-FR",
      "DE10Y-DE"
@@ -3250,43 +3250,43 @@
  "status": {
   "history": {
    "ok": true,
-   "fetched_at": "2026-11-04T13:13:00+00:00",
+   "fetched_at": "2026-11-05T13:27:35+00:00",
    "error": null
   },
   "government": {
    "ok": true,
-   "fetched_at": "2026-11-04T13:13:00+00:00",
+   "fetched_at": "2026-11-05T13:27:35+00:00",
    "error": null
   },
   "officials_errors": [],
   "officials": {
    "ok": true,
-   "fetched_at": "2026-11-04T13:13:08+00:00",
+   "fetched_at": "2026-11-05T13:27:40+00:00",
    "error": null
   },
   "budgets": {
    "ok": true,
-   "fetched_at": "2026-11-04T13:13:08+00:00",
+   "fetched_at": "2026-11-05T13:27:41+00:00",
    "error": null
   },
   "reference": {
    "ok": true,
-   "fetched_at": "2026-11-04T13:13:10+00:00",
+   "fetched_at": "2026-11-05T13:27:43+00:00",
    "error": null
   },
   "figures": {
    "ok": true,
-   "fetched_at": "2026-11-04T13:13:15+00:00",
+   "fetched_at": "2026-11-05T13:27:49+00:00",
    "error": null
   },
   "jorf": {
    "ok": true,
-   "fetched_at": "2026-11-04T13:13:24+00:00",
+   "fetched_at": "2026-11-05T13:27:57+00:00",
    "error": null
   },
   "market": {
    "ok": true,
-   "fetched_at": "2026-11-04T13:13:15+00:00",
+   "fetched_at": "2026-11-05T13:27:49+00:00",
    "error": null
   }
  },
@@ -3304,7 +3304,7 @@
    "to": "Christine Lavarde"
   }
  ],
- "generated_at": "2026-11-04T13:13:24+00:00",
+ "generated_at": "2026-11-05T13:27:57+00:00",
  "checks": [
   {
    "name": "Collecte « history »",
@@ -3388,7 +3388,7 @@
    "name": "Journal officiel récent (≤ 4 jours)",
    "ok": true,
    "level": "ok",
-   "detail": "dernier numéro lu : 2026-11-04"
+   "detail": "dernier numéro lu : 2026-11-05"
   },
   {
    "name": "Wikipédia à jour du dernier décret de composition du Gouvernement",
@@ -3406,13 +3406,13 @@
    "name": "Cours de marché « oat10 » de moins de 4 jours",
    "ok": true,
    "level": "ok",
-   "detail": "cours du 2026-11-04T14:13:14+01:00"
+   "detail": "cours du 2026-11-05T14:27:48+01:00"
   },
   {
    "name": "Cours de marché « spread » de moins de 4 jours",
    "ok": true,
    "level": "ok",
-   "detail": "cours du 2026-11-04T14:13:14+01:00"
+   "detail": "cours du 2026-11-05T14:27:48+01:00"
   }
  ]
 }
