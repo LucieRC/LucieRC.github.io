@@ -2831,9 +2831,13 @@
      [
       "2026-09",
       4.44
+     ],
+     [
+      "2026-10",
+      4.89
      ]
     ],
-    "updated": "2026-10-13T11:00:00+0200",
+    "updated": "2026-11-12T11:00:00+0100",
     "source": "Eurostat",
     "dataset": "irt_lt_mcby_m",
     "dataset_label": "Critère de convergence de l'UEM - données mensuelles",
@@ -3219,9 +3223,13 @@
      [
       "2026-09",
       96.7
+     ],
+     [
+      "2026-10",
+      147.4
      ]
     ],
-    "updated": "2026-10-13T11:00:00+0200",
+    "updated": "2026-11-12T11:00:00+0100",
     "source": "Eurostat",
     "dataset": "irt_lt_mcby_m",
     "dataset_label": "Critère de convergence de l'UEM - données mensuelles",
@@ -3233,14 +3241,14 @@
   },
   "jorf": {
    "coverage_from": "2026-07-01",
-   "latest_bundle": "JORF_20261111-044354.tar.gz",
+   "latest_bundle": "JORF_20261111-211545.tar.gz",
    "count": 9818
   },
   "market": {
    "oat10": {
-    "value": 4.766,
-    "prev_close": 4.7887,
-    "time": "2026-11-11T13:55:03+01:00",
+    "value": 4.8167,
+    "prev_close": 4.798,
+    "time": "2026-11-12T14:56:57+01:00",
     "symbols": [
      "FR10Y-FR"
     ],
@@ -3251,9 +3259,9 @@
     "url": "https://www.cnbc.com/quotes/FR10Y-FR"
    },
    "spread": {
-    "value": 145.53,
-    "prev_close": 148.13,
-    "time": "2026-11-11T13:55:03+01:00",
+    "value": 149.9,
+    "prev_close": 147.43,
+    "time": "2026-11-12T14:56:55+01:00",
     "symbols": [
      "FR10Y-FR",
      "DE10Y-DE"
@@ -3270,43 +3278,43 @@
  "status": {
   "history": {
    "ok": true,
-   "fetched_at": "2026-11-11T12:54:53+00:00",
+   "fetched_at": "2026-11-12T13:56:43+00:00",
    "error": null
   },
   "government": {
    "ok": true,
-   "fetched_at": "2026-11-11T12:54:53+00:00",
+   "fetched_at": "2026-11-12T13:56:43+00:00",
    "error": null
   },
   "officials_errors": [],
   "officials": {
    "ok": true,
-   "fetched_at": "2026-11-11T12:55:01+00:00",
+   "fetched_at": "2026-11-12T13:56:50+00:00",
    "error": null
   },
   "budgets": {
    "ok": true,
-   "fetched_at": "2026-11-11T12:55:02+00:00",
+   "fetched_at": "2026-11-12T13:56:50+00:00",
    "error": null
   },
   "reference": {
    "ok": true,
-   "fetched_at": "2026-11-11T12:55:04+00:00",
+   "fetched_at": "2026-11-12T13:56:51+00:00",
    "error": null
   },
   "figures": {
    "ok": true,
-   "fetched_at": "2026-11-11T12:55:09+00:00",
+   "fetched_at": "2026-11-12T13:56:57+00:00",
    "error": null
   },
   "jorf": {
    "ok": true,
-   "fetched_at": "2026-11-11T12:55:16+00:00",
+   "fetched_at": "2026-11-12T13:57:02+00:00",
    "error": null
   },
   "market": {
    "ok": true,
-   "fetched_at": "2026-11-11T12:55:09+00:00",
+   "fetched_at": "2026-11-12T13:56:57+00:00",
    "error": null
   }
  },
@@ -3324,7 +3332,7 @@
    "to": "Christine Lavarde"
   }
  ],
- "generated_at": "2026-11-11T12:55:16+00:00",
+ "generated_at": "2026-11-12T13:57:02+00:00",
  "checks": [
   {
    "name": "Collecte « history »",
@@ -3426,13 +3434,13 @@
    "name": "Cours de marché « oat10 » de moins de 4 jours",
    "ok": true,
    "level": "ok",
-   "detail": "cours du 2026-11-11T13:55:03+01:00"
+   "detail": "cours du 2026-11-12T14:56:57+01:00"
   },
   {
    "name": "Cours de marché « spread » de moins de 4 jours",
    "ok": true,
    "level": "ok",
-   "detail": "cours du 2026-11-11T13:55:03+01:00"
+   "detail": "cours du 2026-11-12T14:56:55+01:00"
   }
  ]
 }
