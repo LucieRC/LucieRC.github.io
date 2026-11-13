@@ -1395,7 +1395,7 @@
     "page": "Budget de l'État français en 2026",
     "url": "https://fr.wikipedia.org/wiki/Budget_de_l'État_français_en_2026",
     "extract": "Le budget de l'État français en 2026 est promulgué le 19 février 2026. Le financement de la sécurité sociale pour 2026 est promulgué le 30 décembre 2025.",
-    "page_updated": "2026-11-03T14:00:36Z"
+    "page_updated": "2026-11-12T14:10:21Z"
    },
    {
     "year": 2027,
@@ -3241,14 +3241,14 @@
   },
   "jorf": {
    "coverage_from": "2026-07-01",
-   "latest_bundle": "JORF_20261111-211545.tar.gz",
-   "count": 9818
+   "latest_bundle": "JORF_20261113-003226.tar.gz",
+   "count": 9962
   },
   "market": {
    "oat10": {
-    "value": 4.8167,
-    "prev_close": 4.798,
-    "time": "2026-11-12T14:56:57+01:00",
+    "value": 4.9009,
+    "prev_close": 4.8296,
+    "time": "2026-11-13T14:22:04+01:00",
     "symbols": [
      "FR10Y-FR"
     ],
@@ -3259,9 +3259,9 @@
     "url": "https://www.cnbc.com/quotes/FR10Y-FR"
    },
    "spread": {
-    "value": 149.9,
-    "prev_close": 147.43,
-    "time": "2026-11-12T14:56:55+01:00",
+    "value": 151.78,
+    "prev_close": 150.4,
+    "time": "2026-11-13T14:22:04+01:00",
     "symbols": [
      "FR10Y-FR",
      "DE10Y-DE"
@@ -3278,43 +3278,43 @@
  "status": {
   "history": {
    "ok": true,
-   "fetched_at": "2026-11-12T13:56:43+00:00",
+   "fetched_at": "2026-11-13T13:21:53+00:00",
    "error": null
   },
   "government": {
    "ok": true,
-   "fetched_at": "2026-11-12T13:56:43+00:00",
+   "fetched_at": "2026-11-13T13:21:53+00:00",
    "error": null
   },
   "officials_errors": [],
   "officials": {
    "ok": true,
-   "fetched_at": "2026-11-12T13:56:50+00:00",
+   "fetched_at": "2026-11-13T13:22:01+00:00",
    "error": null
   },
   "budgets": {
    "ok": true,
-   "fetched_at": "2026-11-12T13:56:50+00:00",
+   "fetched_at": "2026-11-13T13:22:01+00:00",
    "error": null
   },
   "reference": {
    "ok": true,
-   "fetched_at": "2026-11-12T13:56:51+00:00",
+   "fetched_at": "2026-11-13T13:22:02+00:00",
    "error": null
   },
   "figures": {
    "ok": true,
-   "fetched_at": "2026-11-12T13:56:57+00:00",
+   "fetched_at": "2026-11-13T13:22:07+00:00",
    "error": null
   },
   "jorf": {
    "ok": true,
-   "fetched_at": "2026-11-12T13:57:02+00:00",
+   "fetched_at": "2026-11-13T13:22:10+00:00",
    "error": null
   },
   "market": {
    "ok": true,
-   "fetched_at": "2026-11-12T13:56:57+00:00",
+   "fetched_at": "2026-11-13T13:22:07+00:00",
    "error": null
   }
  },
@@ -3332,7 +3332,7 @@
    "to": "Christine Lavarde"
   }
  ],
- "generated_at": "2026-11-12T13:57:02+00:00",
+ "generated_at": "2026-11-13T13:22:10+00:00",
  "checks": [
   {
    "name": "Collecte « history »",
@@ -3416,7 +3416,7 @@
    "name": "Journal officiel récent (≤ 4 jours)",
    "ok": true,
    "level": "ok",
-   "detail": "dernier numéro lu : 2026-11-11"
+   "detail": "dernier numéro lu : 2026-11-13"
   },
   {
    "name": "Wikipédia à jour du dernier décret de composition du Gouvernement",
@@ -3434,13 +3434,13 @@
    "name": "Cours de marché « oat10 » de moins de 4 jours",
    "ok": true,
    "level": "ok",
-   "detail": "cours du 2026-11-12T14:56:57+01:00"
+   "detail": "cours du 2026-11-13T14:22:04+01:00"
   },
   {
    "name": "Cours de marché « spread » de moins de 4 jours",
    "ok": true,
    "level": "ok",
-   "detail": "cours du 2026-11-12T14:56:55+01:00"
+   "detail": "cours du 2026-11-13T14:22:04+01:00"
   }
  ]
 }
