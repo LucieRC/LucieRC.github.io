@@ -1531,7 +1531,7 @@
        "page": "Dette publique de la France",
        "url": "https://fr.wikipedia.org/wiki/Dette_publique_de_la_France",
        "extract": "La dette publique de la France est la dette émise par l'ensemble des administrations publiques françaises, regroupant ainsi la totalité des engagements financiers, sous forme d'emprunts, pris par l'État (y compris les organismes divers d'administration centrale), par les collectivités territoriales et par les administrations de sécurité sociale. La dette publique française est la somme des déficits publics annuels cumulés.\nLe montant à rembourser par les administrations publiques est brut : il ne tient pas compte des actifs, et ne constitue qu'une des composantes du patrimoine net. Il ne tient pas compte non plus des engagements hors bilan, qui en France représentent plusieurs fois le montant de la dette brute.\nL'endettement public a connu au cours de son histoire de grandes variations, et est l'une des causes de la Révolution française. Les guerres mondiales le pousseront à des niveaux considérables avant une chute durant les Trente Glorieuses. Le défaut de paiement (comme la banqueroute des Deux-Tiers), l'inflation, la dévaluation, et une hausse des recettes publiques ont été les moyens de la réduire.\nLa croissance de l'endettement des principaux pays développés, à partir des années 1980, a conduit certains économistes à définir et évaluer la soutenabilité de la dette publique à long terme d'un pays. La persistance de déficits publics élevés remet en cause cette soutenabilité. L'Organisation de coopération et de développement économiques considérait en 2016 que la probabilité de défaut de paiement était quasiment nulle dans la plupart des pays avancés, à l'exception notable du Japon, de l'Italie et, dans une moindre mesure, de la France.\nL'appartenance de la France à la zone euro, depuis 1999, nécessite, pour éviter les phénomènes de passager clandestin et pour garantir une stabilité macroéconomique de la zone euro, de respecter des critères définis en 1992 par le traité de Maastricht et renforcés par le Traité sur la stabilité, la coordination et la gouvernance (TSCG) signé le 2 mars 2012 et entré en vigueur le 1er janvier 2013, dont notamment un déficit public annuel qui ne devrait pas excéder 3 % du PIB, une dette publique « au sens de Maastricht » qui devrait rester inférieure à 60 % du PIB, sauf circonstances « exceptionnelles ou temporaires », ou, lorsque la dette dépasse cette limite, un objectif à moyen terme de baisse de cette dette sur des périodes glissantes de trois ans, de chaque année au moins 0,5 % du PIB et au moins un vingtième de l'excès par rapport aux 60 %.\nDe 2007 à 2017, la France ne respectait aucun de ces critères. Aussi a-t-elle fait l'objet d'une procédure de déficit excessif dont elle est sortie en juin 2018, la Commission européenne estimant que le déficit serait inférieur à 3 % pendant trois années consécutives de 2017 à 2019. Fin juin 2024, la Commission européenne engage une nouvelle procédure de déficit excessif à l'encontre de la France.\nDepuis 1975, le budget de l'État français a toujours été en situation de déficit.\nLa dette publique française, estimée « au sens de Maastricht » par l'Institut national de la statistique et des études économiques, a connu une trajectoire ascendante continue depuis les années 1980, en valeur absolue comme rapportée au PIB. La dette publique française s'élevait à 55,8 % du PIB à la fin de 1995 et à 66,8 % du PIB à la veille de la crise économique mondiale de 2008. Son montant s'élève à 3 482,2 milliards d'euros, soit 115,6 % du PIB à la fin du troisième trimestre 2025; pour des actifs non financiers de 2 821 milliards et des actifs financiers de 1 675 milliards.\nLa dette publique française n'a cessé d'augmenter de la fin du XXe siècle au premier quart du XXIe siècle, les causes de cette augmentation sont multifactorielles et font l'objet des débats politiques et économiques qui mettent l'accent suivant leurs orientations sur l'une ou l'autre des causes: dépenses durablement supérieures aux recettes, déficits relatifs aux pensions de retraites, choix de la dette en situation de taux d'intérêt négatif, fonctionnement des gouvernements, baisse de ressources fiscales non compensées, crises et chocs économiques.",
-       "page_updated": "2026-10-23T10:47:53Z"
+       "page_updated": "2026-11-17T16:39:35Z"
       },
       {
        "page": "Objectif national de dépenses d'assurance maladie",
@@ -3241,14 +3241,14 @@
   },
   "jorf": {
    "coverage_from": "2026-07-01",
-   "latest_bundle": "JORF_20261117-014236.tar.gz",
-   "count": 10168
+   "latest_bundle": "JORF_20261118-002608.tar.gz",
+   "count": 10277
   },
   "market": {
    "oat10": {
-    "value": 4.9054,
-    "prev_close": 4.9498,
-    "time": "2026-11-17T15:49:00+01:00",
+    "value": 4.869,
+    "prev_close": 4.8973,
+    "time": "2026-11-18T15:29:26+01:00",
     "symbols": [
      "FR10Y-FR"
     ],
@@ -3259,9 +3259,9 @@
     "url": "https://www.cnbc.com/quotes/FR10Y-FR"
    },
    "spread": {
-    "value": 151.89,
-    "prev_close": 156.68,
-    "time": "2026-11-17T15:49:00+01:00",
+    "value": 148.66,
+    "prev_close": 151.36,
+    "time": "2026-11-18T15:29:25+01:00",
     "symbols": [
      "FR10Y-FR",
      "DE10Y-DE"
@@ -3278,43 +3278,43 @@
  "status": {
   "history": {
    "ok": true,
-   "fetched_at": "2026-11-17T14:48:47+00:00",
+   "fetched_at": "2026-11-18T14:29:09+00:00",
    "error": null
   },
   "government": {
    "ok": true,
-   "fetched_at": "2026-11-17T14:48:48+00:00",
+   "fetched_at": "2026-11-18T14:29:09+00:00",
    "error": null
   },
   "officials_errors": [],
   "officials": {
    "ok": true,
-   "fetched_at": "2026-11-17T14:48:54+00:00",
+   "fetched_at": "2026-11-18T14:29:19+00:00",
    "error": null
   },
   "budgets": {
    "ok": true,
-   "fetched_at": "2026-11-17T14:48:55+00:00",
+   "fetched_at": "2026-11-18T14:29:19+00:00",
    "error": null
   },
   "reference": {
    "ok": true,
-   "fetched_at": "2026-11-17T14:48:57+00:00",
+   "fetched_at": "2026-11-18T14:29:22+00:00",
    "error": null
   },
   "figures": {
    "ok": true,
-   "fetched_at": "2026-11-17T14:49:02+00:00",
+   "fetched_at": "2026-11-18T14:29:27+00:00",
    "error": null
   },
   "jorf": {
    "ok": true,
-   "fetched_at": "2026-11-17T14:49:10+00:00",
+   "fetched_at": "2026-11-18T14:29:38+00:00",
    "error": null
   },
   "market": {
    "ok": true,
-   "fetched_at": "2026-11-17T14:49:03+00:00",
+   "fetched_at": "2026-11-18T14:29:27+00:00",
    "error": null
   }
  },
@@ -3332,7 +3332,7 @@
    "to": "Christine Lavarde"
   }
  ],
- "generated_at": "2026-11-17T14:49:10+00:00",
+ "generated_at": "2026-11-18T14:29:38+00:00",
  "checks": [
   {
    "name": "Collecte « history »",
@@ -3416,7 +3416,7 @@
    "name": "Journal officiel récent (≤ 4 jours)",
    "ok": true,
    "level": "ok",
-   "detail": "dernier numéro lu : 2026-11-17"
+   "detail": "dernier numéro lu : 2026-11-18"
   },
   {
    "name": "Wikipédia à jour du dernier décret de composition du Gouvernement",
@@ -3434,13 +3434,13 @@
    "name": "Cours de marché « oat10 » de moins de 4 jours",
    "ok": true,
    "level": "ok",
-   "detail": "cours du 2026-11-17T15:49:00+01:00"
+   "detail": "cours du 2026-11-18T15:29:26+01:00"
   },
   {
    "name": "Cours de marché « spread » de moins de 4 jours",
    "ok": true,
    "level": "ok",
-   "detail": "cours du 2026-11-17T15:49:00+01:00"
+   "detail": "cours du 2026-11-18T15:29:25+01:00"
   }
  ]
 }
