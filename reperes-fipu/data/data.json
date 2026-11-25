@@ -1281,7 +1281,7 @@
     "label": "Directeur du Budget",
     "group": "Administration",
     "source": "https://fr.wikipedia.org/wiki/Direction_du_Budget",
-    "page_updated": "2026-11-23T20:01:00Z"
+    "page_updated": "2026-11-24T17:53:59Z"
    },
    {
     "name": "Amélie de Montchalin",
@@ -1490,8 +1490,8 @@
       {
        "page": "Direction du Budget",
        "url": "https://fr.wikipedia.org/wiki/Direction_du_Budget",
-       "extract": "La direction du Budget (DB) est, en France, une direction d'état-major du ministère de l'Économie et des Finances.\nCréée en 1919 et placée sous l'autorité du ministre chargé du Budget, elle est chargée de l'élaboration du budget de l'État français et joue un rôle essentiel de conception et d’exécution dans le pilotage de l'ensemble des finances publiques. Ainsi, elle :\n\nprépare une trajectoire soutenable des finances publiques, respectant les critères européens, que le Gouvernement propose régulièrement à l'approbation du Parlement ;\nconstruit le budget de l'État par des négociations avec les ministères dits « dépensiers », puis elle accompagne son exécution au cours de l'année ;\nassure la tutelle financière des entreprises publiques et des établissements publics nationaux ;\nréalise des prévisions sur les évolutions des dépenses et des recettes publiques, et donc du déficit budgétaire et du déficit public ;\nanalyse des enjeux financiers des politiques publiques, contre-expertise les projets des ministères, propose au Gouvernement des réformes structurelles renforçant l'efficience des politiques publiques, et défend les positions de plus grande rigueur budgétaire dans le dialogue interministériel.",
-       "page_updated": "2026-11-23T20:01:00Z"
+       "extract": "La direction du Budget (DB) est, en France, une direction d'état-major des ministères économiques et financiers.\nCréée en 1919 et placée sous l'autorité du ministre chargé du Budget, elle est chargée de l'élaboration du budget de l'État français et joue un rôle essentiel de conception et d’exécution dans le pilotage de l'ensemble des finances publiques. Ainsi, elle :\n\nprépare une trajectoire soutenable des finances publiques, respectant les critères européens, que le Gouvernement propose régulièrement à l'approbation du Parlement ;\nconstruit le budget de l'État par des négociations avec les ministères dits « dépensiers », puis elle accompagne son exécution au cours de l'année ;\nassure la tutelle financière des entreprises publiques et des établissements publics nationaux ;\nréalise des prévisions sur les évolutions des dépenses et des recettes publiques, et donc du déficit budgétaire et du déficit public ;\nanalyse des enjeux financiers des politiques publiques, contre-expertise les projets des ministères, propose au Gouvernement des réformes structurelles renforçant l'efficience des politiques publiques, et défend les positions de plus grande rigueur budgétaire dans le dialogue interministériel.",
+       "page_updated": "2026-11-24T17:53:59Z"
       }
      ]
     },
@@ -3257,14 +3257,14 @@
   },
   "jorf": {
    "coverage_from": "2026-07-01",
-   "latest_bundle": "JORF_20261124-002557.tar.gz",
-   "count": 10809
+   "latest_bundle": "JORF_20261125-002638.tar.gz",
+   "count": 10893
   },
   "market": {
    "oat10": {
-    "value": 4.7787,
-    "prev_close": 4.7847,
-    "time": "2026-11-24T17:13:48+01:00",
+    "value": 4.7229,
+    "prev_close": 4.7783,
+    "time": "2026-11-25T16:57:32+01:00",
     "symbols": [
      "FR10Y-FR"
     ],
@@ -3275,9 +3275,9 @@
     "url": "https://www.cnbc.com/quotes/FR10Y-FR"
    },
    "spread": {
-    "value": 151.75,
-    "prev_close": 150.18,
-    "time": "2026-11-24T17:13:48+01:00",
+    "value": 150.44,
+    "prev_close": 151.27,
+    "time": "2026-11-25T16:57:32+01:00",
     "symbols": [
      "FR10Y-FR",
      "DE10Y-DE"
@@ -3294,43 +3294,43 @@
  "status": {
   "history": {
    "ok": true,
-   "fetched_at": "2026-11-24T16:13:35+00:00",
+   "fetched_at": "2026-11-25T15:57:22+00:00",
    "error": null
   },
   "government": {
    "ok": true,
-   "fetched_at": "2026-11-24T16:13:35+00:00",
+   "fetched_at": "2026-11-25T15:57:22+00:00",
    "error": null
   },
   "officials_errors": [],
   "officials": {
    "ok": true,
-   "fetched_at": "2026-11-24T16:13:42+00:00",
+   "fetched_at": "2026-11-25T15:57:28+00:00",
    "error": null
   },
   "budgets": {
    "ok": true,
-   "fetched_at": "2026-11-24T16:13:42+00:00",
+   "fetched_at": "2026-11-25T15:57:28+00:00",
    "error": null
   },
   "reference": {
    "ok": true,
-   "fetched_at": "2026-11-24T16:13:45+00:00",
+   "fetched_at": "2026-11-25T15:57:30+00:00",
    "error": null
   },
   "figures": {
    "ok": true,
-   "fetched_at": "2026-11-24T16:13:49+00:00",
+   "fetched_at": "2026-11-25T15:57:34+00:00",
    "error": null
   },
   "jorf": {
    "ok": true,
-   "fetched_at": "2026-11-24T16:13:55+00:00",
+   "fetched_at": "2026-11-25T15:57:42+00:00",
    "error": null
   },
   "market": {
    "ok": true,
-   "fetched_at": "2026-11-24T16:13:50+00:00",
+   "fetched_at": "2026-11-25T15:57:34+00:00",
    "error": null
   }
  },
@@ -3348,7 +3348,7 @@
    "to": "Christine Lavarde"
   }
  ],
- "generated_at": "2026-11-24T16:13:55+00:00",
+ "generated_at": "2026-11-25T15:57:42+00:00",
  "checks": [
   {
    "name": "Collecte « history »",
@@ -3432,7 +3432,7 @@
    "name": "Journal officiel récent (≤ 4 jours)",
    "ok": true,
    "level": "ok",
-   "detail": "dernier numéro lu : 2026-11-24"
+   "detail": "dernier numéro lu : 2026-11-25"
   },
   {
    "name": "Wikipédia à jour du dernier décret de composition du Gouvernement",
@@ -3450,13 +3450,13 @@
    "name": "Cours de marché « oat10 » de moins de 4 jours",
    "ok": true,
    "level": "ok",
-   "detail": "cours du 2026-11-24T17:13:48+01:00"
+   "detail": "cours du 2026-11-25T16:57:32+01:00"
   },
   {
    "name": "Cours de marché « spread » de moins de 4 jours",
    "ok": true,
    "level": "ok",
-   "detail": "cours du 2026-11-24T17:13:48+01:00"
+   "detail": "cours du 2026-11-25T16:57:32+01:00"
   }
  ]
 }
